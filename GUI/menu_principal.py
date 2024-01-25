@@ -1,8 +1,10 @@
 from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QFileDialog
 
 from GUI.CargarMuestra import CargarMuestraWindow
 from GUI.NuevaMuestra import NuevaMuestraWindow
 from GUI.menu_principal_ui import Ui_MainWindow
+from utils import cargar_archivo_muestra
 
 
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
@@ -12,7 +14,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         QtWidgets.QMainWindow.__init__(self, *args, **kwargs)
         self.setupUi(self)
         self.pushButton.clicked.connect(self.show_nueva_muestra)
-        self.pushButton_2.clicked.connect(self.show_cargar_muestra)
+        self.pushButton_2.clicked.connect(self.cargar_muestra)
 
     def show_nueva_muestra(self, checked):
         if self.nueva_muestra_w is None:
@@ -21,12 +23,26 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         else:
             self.nueva_muestra_w = None  # Discard reference and close window.
 
-    def show_cargar_muestra(self, checked):
-        if self.cargar_muestra_w is None:
-            self.cargar_muestra_w = CargarMuestraWindow()
-            self.cargar_muestra_w.show()
-        else:
-            self.cargar_muestra_w = None  # Discard reference and close window.
+    def openFileNameDialog(self):
+        options = QFileDialog.Options()
+        options |= QFileDialog.DontUseNativeDialog
+        fileName, _ = QFileDialog.getOpenFileName(self, "Cargar muestra", "../muestras",
+                                                  "All Files (*);;Muestras (*.mtra)", options=options)
+        if fileName:
+            print(fileName)
+            return fileName
+        return None
+
+    def cargar_muestra(self, checked):
+        fileName = self.openFileNameDialog()
+        if fileName is not None:
+            muestra = cargar_archivo_muestra(fileName)
+            print(muestra.nombre)
+        # if self.cargar_muestra_w is None:
+        #     self.cargar_muestra_w = CargarMuestraWindow()
+        #     self.cargar_muestra_w.show()
+        # else:
+        #     self.cargar_muestra_w = None  # Discard reference and close window.
 
 
 if __name__ == "__main__":

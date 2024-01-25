@@ -20,7 +20,7 @@ def guardar_muestra(obj, file_name: str, verbose=False):
         if verbose: print("Saved as:", file_name)
 
 
-def load_pickle(file_name: str, verbose=False):
+def cargar_archivo_muestra(file_name: str, verbose=False):
     if file_extension(file_name) != '.mtra':
         file_name += '.mtra'
 
