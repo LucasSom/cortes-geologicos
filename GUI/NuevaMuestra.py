@@ -2,6 +2,7 @@ from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QFileDialog
 
 from GUI.EditarMapaWindow import EditarMapaWindow
+from GUI.Sesion import SesionWindow
 from GUI.nueva_muestra_ui import Ui_NuevaMuestraWindow
 from Muestra import Muestra
 from utils import guardar_muestra
@@ -16,6 +17,7 @@ class NuevaMuestraWindow(QtWidgets.QMainWindow, Ui_NuevaMuestraWindow):
     def __init__(self, *args, **kwargs):
         QtWidgets.QMainWindow.__init__(self, *args, **kwargs)
         self.editar_mapa_w = None
+        self.sesion_window = None
         self.mapa = {}
         self.setupUi(self)
         self.cancelar_aceptar_boton.accepted.connect(self.aceptar)
@@ -25,7 +27,7 @@ class NuevaMuestraWindow(QtWidgets.QMainWindow, Ui_NuevaMuestraWindow):
     def saveFileDialog(self):
         options = QFileDialog.Options()
         options |= QFileDialog.DontUseNativeDialog
-        fileName, _ = QFileDialog.getSaveFileName(self, "Guardar muestra", "../muestras",
+        fileName, _ = QFileDialog.getSaveFileName(self, "Guardar muestra", "./muestras",
                                                   "All Files (*);;Muestras (*.mtra)", options=options)
         if fileName:
             print(fileName)
@@ -44,6 +46,12 @@ class NuevaMuestraWindow(QtWidgets.QMainWindow, Ui_NuevaMuestraWindow):
         fileName = self.saveFileDialog()
         if fileName is not None:
             guardar_muestra(nueva_muestra, fileName, verbose=True)
+
+        if self.sesion_window is None:
+            self.sesion_window = SesionWindow(nueva_muestra.nombre, nueva_muestra.mapa)
+            self.sesion_window.show()
+        else:
+            self.sesion_window = None
         self.close()
 
     def cancelar(self):

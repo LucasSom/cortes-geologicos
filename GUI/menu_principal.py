@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import QFileDialog
 
 from GUI.CargarMuestra import CargarMuestraWindow
 from GUI.NuevaMuestra import NuevaMuestraWindow
+from GUI.Sesion import SesionWindow
 from GUI.menu_principal_ui import Ui_MainWindow
 from utils import cargar_archivo_muestra
 
@@ -11,6 +12,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def __init__(self, *args, **kwargs):
         self.nueva_muestra_w = None
         self.cargar_muestra_w = None
+        self.sesion_window = None
         QtWidgets.QMainWindow.__init__(self, *args, **kwargs)
         self.setupUi(self)
         self.pushButton.clicked.connect(self.show_nueva_muestra)
@@ -26,7 +28,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def openFileNameDialog(self):
         options = QFileDialog.Options()
         options |= QFileDialog.DontUseNativeDialog
-        fileName, _ = QFileDialog.getOpenFileName(self, "Cargar muestra", "../muestras",
+        fileName, _ = QFileDialog.getOpenFileName(self, "Cargar muestra", "./muestras",
                                                   "All Files (*);;Muestras (*.mtra)", options=options)
         if fileName:
             print(fileName)
@@ -38,12 +40,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         if fileName is not None:
             muestra = cargar_archivo_muestra(fileName)
             print(muestra.nombre)
-        # if self.cargar_muestra_w is None:
-        #     self.cargar_muestra_w = CargarMuestraWindow()
-        #     self.cargar_muestra_w.show()
-        # else:
-        #     self.cargar_muestra_w = None  # Discard reference and close window.
-
+            if self.sesion_window is None:
+                self.sesion_window = SesionWindow(muestra.nombre, muestra.mapa)
+                self.sesion_window.show()
+            else:
+                self.sesion_window = None
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
