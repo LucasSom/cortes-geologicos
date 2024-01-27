@@ -1,7 +1,6 @@
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QFileDialog
 
-from GUI.CargarMuestra import CargarMuestraWindow
 from GUI.NuevaMuestra import NuevaMuestraWindow
 from GUI.Sesion import SesionWindow
 from GUI.menu_principal_ui import Ui_MainWindow
@@ -45,6 +44,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 self.sesion_window.show()
             else:
                 self.sesion_window = None
+
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])

@@ -1,5 +1,6 @@
-from GUI.sesion_ui import Ui_Dialog
 from PyQt5 import QtWidgets
+
+from GUI.sesion_ui import Ui_Dialog
 
 
 class SesionWindow(QtWidgets.QDialog, Ui_Dialog):

@@ -1,5 +1,3 @@
-from PyQt5 import QtWidgets
-
 from GUI.editar_mapa_ui import Ui_MainWindow
 
 
@@ -7,6 +5,7 @@ class EditarMapaWindow(Ui_MainWindow):
     def __init__(self, parent=None):
         super(EditarMapaWindow, self).__init__()
         self.mapa = {}
+        self.parent = parent
         self.botonGuardar.clicked.connect(self.guardar)
 
     def guardar(self):
@@ -48,5 +47,8 @@ class EditarMapaWindow(Ui_MainWindow):
             "8": self.text_8.text(),
             "9": self.text_9.text(),
         }
+        if self.parent is not None:
+            self.parent.mapa = self.mapa
+            self.parent.setupUi(self.parent)
         self.close()
 
