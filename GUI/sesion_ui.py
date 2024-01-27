@@ -17,16 +17,17 @@ class Ui_Dialog(object):
         Dialog.resize(1078, 797)
 
         self.aceptar_cancelar = QtWidgets.QDialogButtonBox(Dialog)
-        self.aceptar_cancelar.setGeometry(QtCore.QRect(380, 760, 171, 32))
+        self.aceptar_cancelar.setGeometry(QtCore.QRect(900, 760, 171, 30))
         self.aceptar_cancelar.setOrientation(QtCore.Qt.Horizontal)
         self.aceptar_cancelar.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel | QtWidgets.QDialogButtonBox.Ok)
         self.aceptar_cancelar.setObjectName("aceptar_cancelar")
 
         self.deshacerButton = QtWidgets.QCommandLinkButton(Dialog)
-        self.deshacerButton.setGeometry(QtCore.QRect(190, 760, 191, 31))
+        self.deshacerButton.setGeometry(QtCore.QRect(10, 760, 530, 30))
         self.deshacerButton.setLayoutDirection(QtCore.Qt.RightToLeft)
         self.deshacerButton.setObjectName("deshacerButton")
 
+        # Scroll area de las rocas
         self.scrollRocas = QtWidgets.QScrollArea(Dialog)
         self.scrollRocas.setGeometry(QtCore.QRect(0, 0, 551, 751))
         self.scrollRocas.setWidgetResizable(True)
@@ -37,13 +38,13 @@ class Ui_Dialog(object):
         self.scrollRocasWidgetContents.setObjectName("scrollRocasWidgetContents")
         self.scrollRocas.setWidget(self.scrollRocasWidgetContents)
 
-        self.label = QtWidgets.QLabel(Dialog)
-        self.label.setGeometry(QtCore.QRect(10, 760, 41, 17))
-        self.label.setObjectName("label")
+        self.vbox_rocas = QtWidgets.QVBoxLayout()  # The Vertical Box that contains the Horizontal Boxes of labels and buttons
+        self.widget_rocas = QtWidgets.QWidget()  # Widget that contains the collection of Vertical Box
 
-        self.input = QtWidgets.QLineEdit(Dialog)
-        self.input.setGeometry(QtCore.QRect(60, 760, 121, 25))
-        self.input.setObjectName("input")
+        self.listwidgetRocas = QtWidgets.QListWidget()
+        self.vbox_rocas.addWidget(self.listwidgetRocas)
+        self.widget_rocas.setLayout(self.vbox_rocas)
+        self.scrollRocas.setWidget(self.widget_rocas)
 
         # self.editarMapaBoton = QtWidgets.QPushButton(Dialog)
         # self.editarMapaBoton.setGeometry(QtCore.QRect(560, 760, 511, 31))
@@ -67,13 +68,8 @@ class Ui_Dialog(object):
             self.listwidgetMapa.addItem(f"{tecla}: {roca}")
             item = self.listwidgetMapa.item(i)
             item.setFlags(item.flags() | QtCore.Qt.ItemIsEditable)
-            # object = QtWidgets.QLabel(f"{tecla}: {roca}")
         self.vbox_mapa.addWidget(self.listwidgetMapa)
         self.widget_mapa.setLayout(self.vbox_mapa)
-
-        # self.scrollMapa.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
-        # self.scrollMapa.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
-        self.scrollMapa.setWidgetResizable(True)
         self.scrollMapa.setWidget(self.widget_mapa)
 
         self.retranslateUi(Dialog)
@@ -85,7 +81,7 @@ class Ui_Dialog(object):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
         self.deshacerButton.setText(_translate("Dialog", "Deshacer"))
-        self.label.setText(_translate("Dialog", "Input"))
+        # self.label.setText(_translate("Dialog", "Input"))
         # self.editarMapaBoton.setText(_translate("Dialog", "Editar mapa de teclas"))
 
 
