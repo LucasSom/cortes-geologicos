@@ -30,7 +30,6 @@ class NuevaMuestraWindow(QtWidgets.QMainWindow, Ui_NuevaMuestraWindow):
         fileName, _ = QFileDialog.getSaveFileName(self, "Guardar muestra", "./muestras",
                                                   "All Files (*);;Muestras (*.mtra)", options=options)
         if fileName:
-            print(fileName)
             return fileName
         return None
 

@@ -30,7 +30,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         fileName, _ = QFileDialog.getOpenFileName(self, "Cargar muestra", "./muestras",
                                                   "All Files (*);;Muestras (*.mtra)", options=options)
         if fileName:
-            print(fileName)
             return fileName
         return None
 
@@ -38,7 +37,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         fileName = self.openFileNameDialog()
         if fileName is not None:
             muestra = cargar_archivo_muestra(fileName)
-            print(muestra.nombre)
             if self.sesion_window is None:
                 self.sesion_window = SesionWindow(muestra.nombre, muestra.mapa)
                 self.sesion_window.show()

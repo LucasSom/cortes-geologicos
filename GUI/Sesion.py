@@ -11,7 +11,6 @@ class SesionWindow(QtWidgets.QDialog, Ui_Dialog, QtWidgets.QWidget):
         self.setupUi(self)
 
     def keyPressEvent(self, event):
-        print("keyPressEvent:", self.mapa[event.text().upper()])
         self.agregar_roca(self.mapa[event.text().upper()])
 
     def agregar_roca(self, roca):
