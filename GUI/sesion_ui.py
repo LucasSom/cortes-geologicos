@@ -9,6 +9,8 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QVBoxLayout, QWidget
 
 
 class Ui_Dialog(object):
@@ -19,7 +21,7 @@ class Ui_Dialog(object):
         self.aceptar_cancelar = QtWidgets.QDialogButtonBox(Dialog)
         self.aceptar_cancelar.setGeometry(QtCore.QRect(380, 760, 171, 32))
         self.aceptar_cancelar.setOrientation(QtCore.Qt.Horizontal)
-        self.aceptar_cancelar.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
+        self.aceptar_cancelar.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel | QtWidgets.QDialogButtonBox.Ok)
         self.aceptar_cancelar.setObjectName("aceptar_cancelar")
 
         self.deshacerButton = QtWidgets.QCommandLinkButton(Dialog)
@@ -58,20 +60,23 @@ class Ui_Dialog(object):
         self.scrollMapaWidgetContents.setGeometry(QtCore.QRect(0, 0, 509, 749))
         self.scrollMapaWidgetContents.setObjectName("scrollMapaWidgetContents")
 
-        self.label_tecla_1 = QtWidgets.QLabel(self.scrollMapaWidgetContents)
-        self.label_tecla_1.setGeometry(QtCore.QRect(0, 0, 67, 17))
-        self.label_tecla_1.setObjectName("label_tecla_1")
-        self.label_tecla_1.setText("TextLabel")
+        # Scroll area del mapa de teclas
+        self.vbox_mapa = QtWidgets.QVBoxLayout()  # The Vertical Box that contains the Horizontal Boxes of labels and buttons
+        self.widget_mapa = QtWidgets.QWidget()  # Widget that contains the collection of Vertical Box
 
-        self.label_tecla_2 = QtWidgets.QLabel(self.scrollMapaWidgetContents)
-        self.label_tecla_2.setGeometry(QtCore.QRect(0, 20, 67, 17))
-        self.label_tecla_2.setObjectName("label_tecla_2")
-        self.scrollMapa.setWidget(self.scrollMapaWidgetContents)
-        self.label_tecla_2.setText("TextLabel")
+        for tecla, roca in Dialog.mapa.items():
+            object = QtWidgets.QLabel(f"{tecla}: {roca}")
+            self.vbox_mapa.addWidget(object)
+        self.widget_mapa.setLayout(self.vbox_mapa)
+
+        self.scrollMapa.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
+        # self.scrollMapa.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
+        self.scrollMapa.setWidgetResizable(True)
+        self.scrollMapa.setWidget(self.widget_mapa)
 
         self.retranslateUi(Dialog)
-        self.aceptar_cancelar.accepted.connect(Dialog.accept) # type: ignore
-        self.aceptar_cancelar.rejected.connect(Dialog.reject) # type: ignore
+        self.aceptar_cancelar.accepted.connect(Dialog.accept)  # type: ignore
+        self.aceptar_cancelar.rejected.connect(Dialog.reject)  # type: ignore
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
     def retranslateUi(self, Dialog):
@@ -84,6 +89,7 @@ class Ui_Dialog(object):
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     Dialog = QtWidgets.QDialog()
     ui = Ui_Dialog()
