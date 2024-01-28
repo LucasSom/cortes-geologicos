@@ -70,7 +70,7 @@ class Ui_NuevaMuestraWindow(object):
         self.editar_mapa_boton.setObjectName("editar_mapa_boton")
         self.cancelar_aceptar_boton = QtWidgets.QDialogButtonBox(self.centralwidget)
         self.cancelar_aceptar_boton.setGeometry(QtCore.QRect(250, 420, 175, 25))
-        self.cancelar_aceptar_boton.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
+        self.cancelar_aceptar_boton.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Save)
         self.cancelar_aceptar_boton.setObjectName("cancelar_aceptar_boton")
         NuevaMuestraWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(NuevaMuestraWindow)

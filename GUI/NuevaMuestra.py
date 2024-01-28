@@ -1,3 +1,5 @@
+import os.path
+
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QFileDialog
 
@@ -27,13 +29,14 @@ class NuevaMuestraWindow(QtWidgets.QMainWindow, Ui_NuevaMuestraWindow):
     def saveFileDialog(self):
         options = QFileDialog.Options()
         options |= QFileDialog.DontUseNativeDialog
-        fileName, _ = QFileDialog.getSaveFileName(self, "Guardar muestra", "./muestras",
+        fileName, _ = QFileDialog.getSaveFileName(self, "Guardar muestra", os.path.curdir,
                                                   "All Files (*);;Muestras (*.mtra)", options=options)
         if fileName:
             return fileName
         return None
 
     def aceptar(self):
+        fileName = self.saveFileDialog()
         nueva_muestra = Muestra(self.nombre.text(),
                                 self.fecha.date().toPyDate(),
                                 self.localidad.text(),
@@ -41,13 +44,13 @@ class NuevaMuestraWindow(QtWidgets.QMainWindow, Ui_NuevaMuestraWindow):
                                 self.operador.text(),
                                 self.cantidad_lecturas.value(),
                                 self.observaciones.toPlainText(),
-                                self.editar_mapa_w.mapa)
-        fileName = self.saveFileDialog()
+                                self.editar_mapa_w.mapa,
+                                fileName)
         if fileName is not None:
             guardar_muestra(nueva_muestra, fileName, verbose=True)
 
         if self.sesion_window is None:
-            self.sesion_window = SesionWindow(nueva_muestra.nombre, nueva_muestra.mapa)
+            self.sesion_window = SesionWindow(nueva_muestra)
             self.sesion_window.show()
         else:
             self.sesion_window = None

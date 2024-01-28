@@ -1,5 +1,5 @@
 class Muestra:
-    def __init__(self, nombre, fecha, localidad, numero, operador, cantidad_lecturas, observaciones, mapa):
+    def __init__(self, nombre, fecha, localidad, numero, operador, cantidad_lecturas, observaciones, mapa, fileName):
         self.nombre = nombre
         self.fecha = fecha
         self.localidad = localidad
@@ -8,4 +8,5 @@ class Muestra:
         self.cantidad_lecturas = cantidad_lecturas
         self.observaciones = observaciones
         self.mapa = mapa
-        self.componentes = ""
+        self.fileName = fileName
+        self.componentes = []

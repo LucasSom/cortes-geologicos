@@ -19,7 +19,7 @@ class Ui_Dialog(object):
         self.aceptar_cancelar = QtWidgets.QDialogButtonBox(Dialog)
         self.aceptar_cancelar.setGeometry(QtCore.QRect(900, 760, 171, 30))
         self.aceptar_cancelar.setOrientation(QtCore.Qt.Horizontal)
-        self.aceptar_cancelar.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel | QtWidgets.QDialogButtonBox.Ok)
+        self.aceptar_cancelar.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel | QtWidgets.QDialogButtonBox.Save)
         self.aceptar_cancelar.setObjectName("aceptar_cancelar")
 
         self.deshacerButton = QtWidgets.QCommandLinkButton(Dialog)
@@ -42,6 +42,8 @@ class Ui_Dialog(object):
         self.widget_rocas = QtWidgets.QWidget()  # Widget that contains the collection of Vertical Box
 
         self.listwidgetRocas = QtWidgets.QListWidget()
+        for roca in Dialog.muestra.componentes:
+            self.listwidgetRocas.addItem(roca)
         self.vbox_rocas.addWidget(self.listwidgetRocas)
         self.widget_rocas.setLayout(self.vbox_rocas)
         self.scrollRocas.setWidget(self.widget_rocas)
@@ -64,7 +66,7 @@ class Ui_Dialog(object):
         self.widget_mapa = QtWidgets.QWidget()  # Widget that contains the collection of Vertical Box
 
         self.listwidgetMapa = QtWidgets.QListWidget()
-        for i, (tecla, roca) in enumerate(Dialog.mapa.items()):
+        for i, (tecla, roca) in enumerate(sorted(list(Dialog.muestra.mapa.items()))):
             self.listwidgetMapa.addItem(f"{tecla}: {roca}")
             item = self.listwidgetMapa.item(i)
             item.setFlags(item.flags() | QtCore.Qt.ItemIsEditable)
@@ -83,15 +85,3 @@ class Ui_Dialog(object):
         self.deshacerButton.setText(_translate("Dialog", "Deshacer"))
         # self.label.setText(_translate("Dialog", "Input"))
         # self.editarMapaBoton.setText(_translate("Dialog", "Editar mapa de teclas"))
-
-
-if __name__ == "__main__":
-    import sys
-
-    app = QtWidgets.QApplication(sys.argv)
-    Dialog = QtWidgets.QDialog()
-    ui = Ui_Dialog()
-    Dialog.mapa = {"A": "Cuarzo monocristalino de nombre super super largo cosa que pase el borde del área"}
-    ui.setupUi(Dialog)
-    Dialog.show()
-    sys.exit(app.exec_())

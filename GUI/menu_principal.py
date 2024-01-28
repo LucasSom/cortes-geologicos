@@ -1,3 +1,5 @@
+import os.path
+
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QFileDialog
 
@@ -27,7 +29,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def openFileNameDialog(self):
         options = QFileDialog.Options()
         options |= QFileDialog.DontUseNativeDialog
-        fileName, _ = QFileDialog.getOpenFileName(self, "Cargar muestra", "./muestras",
+        fileName, _ = QFileDialog.getOpenFileName(self, "Cargar muestra", os.path.curdir,
                                                   "All Files (*);;Muestras (*.mtra)", options=options)
         if fileName:
             return fileName
@@ -38,7 +40,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         if fileName is not None:
             muestra = cargar_archivo_muestra(fileName)
             if self.sesion_window is None:
-                self.sesion_window = SesionWindow(muestra.nombre, muestra.mapa)
+                self.sesion_window = SesionWindow(muestra)
                 self.sesion_window.show()
             else:
                 self.sesion_window = None
