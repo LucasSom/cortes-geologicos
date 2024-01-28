@@ -10,9 +10,13 @@ class SesionWindow(QtWidgets.QDialog, Ui_Dialog, QtWidgets.QWidget):
         self.mapa = mapa
         self.setupUi(self)
 
+        self.deshacerButton.clicked.connect(self.borrar_roca)
+
     def keyPressEvent(self, event):
         self.agregar_roca(self.mapa[event.text().upper()])
 
     def agregar_roca(self, roca):
         self.listwidgetRocas.insertItem(0, roca)
 
+    def borrar_roca(self):
+        self.listwidgetRocas.takeItem(0)
