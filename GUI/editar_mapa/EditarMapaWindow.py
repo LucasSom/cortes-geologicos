@@ -1,4 +1,4 @@
-from GUI.editar_mapa_ui import Ui_MainWindow
+from GUI.editar_mapa.editar_mapa_ui import Ui_MainWindow
 
 
 class EditarMapaWindow(Ui_MainWindow):

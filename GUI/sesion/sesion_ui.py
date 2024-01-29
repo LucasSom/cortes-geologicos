@@ -89,12 +89,11 @@ class Ui_Dialog_Sesion(object):
             if roca != "":
                 self.listwidgetMapa.addItem(f"{tecla}: {roca}")
                 item = self.listwidgetMapa.item(i)
-                item.setFlags(item.flags() | QtCore.Qt.ItemIsEditable)
                 i += 1
 
     def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate
-        self.Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
+        self.Dialog.setWindowTitle(_translate("Dialog", "Sesión"))
         self.deshacerButton.setText(_translate("Dialog", "Deshacer"))
         self.agregarTeclaButton.setText(_translate("Dialog", "Agregar tecla"))
         # self.label.setText(_translate("Dialog", "Input"))

@@ -3,9 +3,9 @@ import os.path
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QFileDialog
 
-from GUI.EditarMapaWindow import EditarMapaWindow
-from GUI.Sesion import SesionWindow
-from GUI.nueva_muestra_ui import Ui_NuevaMuestraWindow
+from GUI.editar_mapa.EditarMapaWindow import EditarMapaWindow
+from GUI.sesion.Sesion import SesionWindow
+from GUI.nueva_muestra.nueva_muestra_ui import Ui_NuevaMuestraWindow
 from Muestra import Muestra
 from utils import guardar_muestra
 

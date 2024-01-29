@@ -1,4 +1,4 @@
-from GUI.nueva_tecla_ui import Ui_Dialog_Nueva_Tecla
+from GUI.nueva_tecla.nueva_tecla_ui import Ui_Dialog_Nueva_Tecla
 from PyQt5 import QtWidgets
 
 

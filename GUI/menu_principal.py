@@ -3,8 +3,8 @@ import os.path
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QFileDialog
 
-from GUI.NuevaMuestra import NuevaMuestraWindow
-from GUI.Sesion import SesionWindow
+from GUI.nueva_muestra.NuevaMuestra import NuevaMuestraWindow
+from GUI.sesion.Sesion import SesionWindow
 from GUI.menu_principal_ui import Ui_MainWindow
 from utils import cargar_archivo_muestra
 

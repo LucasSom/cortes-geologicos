@@ -1,9 +1,8 @@
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QMessageBox
 
-from GUI.NuevaTeclaWindow import NuevaTeclaWindow
-from GUI.sesion_ui import Ui_Dialog_Sesion
+from GUI.nueva_tecla.NuevaTeclaWindow import NuevaTeclaWindow
+from GUI.sesion.sesion_ui import Ui_Dialog_Sesion
 from utils import guardar_muestra
 
 

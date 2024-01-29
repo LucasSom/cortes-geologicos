@@ -86,7 +86,7 @@ class Ui_NuevaMuestraWindow(object):
 
     def retranslateUi(self, NuevaMuestraWindow):
         _translate = QtCore.QCoreApplication.translate
-        NuevaMuestraWindow.setWindowTitle(_translate("NuevaMuestraWindow", "MainWindow"))
+        NuevaMuestraWindow.setWindowTitle(_translate("NuevaMuestraWindow", "Nueva muestra"))
         self.label.setText(_translate("NuevaMuestraWindow", "Nombre de la muestra"))
         self.label_2.setText(_translate("NuevaMuestraWindow", "Fecha"))
         self.label_3.setText(_translate("NuevaMuestraWindow", "Localidad"))
