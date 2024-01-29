@@ -1,5 +1,6 @@
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QMessageBox
 
 from GUI.nueva_tecla.NuevaTeclaWindow import NuevaTeclaWindow
 from GUI.sesion.sesion_ui import Ui_Dialog_Sesion
@@ -29,6 +30,17 @@ class SesionWindow(QtWidgets.QDialog, Ui_Dialog_Sesion, QtWidgets.QWidget):
 
     def agregar_roca(self, roca):
         self.listwidgetRocas.insertItem(0, roca)
+        if self.listwidgetRocas.count() >= self.muestra.cantidad_lecturas:
+            self.guardar()
+
+            finalizarPopUp = QMessageBox(self)
+            finalizarPopUp.setText(f"Sesión finalizada.\n"
+                                   f"Se llegó a las {self.muestra.cantidad_lecturas} muestras.\n"
+                                   f"Se procederá a calcular los resultados correspondientes.")
+            finalizarPopUp.setIcon(QMessageBox.Information)
+            finalizarPopUp.exec()
+
+            self.close()
 
     def agregar_tecla(self):
         if self.nueva_tecla_window is None:

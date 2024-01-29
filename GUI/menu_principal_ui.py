@@ -36,7 +36,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Menú principal"))
         self.pushButton.setText(_translate("MainWindow", "Nueva muestra"))
         self.pushButton_2.setText(_translate("MainWindow", "Cargar muestra"))
 
