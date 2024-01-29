@@ -11,24 +11,30 @@
 from PyQt5 import QtCore, QtWidgets
 
 
-class Ui_Dialog(object):
+class Ui_Dialog_Sesion(object):
     def setupUi(self, Dialog):
-        Dialog.setObjectName("Dialog")
-        Dialog.resize(1078, 797)
+        self.Dialog = Dialog
+        self.Dialog.setObjectName("Dialog")
+        self.Dialog.resize(1078, 797)
 
-        self.aceptar_cancelar = QtWidgets.QDialogButtonBox(Dialog)
+        self.aceptar_cancelar = QtWidgets.QDialogButtonBox(self.Dialog)
         self.aceptar_cancelar.setGeometry(QtCore.QRect(900, 760, 171, 30))
         self.aceptar_cancelar.setOrientation(QtCore.Qt.Horizontal)
         self.aceptar_cancelar.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel | QtWidgets.QDialogButtonBox.Save)
         self.aceptar_cancelar.setObjectName("aceptar_cancelar")
 
-        self.deshacerButton = QtWidgets.QCommandLinkButton(Dialog)
+        self.deshacerButton = QtWidgets.QCommandLinkButton(self.Dialog)
         self.deshacerButton.setGeometry(QtCore.QRect(10, 760, 530, 30))
         self.deshacerButton.setLayoutDirection(QtCore.Qt.RightToLeft)
         self.deshacerButton.setObjectName("deshacerButton")
 
+        self.agregarTeclaButton = QtWidgets.QCommandLinkButton(self.Dialog)
+        self.agregarTeclaButton.setGeometry(QtCore.QRect(550, 760, 350, 30))
+        self.agregarTeclaButton.setLayoutDirection(QtCore.Qt.RightToLeft)
+        self.agregarTeclaButton.setObjectName("agregarTeclaButton")
+
         # Scroll area de las rocas
-        self.scrollRocas = QtWidgets.QScrollArea(Dialog)
+        self.scrollRocas = QtWidgets.QScrollArea(self.Dialog)
         self.scrollRocas.setGeometry(QtCore.QRect(0, 0, 551, 751))
         self.scrollRocas.setWidgetResizable(True)
         self.scrollRocas.setObjectName("scrollRocas")
@@ -42,17 +48,17 @@ class Ui_Dialog(object):
         self.widget_rocas = QtWidgets.QWidget()  # Widget that contains the collection of Vertical Box
 
         self.listwidgetRocas = QtWidgets.QListWidget()
-        for roca in Dialog.muestra.componentes:
+        for roca in self.Dialog.muestra.componentes:
             self.listwidgetRocas.addItem(roca)
         self.vbox_rocas.addWidget(self.listwidgetRocas)
         self.widget_rocas.setLayout(self.vbox_rocas)
         self.scrollRocas.setWidget(self.widget_rocas)
 
-        # self.editarMapaBoton = QtWidgets.QPushButton(Dialog)
+        # self.editarMapaBoton = QtWidgets.QPushButton(self.Dialog)
         # self.editarMapaBoton.setGeometry(QtCore.QRect(560, 760, 511, 31))
         # self.editarMapaBoton.setObjectName("editarMapaBoton")
 
-        self.scrollMapa = QtWidgets.QScrollArea(Dialog)
+        self.scrollMapa = QtWidgets.QScrollArea(self.Dialog)
         self.scrollMapa.setGeometry(QtCore.QRect(560, 0, 511, 751))
         self.scrollMapa.setWidgetResizable(True)
         self.scrollMapa.setObjectName("scrollMapa")
@@ -66,22 +72,30 @@ class Ui_Dialog(object):
         self.widget_mapa = QtWidgets.QWidget()  # Widget that contains the collection of Vertical Box
 
         self.listwidgetMapa = QtWidgets.QListWidget()
-        for i, (tecla, roca) in enumerate(sorted(list(Dialog.muestra.mapa.items()))):
-            self.listwidgetMapa.addItem(f"{tecla}: {roca}")
-            item = self.listwidgetMapa.item(i)
-            item.setFlags(item.flags() | QtCore.Qt.ItemIsEditable)
+        self.imprimir_lista_teclas()
         self.vbox_mapa.addWidget(self.listwidgetMapa)
         self.widget_mapa.setLayout(self.vbox_mapa)
         self.scrollMapa.setWidget(self.widget_mapa)
 
-        self.retranslateUi(Dialog)
-        self.aceptar_cancelar.accepted.connect(Dialog.accept)  # type: ignore
-        self.aceptar_cancelar.rejected.connect(Dialog.reject)  # type: ignore
-        QtCore.QMetaObject.connectSlotsByName(Dialog)
+        self.retranslateUi()
+        self.aceptar_cancelar.accepted.connect(self.Dialog.accept)  # type: ignore
+        self.aceptar_cancelar.rejected.connect(self.Dialog.reject)  # type: ignore
+        QtCore.QMetaObject.connectSlotsByName(self.Dialog)
 
-    def retranslateUi(self, Dialog):
+    def imprimir_lista_teclas(self):
+        i = 0
+        self.listwidgetMapa.clear()
+        for tecla, roca in sorted(list(self.Dialog.muestra.mapa.items())):
+            if roca != "":
+                self.listwidgetMapa.addItem(f"{tecla}: {roca}")
+                item = self.listwidgetMapa.item(i)
+                item.setFlags(item.flags() | QtCore.Qt.ItemIsEditable)
+                i += 1
+
+    def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
+        self.Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
         self.deshacerButton.setText(_translate("Dialog", "Deshacer"))
+        self.agregarTeclaButton.setText(_translate("Dialog", "Agregar tecla"))
         # self.label.setText(_translate("Dialog", "Input"))
         # self.editarMapaBoton.setText(_translate("Dialog", "Editar mapa de teclas"))

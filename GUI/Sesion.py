@@ -2,17 +2,20 @@ from PyQt5 import QtWidgets
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QMessageBox
 
-from GUI.sesion_ui import Ui_Dialog
+from GUI.NuevaTeclaWindow import NuevaTeclaWindow
+from GUI.sesion_ui import Ui_Dialog_Sesion
 from utils import guardar_muestra
 
 
-class SesionWindow(QtWidgets.QDialog, Ui_Dialog, QtWidgets.QWidget):
+class SesionWindow(QtWidgets.QDialog, Ui_Dialog_Sesion, QtWidgets.QWidget):
     def __init__(self, muestra):
         super(SesionWindow, self).__init__()
         self.muestra = muestra
+        self.nueva_tecla_window = None
         self.setupUi(self)
 
         self.deshacerButton.clicked.connect(self.borrar_roca)
+        self.agregarTeclaButton.clicked.connect(self.agregar_tecla)
         self.aceptar_cancelar.accepted.connect(self.guardar)
         # self.aceptar_cancelar.rejected.connect(self.cancelar)
 
@@ -22,10 +25,18 @@ class SesionWindow(QtWidgets.QDialog, Ui_Dialog, QtWidgets.QWidget):
             self.cancelar()
         elif tecla.isalnum():
             roca = self.muestra.mapa[tecla.upper()]
-            self.agregar_roca(roca)
+            if roca != "":
+                self.agregar_roca(roca)
 
     def agregar_roca(self, roca):
         self.listwidgetRocas.insertItem(0, roca)
+
+    def agregar_tecla(self):
+        if self.nueva_tecla_window is None:
+            self.nueva_tecla_window = NuevaTeclaWindow(self)
+            self.nueva_tecla_window.show()
+        else:
+            self.nueva_tecla_window = None
 
     def borrar_roca(self):
         self.listwidgetRocas.takeItem(0)
