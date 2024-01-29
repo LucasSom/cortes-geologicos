@@ -40,6 +40,7 @@ class SesionWindow(QtWidgets.QDialog, Ui_Dialog_Sesion, QtWidgets.QWidget):
             finalizarPopUp.setIcon(QMessageBox.Information)
             finalizarPopUp.exec()
 
+            self.muestra.exportar_datos()
             self.close()
 
     def agregar_tecla(self):
