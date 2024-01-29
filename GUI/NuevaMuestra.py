@@ -40,7 +40,6 @@ class NuevaMuestraWindow(QtWidgets.QMainWindow, Ui_NuevaMuestraWindow):
         nueva_muestra = Muestra(self.nombre.text(),
                                 self.fecha.date().toPyDate(),
                                 self.localidad.text(),
-                                self.numero.value(),
                                 self.operador.text(),
                                 self.cantidad_lecturas.value(),
                                 self.observaciones.toPlainText(),
