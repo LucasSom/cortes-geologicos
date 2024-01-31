@@ -1,8 +1,6 @@
 import os
-from collections import Counter
 
 import pandas as pd
-from pandas import Series
 
 
 class Muestra:
@@ -22,6 +20,21 @@ class Muestra:
         if not os.path.exists(path_dir):
             os.makedirs(path_dir)
 
-        df = pd.DataFrame(self.componentes, columns=["Muestra"])
-        df = pd.DataFrame(df.value_counts(normalize=True)).rename(columns={"proportion": self.nombre}).T
-        df.to_csv(os.path.join(path_dir, f"{self.localidad}.csv"))
+        df_new = pd.DataFrame(self.componentes, columns=["Muestra"])
+        counts_df = pd.DataFrame(df_new["Muestra"].value_counts(normalize=True))
+        df_new = counts_df.rename(columns={"proportion": self.nombre}).T
+
+        # Cargar viejo CSV y concatenarlo
+        file_path = os.path.join(path_dir, f"{self.localidad}.csv")
+        if os.path.isfile(file_path):
+            df_old = pd.read_csv(file_path, index_col=0)
+            df_old.drop(["Promedio"], inplace=True)
+            df_new = pd.concat([df_old, df_new])
+
+        # Calculo el promedio de cada columna
+        promedio = df_new.mean()
+        promedio["Muestra"] = "Promedio"
+        df_promedio = pd.DataFrame(promedio).T.set_index("Muestra")
+        df_new = pd.concat([df_new, df_promedio])
+
+        df_new.to_csv(os.path.join(path_dir, f"{self.localidad}.csv"))
