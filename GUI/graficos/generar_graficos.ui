@@ -6,51 +6,64 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>189</width>
-    <height>210</height>
+    <width>322</width>
+    <height>491</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Menú principal</string>
+   <string>Generar gráficos</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="QFL_boton">
     <property name="geometry">
      <rect>
       <x>20</x>
       <y>20</y>
-      <width>151</width>
-      <height>25</height>
+      <width>281</width>
+      <height>91</height>
      </rect>
     </property>
     <property name="text">
-     <string>Nueva muestra</string>
+     <string>Generar QFL</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="QmFLQp_boton">
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>50</y>
-      <width>151</width>
-      <height>25</height>
+      <y>130</y>
+      <width>281</width>
+      <height>91</height>
      </rect>
     </property>
     <property name="text">
-     <string>Cargar muestra</string>
+     <string>Generar Qm-F-(L+Qp)</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="cargarTablaBoton">
+   <widget class="QPushButton" name="relacion_Fp_F_Boton">
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>80</y>
-      <width>151</width>
-      <height>25</height>
+      <y>350</y>
+      <width>281</width>
+      <height>91</height>
      </rect>
     </property>
     <property name="text">
-     <string>Cargar tabla</string>
+     <string>Calcular relación Fp/(Fp+Fk+Fm)</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="LVLSLm_boton">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>240</y>
+      <width>281</width>
+      <height>91</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Generar LV-LS-Lm</string>
     </property>
    </widget>
   </widget>
@@ -59,7 +72,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>189</width>
+     <width>322</width>
      <height>22</height>
     </rect>
    </property>
