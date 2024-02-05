@@ -36,5 +36,6 @@ class Muestra:
         promedio["Muestra"] = "Promedio"
         df_promedio = pd.DataFrame(promedio).T.set_index("Muestra")
         df_new = pd.concat([df_new, df_promedio])
+        df_new.fillna(0, inplace=True)
 
-        df_new.to_csv(os.path.join(path_dir, f"{self.localidad}.csv"))
+        df_new.to_csv(os.path.join(path_dir, f"{self.localidad}.csv"), index_label='Muestra')
