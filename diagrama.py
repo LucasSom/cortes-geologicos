@@ -76,7 +76,7 @@ def field_boundaries(scheme):
 
 
 def plot_diagrama(data, top, left, right, matrix=None, plot_type='blank', top_label='', left_label='', right_label='',
-                  grid=True, color='r', size=15) -> Tuple[pd.DataFrame, plt.Figure]:
+                  grid=True, color='g', size=15) -> Tuple[pd.DataFrame, plt.Figure]:
     """
     Grafica un diagrama triangular. Para QFL top=cuarzo, left=feldespato, right=lítico.
 
@@ -85,8 +85,8 @@ def plot_diagrama(data, top, left, right, matrix=None, plot_type='blank', top_la
      dataframe. Para QFL top=cuarzo.
     :param left: str o array. Ídem 'top'. Para QFL left=feldespato.
     :param right: str o array. Ídem 'top'. Para QFL right=lítico.
-    :param matrix: str or array-like, optional, default=None. Si se grafican datos petrográficos pueden incluirse en este
-     parámetro los clay matrix. Estructura análoga a los anteriores.
+    :param matrix: str or array-like, optional, default=None. Si se grafican datos petrográficos pueden incluirse en
+     este parámetro los clay matrix. Estructura análoga a los anteriores.
     :param plot_type: Tipo de gráfico. Son 3 opciones: 'Dickinson_1983', 'Pettijohn_1977' o 'blank'. Default: 'blank'
     :param top_label: Label del vértice superior del triángulo (para QFL, 'Q').
     :param left_label: Label del vértice izquierdo del triángulo (para QFL, 'F').
@@ -108,7 +108,10 @@ def plot_diagrama(data, top, left, right, matrix=None, plot_type='blank', top_la
     for lab in labs:
         ax.text(lab[1], lab[2], lab[0], ha="center", va="center", rotation=lab[3], size=8)
 
-    ax.scatter(x, y, color=color, s=size, edgecolor='k', zorder=10)
+    ax.scatter(x[:-1], y[:-1], color=color, s=size, edgecolor='k', zorder=10)
+    ax.scatter(x[-1], y[-1], color='r', s=size+1, edgecolor='k', zorder=10)
+    for i, muestra in enumerate(data['Muestra']):
+        plt.text(x[i] * (1 + 0.01), y[i] * (1 + 0.01), muestra, fontsize=8)
     ax.set_frame_on(False)
     ax.axes.get_xaxis().set_visible(False)
     ax.axes.get_yaxis().set_visible(False)
@@ -133,7 +136,7 @@ def plot_diagrama(data, top, left, right, matrix=None, plot_type='blank', top_la
             ax.add_line(l0)
             ax.add_line(l1)
             ax.add_line(l2)
-    if grid:
+
         grid1 = np.linspace(0.1, 0.9, 9)
         grid2 = np.linspace(0.05, .45, 9)
         axislabels = list(range(10, 100, 10))
@@ -159,6 +162,7 @@ def plot_diagrama(data, top, left, right, matrix=None, plot_type='blank', top_la
                 ax.add_patch(patches.PathPatch(path, alpha=0.1, facecolor='green', lw=0, zorder=0))
         patch = patches.PathPatch(path, color=None, facecolor=None, fill=False, lw=1.5, zorder=1)
         ax.add_patch(patch)
+
     if plot_type != 'blank':
         final_data = data.copy()
         for i in range(len(classifications)):
@@ -182,10 +186,10 @@ def plot_diagrama(data, top, left, right, matrix=None, plot_type='blank', top_la
                                 final_data.loc[j, "Pettijohn"] = 'Quartz Wacke'
                         elif matrix[j] > 75:
                             final_data.loc[j, "Pettijohn"] = 'Mudrock'
-                else:
-                    pass
+
         final_data = final_data.set_index('Muestra')
         return final_data, fig
+
     return data.set_index('Muestra'), fig
 
 

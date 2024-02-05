@@ -29,8 +29,7 @@ class GraficosWindow(QMainWindow, Ui_GraficosWindow):
 
         classified_data, plot = plot_diagrama(self.df, top=cuarzos, left=feldespatos, right=liticos, matrix=matrix,
                                               plot_type='Pettijohn_1977',
-                                              top_label='Q', left_label='F', right_label='L',
-                                              grid=True, color='r', size=15)
+                                              top_label='Q', left_label='F', right_label='L')
         plt.show()
         print(classified_data)
 
@@ -46,8 +45,7 @@ class GraficosWindow(QMainWindow, Ui_GraficosWindow):
                                               right=liticos + cuarzos_policristalinos,
                                               matrix=None,
                                               plot_type='blank',
-                                              top_label='Qm', left_label='F', right_label='L+Qp',
-                                              grid=True, color='r', size=15)
+                                              top_label='Qm', left_label='F', right_label='L+Qp')
         plt.show()
 
     def relacion_Fp_F(self):
