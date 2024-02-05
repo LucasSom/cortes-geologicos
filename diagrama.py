@@ -1,3 +1,5 @@
+from typing import Tuple
+
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -73,15 +75,35 @@ def field_boundaries(scheme):
     return classifications, labels
 
 
-def plot_qfl(data, top, left, right, matrix=None, plottype='blank', toplab='', leftlab='', rightlab='', grid=True,
-             color='r', size=15):
+def plot_diagrama(data, top, left, right, matrix=None, plot_type='blank', top_label='', left_label='', right_label='',
+                  grid=True, color='r', size=15) -> Tuple[pd.DataFrame, plt.Figure]:
+    """
+    Grafica un diagrama triangular. Para QFL top=cuarzo, left=feldespato, right=lítico.
+
+    :param data: Pandas data frame conteniendo los datos a los cuales las clasificaciones serán agregadas
+    :param top: str o array. Comúnmente serán arrays de 1D pero pueden ser strings referenciando las columnas del
+     dataframe. Para QFL top=cuarzo.
+    :param left: str o array. Ídem 'top'. Para QFL left=feldespato.
+    :param right: str o array. Ídem 'top'. Para QFL right=lítico.
+    :param matrix: str or array-like, optional, default=None. Si se grafican datos petrográficos pueden incluirse en este
+     parámetro los clay matrix. Estructura análoga a los anteriores.
+    :param plot_type: Tipo de gráfico. Son 3 opciones: 'Dickinson_1983', 'Pettijohn_1977' o 'blank'. Default: 'blank'
+    :param top_label: Label del vértice superior del triángulo (para QFL, 'Q').
+    :param left_label: Label del vértice izquierdo del triángulo (para QFL, 'F').
+    :param right_label: Label del vértice derecho del triángulo (para QFL, 'L').
+    :param grid: Bool que indica si se dibuja la grilla en el triángulo o no. Default: 'True'
+    :param color: Color de los puntos a marcar. Default: 'r'
+    :param size: Tamaño de la marca. Default: '15'
+    :return: tupla con el Dataframe de entrada al que se le agrega una columna con el valor de la clasificación según
+     el plot_type elegido
+    """
     list_valid_types = ['Pettijohn_1977', 'Dickinson_1983', 'blank']
-    if plottype not in list_valid_types:
+    if plot_type not in list_valid_types:
         raise ValueError("Plot type not recognised, valid types are blank, Pettijohn_1977 and Dickinson_1983")
 
     x, y = data_prep(data, top, left, right)
     fig, ax = plt.subplots()
-    classifications, labs = field_boundaries(plottype)
+    classifications, labs = field_boundaries(plot_type)
 
     for lab in labs:
         ax.text(lab[1], lab[2], lab[0], ha="center", va="center", rotation=lab[3], size=8)
@@ -91,9 +113,9 @@ def plot_qfl(data, top, left, right, matrix=None, plottype='blank', toplab='', l
     ax.axes.get_xaxis().set_visible(False)
     ax.axes.get_yaxis().set_visible(False)
     # label the apexes of the triangle
-    ax.text(-0.02, -0.04, str(leftlab), ha="center", va="center", rotation=0, size=12)
-    ax.text(1.02, -0.04, str(rightlab), ha="center", va="center", rotation=0, size=12)
-    ax.text(0.5, 1.05, str(toplab), ha="center", va="center", rotation=0, size=12, zorder=0)
+    ax.text(-0.02, -0.04, str(left_label), ha="center", va="center", rotation=0, size=12)
+    ax.text(1.02, -0.04, str(right_label), ha="center", va="center", rotation=0, size=12)
+    ax.text(0.5, 1.05, str(top_label), ha="center", va="center", rotation=0, size=12, zorder=0)
     ax.set_xlim(-0.1, 1.1)
     ax.set_ylim(-0.1, 1.1)
 
@@ -132,12 +154,12 @@ def plot_qfl(data, top, left, right, matrix=None, plottype='blank', toplab='', l
         path = Path(polygon)
         # check if every polygon in the loop contains points and color green if true
         index = path.contains_points(np.column_stack((x, y)))
-        if plottype != 'blank':
+        if plot_type != 'blank':
             if sum(index) > 0:
                 ax.add_patch(patches.PathPatch(path, alpha=0.1, facecolor='green', lw=0, zorder=0))
         patch = patches.PathPatch(path, color=None, facecolor=None, fill=False, lw=1.5, zorder=1)
         ax.add_patch(patch)
-    if plottype != 'blank':
+    if plot_type != 'blank':
         final_data = data.copy()
         for i in range(len(classifications)):
             polygon = classifications[i][1:]
@@ -181,7 +203,7 @@ if __name__ == "__main__":
     matrix = data_pct['PM+Cem']
     # for QFL top = quzrtz, left = feldspar, right = lithic
     # plot type options are 'Dickinson_1983', 'Pettijohn_1977' or 'blank'
-    classified_data, plot = plot_qfl(data, top=quartz, left=fsp, right=lithic, matrix=matrix, plottype='Pettijohn_1977',
-                                     toplab='Q', leftlab='F', rightlab='L', grid=True, color='r', size=15)
+    classified_data, plot = plot_diagrama(data, top=quartz, left=fsp, right=lithic, matrix=matrix, plot_type='Pettijohn_1977',
+                                          top_label='Q', left_label='F', right_label='L', grid=True, color='r', size=15)
     plt.show()
     print(classified_data)

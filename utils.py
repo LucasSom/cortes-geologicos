@@ -1,6 +1,8 @@
 import os
 import pickle
 
+import pandas as pd
+
 
 def file_extension(p):
     return os.path.splitext(p)[1]
@@ -28,3 +30,8 @@ def cargar_archivo_muestra(file_name: str, verbose=False):
         p = pickle.load(f)
         if verbose: print("Loaded file:", f)
         return p
+
+
+def filtrar_tipo_roca(df: pd.DataFrame, tipo: str) -> pd.DataFrame:
+    columnas = [c for c in df.columns if c[1:len(tipo) + 1] == tipo]
+    return df[columnas].sum(axis=1)

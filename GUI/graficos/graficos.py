@@ -2,7 +2,8 @@ from PyQt5.QtWidgets import QMainWindow
 from matplotlib import pyplot as plt
 
 from GUI.graficos.generar_graficos_ui import Ui_GraficosWindow
-from diagrama_qfl import plot_qfl
+from diagrama import plot_diagrama
+from utils import filtrar_tipo_roca
 
 
 class GraficosWindow(QMainWindow, Ui_GraficosWindow):
@@ -20,49 +21,34 @@ class GraficosWindow(QMainWindow, Ui_GraficosWindow):
         self.LVLSLm_boton.clicked.connect(self.generar_LVLSLm)
 
     def generar_qfl(self):
-        # El DataFrame tiene que tener como columnas: Index, Label, Q, F, L, Size, Color, Alpha, Marker
-        # df = pd.DataFrame({
-        #     'Index': [0, 1],
-        #     'Label': ['Santa Rosa', 'Guatraché'],
-        #     'Q': [0.3, 0.2],
-        #     'F': [0.2, 0.3],
-        #     'L': [0.5, 0.5],
-        #     'Size': [10, 20],
-        #     'Color': ['blue', 'green'],
-        #     'Alpha': [1, 1],
-        #     'Marker': ['x', 'o']
-        # })
-        # qfl = QFL(self, df)
-        # # qfl = QFL(self, self.df)
-        # qfl.Tri()
-        # qfl.Explain()
-
-        # convert counts to percent
-        # self.df = self.df.div(self.df.sum(axis=1), axis=0) * 100
-        # sum QFL types
-        Q_columnas = [c for c in self.df.columns if c[1] == 'Q']
-        cuarzos = self.df[Q_columnas].sum(axis=1)  # data_pct['Qm'] + data_pct['Qmu'] + data_pct['Qp']
-
-        F_columnas = [c for c in self.df.columns if c[1] == 'F']
-        feldespatos = self.df[F_columnas].sum(axis=1)  # data_pct['Plag'] + data_pct['Afsp']
-
-        L_columnas = [c for c in self.df.columns if c[1] == 'L']
-        liticos = self.df[L_columnas].sum(axis=1)  # data_pct['Lf']
-
+        cuarzos = filtrar_tipo_roca(self.df, tipo='Q')
+        feldespatos = filtrar_tipo_roca(self.df, tipo='F')
+        liticos = filtrar_tipo_roca(self.df, tipo='L')
         # the clay matrix can be None if not present
-        O_columnas = [c for c in self.df.columns if c[1] == 'O']
-        matrix = self.df[O_columnas].sum(axis=1)  # data_pct['PM+Cem']
+        matrix = filtrar_tipo_roca(self.df, tipo='O')
 
-        # for QFL top = quzrtz, left = feldspar, right = lithic
-        # plot type options are 'Dickinson_1983', 'Pettijohn_1977' or 'blank'
-        classified_data, plot = plot_qfl(self.df, top=cuarzos, left=feldespatos, right=liticos, matrix=matrix,
-                                         plottype='Pettijohn_1977',
-                                         toplab='Q', leftlab='F', rightlab='L', grid=True, color='r', size=15)
+        classified_data, plot = plot_diagrama(self.df, top=cuarzos, left=feldespatos, right=liticos, matrix=matrix,
+                                              plot_type='Pettijohn_1977',
+                                              top_label='Q', left_label='F', right_label='L',
+                                              grid=True, color='r', size=15)
         plt.show()
         print(classified_data)
 
     def generar_QmFLQp(self):
-        ...
+        cuarzos_monocristalinos = filtrar_tipo_roca(self.df, tipo='Qm')
+        feldespatos = filtrar_tipo_roca(self.df, tipo='F')
+        liticos = filtrar_tipo_roca(self.df, tipo='L')
+        cuarzos_policristalinos = filtrar_tipo_roca(self.df, tipo='Qp')
+
+        classified_data, plot = plot_diagrama(self.df,
+                                              top=cuarzos_monocristalinos,
+                                              left=feldespatos,
+                                              right=liticos + cuarzos_policristalinos,
+                                              matrix=None,
+                                              plot_type='blank',
+                                              top_label='Qm', left_label='F', right_label='L+Qp',
+                                              grid=True, color='r', size=15)
+        plt.show()
 
     def relacion_Fp_F(self):
         ...
