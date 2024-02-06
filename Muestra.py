@@ -29,13 +29,12 @@ class Muestra:
         if os.path.isfile(file_path):
             df_old = pd.read_csv(file_path, index_col=0)
             df_old.drop(["Promedio"], inplace=True)
-            df_new = pd.concat([df_old, df_new])
+            df_new = pd.concat([df_old, df_new]).fillna(0)
 
         # Calculo el promedio de cada columna
         promedio = df_new.mean()
         promedio["Muestra"] = "Promedio"
         df_promedio = pd.DataFrame(promedio).T.set_index("Muestra")
         df_new = pd.concat([df_new, df_promedio])
-        df_new.fillna(0, inplace=True)
 
         df_new.to_csv(os.path.join(path_dir, f"{self.localidad}.csv"), index_label='Muestra')
