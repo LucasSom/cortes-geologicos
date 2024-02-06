@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import QMainWindow
 from matplotlib import pyplot as plt
 
 from GUI.graficos.generar_graficos_ui import Ui_GraficosWindow
+from GUI.graficos.relacion.RelacionWindow import RelacionWindow
 from diagrama import plot_diagrama
 from utils import filtrar_tipo_roca
 
@@ -9,6 +10,7 @@ from utils import filtrar_tipo_roca
 class GraficosWindow(QMainWindow, Ui_GraficosWindow):
     def __init__(self, df):
         QMainWindow.__init__(self)
+        self.relacion_window = None
         self.df = df
         # self.df.index.name = 'Muestra'
         # s = df.T["Promedio"]
@@ -49,7 +51,20 @@ class GraficosWindow(QMainWindow, Ui_GraficosWindow):
         plt.show()
 
     def relacion_Fp_F(self):
-        ...
+        Fp = filtrar_tipo_roca(self.df, tipo='Fp')
+        Fk = filtrar_tipo_roca(self.df, tipo='Fk')
+        Fm = filtrar_tipo_roca(self.df, tipo='Fm')
+
+        df_relacion = self.df.copy()
+        df_relacion['relacion_Fp_F'] = (Fp/(Fp+Fk+Fm)).fillna(0)
+        df_relacion = df_relacion.set_index('Muestra')
+
+        promedio_relacion = df_relacion.loc['Promedio', 'relacion_Fp_F']
+        if self.relacion_window is None:
+            self.relacion_window = RelacionWindow(promedio_relacion)
+            self.relacion_window.show()
+        else:
+            self.relacion_window = None
 
     def generar_LVLSLm(self):
         ...
