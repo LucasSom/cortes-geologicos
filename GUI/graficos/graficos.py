@@ -20,7 +20,7 @@ class GraficosWindow(QMainWindow, Ui_GraficosWindow):
         self.QFL_boton.clicked.connect(self.generar_qfl)
         self.QmFLQp_boton.clicked.connect(self.generar_QmFLQp)
         self.relacion_Fp_F_Boton.clicked.connect(self.relacion_Fp_F)
-        self.LVLSLm_boton.clicked.connect(self.generar_LVLSLm)
+        self.LVLSLm_boton.clicked.connect(self.generar_LvLsLm)
 
     def generar_qfl(self):
         cuarzos = filtrar_tipo_roca(self.df, tipo='Q')
@@ -66,5 +66,15 @@ class GraficosWindow(QMainWindow, Ui_GraficosWindow):
         else:
             self.relacion_window = None
 
-    def generar_LVLSLm(self):
-        ...
+    def generar_LvLsLm(self):
+        liticos_volcanicos = filtrar_tipo_roca(self.df, tipo='Lv')
+        liticos_sedimentarios = filtrar_tipo_roca(self.df, tipo='Ls')
+        liticos_metamorficos = filtrar_tipo_roca(self.df, tipo='Lm')
+
+        classified_data, plot = plot_diagrama(self.df,
+                                              top=liticos_volcanicos,
+                                              left=liticos_sedimentarios,
+                                              right=liticos_metamorficos,
+                                              plot_type='blank',
+                                              top_label='Lv', left_label='Ls', right_label='Lm')
+        plt.show()
