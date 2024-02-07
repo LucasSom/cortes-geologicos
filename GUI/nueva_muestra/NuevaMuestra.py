@@ -48,19 +48,13 @@ class NuevaMuestraWindow(QtWidgets.QMainWindow, Ui_NuevaMuestraWindow):
         if fileName is not None:
             guardar_muestra(nueva_muestra, fileName, verbose=True)
 
-        if self.sesion_window is None:
-            self.sesion_window = SesionWindow(nueva_muestra)
-            self.sesion_window.show()
-        else:
-            self.sesion_window = None
+        self.sesion_window = SesionWindow(nueva_muestra)
+        self.sesion_window.show()
         self.close()
 
     def cancelar(self):
         self.close()
 
     def editar_mapa(self):
-        if self.editar_mapa_w is None:
-            self.editar_mapa_w = EditarMapaWindow()
-            self.editar_mapa_w.show()
-        else:
-            self.editar_mapa_w = None  # Discard reference and close window.
+        self.editar_mapa_w = EditarMapaWindow()
+        self.editar_mapa_w.show()

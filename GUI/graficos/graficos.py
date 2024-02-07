@@ -12,9 +12,6 @@ class GraficosWindow(QMainWindow, Ui_GraficosWindow):
         QMainWindow.__init__(self)
         self.relacion_window = None
         self.df = df
-        # self.df.index.name = 'Muestra'
-        # s = df.T["Promedio"]
-        # self.df = pd.DataFrame({'Muestra': list(s.index), 'Promedio': list(s)})
         self.setupUi(self)
 
         self.QFL_boton.clicked.connect(self.generar_qfl)
@@ -60,11 +57,9 @@ class GraficosWindow(QMainWindow, Ui_GraficosWindow):
         df_relacion = df_relacion.set_index('Muestra')
 
         promedio_relacion = df_relacion.loc['Promedio', 'relacion_Fp_F']
-        if self.relacion_window is None:
-            self.relacion_window = RelacionWindow(promedio_relacion)
-            self.relacion_window.show()
-        else:
-            self.relacion_window = None
+
+        self.relacion_window = RelacionWindow(promedio_relacion)
+        self.relacion_window.show()
 
     def generar_LvLsLm(self):
         liticos_volcanicos = filtrar_tipo_roca(self.df, tipo='Lv')

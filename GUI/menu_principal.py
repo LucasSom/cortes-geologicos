@@ -23,12 +23,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.pushButton_2.clicked.connect(self.cargar_muestra)
         self.cargarTablaBoton.clicked.connect(self.cargar_tabla)
 
-    def show_nueva_muestra(self, checked):
-        if self.nueva_muestra_w is None:
-            self.nueva_muestra_w = NuevaMuestraWindow()
-            self.nueva_muestra_w.show()
-        else:
-            self.nueva_muestra_w = None  # Discard reference and close window.
+    def show_nueva_muestra(self):
+        self.nueva_muestra_w = NuevaMuestraWindow()
+        self.nueva_muestra_w.show()
 
     def openFileNameDialog(self, tipo='mtra'):
         options = QFileDialog.Options()
@@ -37,10 +34,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         if tipo == 'mtra':
             fileName, _ = QFileDialog.getOpenFileName(self, "Cargar muestra", os.path.curdir,
-                                                      "All Files (*);;Muestras (*.mtra)", options=options)
+                                                      "Muestras (*.mtra);;All Files (*)", options=options)
         elif tipo == 'csv':
             fileName, _ = QFileDialog.getOpenFileName(self, "Cargar tabla CSV", os.path.curdir,
-                                                      "All Files (*);;CSV (*.csv)", options=options)
+                                                      "CSV (*.csv);;All Files (*)", options=options)
 
         if fileName:
             return fileName
@@ -50,21 +47,15 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         fileName = self.openFileNameDialog()
         if fileName is not None:
             muestra = cargar_archivo_muestra(fileName)
-            if self.sesion_window is None:
-                self.sesion_window = SesionWindow(muestra)
-                self.sesion_window.show()
-            else:
-                self.sesion_window = None
+            self.sesion_window = SesionWindow(muestra)
+            self.sesion_window.show()
 
     def cargar_tabla(self, checked):
         fileName = self.openFileNameDialog(tipo='csv')
         if fileName is not None:
             df = pd.read_csv(fileName)
-            if self.graficos_window is None:
-                self.graficos_window = GraficosWindow(df)
-                self.graficos_window.show()
-            else:
-                self.graficos_window = None
+            self.graficos_window = GraficosWindow(df)
+            self.graficos_window.show()
 
 
 if __name__ == "__main__":

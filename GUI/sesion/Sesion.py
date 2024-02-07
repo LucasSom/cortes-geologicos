@@ -17,7 +17,6 @@ class SesionWindow(QtWidgets.QDialog, Ui_Dialog_Sesion, QtWidgets.QWidget):
         self.deshacerButton.clicked.connect(self.borrar_roca)
         self.agregarTeclaButton.clicked.connect(self.agregar_tecla)
         self.aceptar_cancelar.accepted.connect(self.guardar)
-        # self.aceptar_cancelar.rejected.connect(self.cancelar)
 
     def keyPressEvent(self, event):
         tecla = event.text()
@@ -44,11 +43,8 @@ class SesionWindow(QtWidgets.QDialog, Ui_Dialog_Sesion, QtWidgets.QWidget):
             self.close()
 
     def agregar_tecla(self):
-        if self.nueva_tecla_window is None:
-            self.nueva_tecla_window = NuevaTeclaWindow(self)
-            self.nueva_tecla_window.show()
-        else:
-            self.nueva_tecla_window = None
+        self.nueva_tecla_window = NuevaTeclaWindow(self)
+        self.nueva_tecla_window.show()
 
     def borrar_roca(self):
         self.listwidgetRocas.takeItem(0)
@@ -56,10 +52,3 @@ class SesionWindow(QtWidgets.QDialog, Ui_Dialog_Sesion, QtWidgets.QWidget):
     def guardar(self):
         self.muestra.componentes = [self.listwidgetRocas.item(i).text() for i in range(self.listwidgetRocas.count())]
         guardar_muestra(self.muestra, self.muestra.fileName)
-
-    # def cancelar(self):
-    #     cancelarPopUp = QMessageBox(self)
-    #     cancelarPopUp.setText("¿Cerrar sin guardar?")
-    #     cancelarPopUp.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
-    #     cancelarPopUp.setIcon(QMessageBox.Warning)
-    #     cancelarPopUp.exec()
