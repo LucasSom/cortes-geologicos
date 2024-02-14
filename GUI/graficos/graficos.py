@@ -27,7 +27,7 @@ class GraficosWindow(QMainWindow, Ui_GraficosWindow):
         matrix = filtrar_tipo_roca(self.df, tipo='O')
 
         classified_data, plot = plot_diagrama(self.df, top=cuarzos, left=feldespatos, right=liticos, matrix=matrix,
-                                              plot_type='Pettijohn_1977',
+                                              plot_type='Dickinson_1983',
                                               top_label='Q', left_label='F', right_label='L')
         plt.show()
         print(classified_data)

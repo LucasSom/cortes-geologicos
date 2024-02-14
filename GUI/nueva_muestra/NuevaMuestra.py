@@ -1,5 +1,7 @@
 import os.path
 
+import numpy as np
+import pandas as pd
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QFileDialog
 
@@ -24,7 +26,8 @@ class NuevaMuestraWindow(QtWidgets.QMainWindow, Ui_NuevaMuestraWindow):
         self.setupUi(self)
         self.cancelar_aceptar_boton.accepted.connect(self.aceptar)
         self.cancelar_aceptar_boton.rejected.connect(self.cancelar)
-        self.editar_mapa_boton.clicked.connect(self.editar_mapa)
+        self.nuevo_mapa_boton.clicked.connect(self.editar_mapa)
+        self.cargar_mapa_boton.clicked.connect(self.cargar_mapa)
 
     def saveFileDialog(self):
         options = QFileDialog.Options()
@@ -35,6 +38,16 @@ class NuevaMuestraWindow(QtWidgets.QMainWindow, Ui_NuevaMuestraWindow):
             return fileName
         return None
 
+    def cargar_mapa(self):
+        options = QFileDialog.Options()
+        options |= QFileDialog.DontUseNativeDialog
+        fileName, _ = QFileDialog.getOpenFileName(self, "Cargar mapa de teclas", os.path.curdir,
+                                                  "CSV (*.csv);;All Files (*)", options=options)
+        if fileName:
+            mapa_df = pd.read_csv(fileName)
+            self.mapa = {tecla: roca[0] for tecla, roca in mapa_df.items() if type(roca[0]) is str}
+            self.editar_mapa()
+
     def aceptar(self):
         fileName = self.saveFileDialog()
         nueva_muestra = Muestra(self.nombre.text(),
@@ -43,7 +56,7 @@ class NuevaMuestraWindow(QtWidgets.QMainWindow, Ui_NuevaMuestraWindow):
                                 self.operador.text(),
                                 self.cantidad_lecturas.value(),
                                 self.observaciones.toPlainText(),
-                                self.editar_mapa_w.mapa,
+                                self.mapa,
                                 fileName)
         if fileName is not None:
             guardar_muestra(nueva_muestra, fileName, verbose=True)
@@ -56,5 +69,5 @@ class NuevaMuestraWindow(QtWidgets.QMainWindow, Ui_NuevaMuestraWindow):
         self.close()
 
     def editar_mapa(self):
-        self.editar_mapa_w = EditarMapaWindow()
+        self.editar_mapa_w = EditarMapaWindow(self)
         self.editar_mapa_w.show()

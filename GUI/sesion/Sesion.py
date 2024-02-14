@@ -39,7 +39,14 @@ class SesionWindow(QtWidgets.QDialog, Ui_Dialog_Sesion, QtWidgets.QWidget):
             finalizarPopUp.setIcon(QMessageBox.Information)
             finalizarPopUp.exec()
 
-            self.muestra.exportar_datos()
+            mapa_fileName = self.muestra.exportar_datos()
+
+            guardadoPopUp = QMessageBox(self)
+            guardadoPopUp.setText(f"Se guardó la tabla de resultados en:\n"
+                                  f"{mapa_fileName}\n")
+            guardadoPopUp.setIcon(QMessageBox.Information)
+            guardadoPopUp.exec()
+
             self.close()
 
     def agregar_tecla(self):
