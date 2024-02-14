@@ -14,11 +14,11 @@ from PyQt5.QtWidgets import QVBoxLayout, QWidget, QMainWindow, QScrollArea
 
 
 class Ui_MainWindow(QMainWindow):
-    def __init__(self):
+    def __init__(self, mapa):
         super().__init__()
-        self.initUI()
+        self.initUI(mapa)
 
-    def initUI(self):
+    def initUI(self, mapa):
         self.scrollArea = QScrollArea()  # Scroll Area which contains the widgets, set as the centralWidget
         self.widget = QWidget()  # Widget that contains the collection of Vertical Box
         self.vbox = QVBoxLayout()  # The Vertical Box that contains the Horizontal Boxes of  labels and buttons
@@ -33,6 +33,8 @@ class Ui_MainWindow(QMainWindow):
         self.vbox.addWidget(self.label_A)
         self.text_A = QtWidgets.QLineEdit(self.scrollAreaWidgetContents)
         self.text_A.setObjectName("text_A")
+        if "A" in mapa:
+            self.text_A.setText(mapa["A"])
         self.vbox.addWidget(self.text_A)
 
         self.label_B = QtWidgets.QLabel(self.scrollAreaWidgetContents)
@@ -41,6 +43,8 @@ class Ui_MainWindow(QMainWindow):
         self.vbox.addWidget(self.label_B)
         self.text_B = QtWidgets.QLineEdit(self.scrollAreaWidgetContents)
         self.text_B.setObjectName("text_B")
+        if "B" in mapa:
+            self.text_B.setText(mapa["B"])
         self.vbox.addWidget(self.text_B)
 
         self.label_C = QtWidgets.QLabel(self.scrollAreaWidgetContents)
@@ -51,6 +55,8 @@ class Ui_MainWindow(QMainWindow):
         self.text_C = QtWidgets.QLineEdit(self.scrollAreaWidgetContents)
         self.text_C.setGeometry(QtCore.QRect(30, 100, 731, 31))
         self.text_C.setObjectName("text_C")
+        if "C" in mapa:
+            self.text_C.setText(mapa["C"])
         self.vbox.addWidget(self.text_C)
 
         self.label_D = QtWidgets.QLabel(self.scrollAreaWidgetContents)
@@ -61,6 +67,8 @@ class Ui_MainWindow(QMainWindow):
         self.text_D = QtWidgets.QLineEdit(self.scrollAreaWidgetContents)
         self.text_D.setGeometry(QtCore.QRect(30, 140, 731, 31))
         self.text_D.setObjectName("text_D")
+        if "D" in mapa:
+            self.text_D.setText(mapa["D"])
         self.vbox.addWidget(self.text_D)
 
         self.label_E = QtWidgets.QLabel(self.scrollAreaWidgetContents)
@@ -71,6 +79,8 @@ class Ui_MainWindow(QMainWindow):
         self.text_E = QtWidgets.QLineEdit(self.scrollAreaWidgetContents)
         self.text_E.setGeometry(QtCore.QRect(30, 180, 731, 31))
         self.text_E.setObjectName("text_E")
+        if "E" in mapa:
+            self.text_E.setText(mapa["E"])
         self.vbox.addWidget(self.text_E)
 
         self.label_F = QtWidgets.QLabel(self.scrollAreaWidgetContents)
@@ -81,6 +91,8 @@ class Ui_MainWindow(QMainWindow):
         self.text_F = QtWidgets.QLineEdit(self.scrollAreaWidgetContents)
         self.text_F.setGeometry(QtCore.QRect(30, 220, 731, 31))
         self.text_F.setObjectName("text_F")
+        if "F" in mapa:
+            self.text_F.setText(mapa["F"])
         self.vbox.addWidget(self.text_F)
 
         self.label_G = QtWidgets.QLabel(self.scrollAreaWidgetContents)
@@ -91,6 +103,8 @@ class Ui_MainWindow(QMainWindow):
         self.text_G = QtWidgets.QLineEdit(self.scrollAreaWidgetContents)
         self.text_G.setGeometry(QtCore.QRect(30, 260, 731, 31))
         self.text_G.setObjectName("text_G")
+        if "G" in mapa:
+            self.text_G.setText(mapa["G"])
         self.vbox.addWidget(self.text_G)
 
         self.label_H = QtWidgets.QLabel(self.scrollAreaWidgetContents)
@@ -101,6 +115,8 @@ class Ui_MainWindow(QMainWindow):
         self.text_H = QtWidgets.QLineEdit(self.scrollAreaWidgetContents)
         self.text_H.setGeometry(QtCore.QRect(30, 300, 731, 31))
         self.text_H.setObjectName("text_H")
+        if "H" in mapa:
+            self.text_H.setText(mapa["H"])
         self.vbox.addWidget(self.text_H)
 
         self.label_I = QtWidgets.QLabel(self.scrollAreaWidgetContents)
@@ -111,6 +127,8 @@ class Ui_MainWindow(QMainWindow):
         self.text_I = QtWidgets.QLineEdit(self.scrollAreaWidgetContents)
         self.text_I.setGeometry(QtCore.QRect(30, 340, 731, 31))
         self.text_I.setObjectName("text_I")
+        if "I" in mapa:
+            self.text_I.setText(mapa["I"])
         self.vbox.addWidget(self.text_I)
 
         self.label_J = QtWidgets.QLabel(self.scrollAreaWidgetContents)
@@ -121,6 +139,8 @@ class Ui_MainWindow(QMainWindow):
         self.text_J = QtWidgets.QLineEdit(self.scrollAreaWidgetContents)
         self.text_J.setGeometry(QtCore.QRect(30, 380, 731, 31))
         self.text_J.setObjectName("text_J")
+        if "J" in mapa:
+            self.text_J.setText(mapa["J"])
         self.vbox.addWidget(self.text_J)
 
         self.label_K = QtWidgets.QLabel(self.scrollAreaWidgetContents)
@@ -131,6 +151,8 @@ class Ui_MainWindow(QMainWindow):
         self.text_K = QtWidgets.QLineEdit(self.scrollAreaWidgetContents)
         self.text_K.setGeometry(QtCore.QRect(30, 420, 731, 31))
         self.text_K.setObjectName("text_K")
+        if "K" in mapa:
+            self.text_K.setText(mapa["K"])
         self.vbox.addWidget(self.text_K)
 
         self.label_L = QtWidgets.QLabel(self.scrollAreaWidgetContents)
@@ -141,6 +163,8 @@ class Ui_MainWindow(QMainWindow):
         self.text_L = QtWidgets.QLineEdit(self.scrollAreaWidgetContents)
         self.text_L.setGeometry(QtCore.QRect(30, 460, 731, 31))
         self.text_L.setObjectName("text_L")
+        if "L" in mapa:
+            self.text_L.setText(mapa["L"])
         self.vbox.addWidget(self.text_L)
 
         self.label_M = QtWidgets.QLabel(self.scrollAreaWidgetContents)
@@ -151,6 +175,8 @@ class Ui_MainWindow(QMainWindow):
         self.text_M = QtWidgets.QLineEdit(self.scrollAreaWidgetContents)
         self.text_M.setGeometry(QtCore.QRect(30, 500, 731, 31))
         self.text_M.setObjectName("text_M")
+        if "M" in mapa:
+            self.text_M.setText(mapa["M"])
         self.vbox.addWidget(self.text_M)
 
         self.label_N = QtWidgets.QLabel(self.scrollAreaWidgetContents)
@@ -161,6 +187,8 @@ class Ui_MainWindow(QMainWindow):
         self.text_N = QtWidgets.QLineEdit(self.scrollAreaWidgetContents)
         self.text_N.setGeometry(QtCore.QRect(30, 540, 731, 31))
         self.text_N.setObjectName("text_N")
+        if "N" in mapa:
+            self.text_N.setText(mapa["N"])
         self.vbox.addWidget(self.text_N)
 
         self.label_O = QtWidgets.QLabel(self.scrollAreaWidgetContents)
@@ -171,6 +199,8 @@ class Ui_MainWindow(QMainWindow):
         self.text_O = QtWidgets.QLineEdit(self.scrollAreaWidgetContents)
         self.text_O.setGeometry(QtCore.QRect(30, 580, 731, 31))
         self.text_O.setObjectName("text_O")
+        if "O" in mapa:
+            self.text_O.setText(mapa["O"])
         self.vbox.addWidget(self.text_O)
 
         self.label_P = QtWidgets.QLabel(self.scrollAreaWidgetContents)
@@ -181,6 +211,8 @@ class Ui_MainWindow(QMainWindow):
         self.text_P = QtWidgets.QLineEdit(self.scrollAreaWidgetContents)
         self.text_P.setGeometry(QtCore.QRect(30, 620, 731, 31))
         self.text_P.setObjectName("text_P")
+        if "P" in mapa:
+            self.text_P.setText(mapa["P"])
         self.vbox.addWidget(self.text_P)
 
         self.label_Q = QtWidgets.QLabel(self.scrollAreaWidgetContents)
@@ -191,6 +223,8 @@ class Ui_MainWindow(QMainWindow):
         self.text_Q = QtWidgets.QLineEdit(self.scrollAreaWidgetContents)
         self.text_Q.setGeometry(QtCore.QRect(30, 660, 731, 31))
         self.text_Q.setObjectName("text_Q")
+        if "Q" in mapa:
+            self.text_Q.setText(mapa["Q"])
         self.vbox.addWidget(self.text_Q)
 
         self.label_R = QtWidgets.QLabel(self.scrollAreaWidgetContents)
@@ -201,6 +235,8 @@ class Ui_MainWindow(QMainWindow):
         self.text_R = QtWidgets.QLineEdit(self.scrollAreaWidgetContents)
         self.text_R.setGeometry(QtCore.QRect(30, 700, 731, 31))
         self.text_R.setObjectName("text_R")
+        if "R" in mapa:
+            self.text_R.setText(mapa["R"])
         self.vbox.addWidget(self.text_R)
 
         self.label_S = QtWidgets.QLabel(self.scrollAreaWidgetContents)
@@ -211,6 +247,8 @@ class Ui_MainWindow(QMainWindow):
         self.text_S = QtWidgets.QLineEdit(self.scrollAreaWidgetContents)
         self.text_S.setGeometry(QtCore.QRect(30, 740, 731, 31))
         self.text_S.setObjectName("text_S")
+        if "S" in mapa:
+            self.text_S.setText(mapa["S"])
         self.vbox.addWidget(self.text_S)
 
         self.label_T = QtWidgets.QLabel(self.scrollAreaWidgetContents)
@@ -221,6 +259,8 @@ class Ui_MainWindow(QMainWindow):
         self.text_T = QtWidgets.QLineEdit(self.scrollAreaWidgetContents)
         self.text_T.setGeometry(QtCore.QRect(30, 780, 731, 31))
         self.text_T.setObjectName("text_T")
+        if "T" in mapa:
+            self.text_T.setText(mapa["T"])
         self.vbox.addWidget(self.text_T)
 
         self.label_U = QtWidgets.QLabel(self.scrollAreaWidgetContents)
@@ -231,6 +271,8 @@ class Ui_MainWindow(QMainWindow):
         self.text_U = QtWidgets.QLineEdit(self.scrollAreaWidgetContents)
         self.text_U.setGeometry(QtCore.QRect(30, 820, 731, 31))
         self.text_U.setObjectName("text_U")
+        if "U" in mapa:
+            self.text_U.setText(mapa["U"])
         self.vbox.addWidget(self.text_U)
 
         self.label_V = QtWidgets.QLabel(self.scrollAreaWidgetContents)
@@ -241,6 +283,8 @@ class Ui_MainWindow(QMainWindow):
         self.text_V = QtWidgets.QLineEdit(self.scrollAreaWidgetContents)
         self.text_V.setGeometry(QtCore.QRect(30, 860, 731, 31))
         self.text_V.setObjectName("text_V")
+        if "V" in mapa:
+            self.text_V.setText(mapa["V"])
         self.vbox.addWidget(self.text_V)
 
         self.label_W = QtWidgets.QLabel(self.scrollAreaWidgetContents)
@@ -251,6 +295,8 @@ class Ui_MainWindow(QMainWindow):
         self.text_W = QtWidgets.QLineEdit(self.scrollAreaWidgetContents)
         self.text_W.setGeometry(QtCore.QRect(30, 900, 731, 31))
         self.text_W.setObjectName("text_W")
+        if "W" in mapa:
+            self.text_W.setText(mapa["W"])
         self.vbox.addWidget(self.text_W)
 
         self.label_X = QtWidgets.QLabel(self.scrollAreaWidgetContents)
@@ -261,6 +307,8 @@ class Ui_MainWindow(QMainWindow):
         self.text_X = QtWidgets.QLineEdit(self.scrollAreaWidgetContents)
         self.text_X.setGeometry(QtCore.QRect(30, 940, 731, 31))
         self.text_X.setObjectName("text_X")
+        if "X" in mapa:
+            self.text_X.setText(mapa["X"])
         self.vbox.addWidget(self.text_X)
 
         self.label_Y = QtWidgets.QLabel(self.scrollAreaWidgetContents)
@@ -271,6 +319,8 @@ class Ui_MainWindow(QMainWindow):
         self.text_Y = QtWidgets.QLineEdit(self.scrollAreaWidgetContents)
         self.text_Y.setGeometry(QtCore.QRect(30, 980, 731, 31))
         self.text_Y.setObjectName("text_Y")
+        if "Y" in mapa:
+            self.text_Y.setText(mapa["Y"])
         self.vbox.addWidget(self.text_Y)
 
         self.label_Z = QtWidgets.QLabel(self.scrollAreaWidgetContents)
@@ -281,6 +331,8 @@ class Ui_MainWindow(QMainWindow):
         self.text_Z = QtWidgets.QLineEdit(self.scrollAreaWidgetContents)
         self.text_Z.setGeometry(QtCore.QRect(30, 1020, 731, 31))
         self.text_Z.setObjectName("text_Z")
+        if "Z" in mapa:
+            self.text_Z.setText(mapa["Z"])
         self.vbox.addWidget(self.text_Z)
 
         self.label_0 = QtWidgets.QLabel(self.scrollAreaWidgetContents)
@@ -291,6 +343,8 @@ class Ui_MainWindow(QMainWindow):
         self.text_0 = QtWidgets.QLineEdit(self.scrollAreaWidgetContents)
         self.text_0.setGeometry(QtCore.QRect(30, 1060, 731, 31))
         self.text_0.setObjectName("text_0")
+        if "0" in mapa:
+            self.text_0.setText(mapa["0"])
         self.vbox.addWidget(self.text_0)
 
         self.label_1 = QtWidgets.QLabel(self.scrollAreaWidgetContents)
@@ -301,6 +355,8 @@ class Ui_MainWindow(QMainWindow):
         self.text_1 = QtWidgets.QLineEdit(self.scrollAreaWidgetContents)
         self.text_1.setGeometry(QtCore.QRect(30, 1100, 731, 31))
         self.text_1.setObjectName("text_1")
+        if "1" in mapa:
+            self.text_1.setText(mapa["1"])
         self.vbox.addWidget(self.text_1)
 
         self.label_2 = QtWidgets.QLabel(self.scrollAreaWidgetContents)
@@ -311,6 +367,8 @@ class Ui_MainWindow(QMainWindow):
         self.text_2 = QtWidgets.QLineEdit(self.scrollAreaWidgetContents)
         self.text_2.setGeometry(QtCore.QRect(30, 1140, 731, 31))
         self.text_2.setObjectName("text_2")
+        if "2" in mapa:
+            self.text_2.setText(mapa["2"])
         self.vbox.addWidget(self.text_2)
 
         self.label_3 = QtWidgets.QLabel(self.scrollAreaWidgetContents)
@@ -321,6 +379,8 @@ class Ui_MainWindow(QMainWindow):
         self.text_3 = QtWidgets.QLineEdit(self.scrollAreaWidgetContents)
         self.text_3.setGeometry(QtCore.QRect(30, 1180, 731, 31))
         self.text_3.setObjectName("text_3")
+        if "3" in mapa:
+            self.text_3.setText(mapa["3"])
         self.vbox.addWidget(self.text_3)
 
         self.label_4 = QtWidgets.QLabel(self.scrollAreaWidgetContents)
@@ -331,6 +391,8 @@ class Ui_MainWindow(QMainWindow):
         self.text_4 = QtWidgets.QLineEdit(self.scrollAreaWidgetContents)
         self.text_4.setGeometry(QtCore.QRect(30, 1220, 731, 31))
         self.text_4.setObjectName("text_4")
+        if "4" in mapa:
+            self.text_4.setText(mapa["4"])
         self.vbox.addWidget(self.text_4)
 
         self.label_5 = QtWidgets.QLabel(self.scrollAreaWidgetContents)
@@ -341,6 +403,8 @@ class Ui_MainWindow(QMainWindow):
         self.text_5 = QtWidgets.QLineEdit(self.scrollAreaWidgetContents)
         self.text_5.setGeometry(QtCore.QRect(30, 1260, 731, 31))
         self.text_5.setObjectName("text_5")
+        if "5" in mapa:
+            self.text_5.setText(mapa["5"])
         self.vbox.addWidget(self.text_5)
 
         self.label_6 = QtWidgets.QLabel(self.scrollAreaWidgetContents)
@@ -351,6 +415,8 @@ class Ui_MainWindow(QMainWindow):
         self.text_6 = QtWidgets.QLineEdit(self.scrollAreaWidgetContents)
         self.text_6.setGeometry(QtCore.QRect(30, 1300, 731, 31))
         self.text_6.setObjectName("text_6")
+        if "6" in mapa:
+            self.text_6.setText(mapa["6"])
         self.vbox.addWidget(self.text_6)
 
         self.label_7 = QtWidgets.QLabel(self.scrollAreaWidgetContents)
@@ -361,6 +427,8 @@ class Ui_MainWindow(QMainWindow):
         self.text_7 = QtWidgets.QLineEdit(self.scrollAreaWidgetContents)
         self.text_7.setGeometry(QtCore.QRect(30, 1340, 731, 31))
         self.text_7.setObjectName("text_7")
+        if "7" in mapa:
+            self.text_7.setText(mapa["7"])
         self.vbox.addWidget(self.text_7)
 
         self.label_8 = QtWidgets.QLabel(self.scrollAreaWidgetContents)
@@ -371,6 +439,8 @@ class Ui_MainWindow(QMainWindow):
         self.text_8 = QtWidgets.QLineEdit(self.scrollAreaWidgetContents)
         self.text_8.setGeometry(QtCore.QRect(30, 1380, 731, 31))
         self.text_8.setObjectName("text_8")
+        if "8" in mapa:
+            self.text_8.setText(mapa["8"])
         self.vbox.addWidget(self.text_8)
 
         self.label_9 = QtWidgets.QLabel(self.scrollAreaWidgetContents)
@@ -381,6 +451,8 @@ class Ui_MainWindow(QMainWindow):
         self.text_9 = QtWidgets.QLineEdit(self.scrollAreaWidgetContents)
         self.text_9.setGeometry(QtCore.QRect(30, 1420, 731, 31))
         self.text_9.setObjectName("text_9")
+        if "9" in mapa:
+            self.text_9.setText(mapa["9"])
         self.vbox.addWidget(self.text_9)
 
         self.botonGuardar = QtWidgets.QPushButton(self.scrollAreaWidgetContents)

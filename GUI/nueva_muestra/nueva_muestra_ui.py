@@ -55,15 +55,23 @@ class Ui_NuevaMuestraWindow(object):
         self.cantidad_lecturas.setMaximum(1000)
         self.cantidad_lecturas.setObjectName("cantidad_lecturas")
         self.observaciones = QtWidgets.QPlainTextEdit(self.centralwidget)
-        self.observaciones.setGeometry(QtCore.QRect(10, 280, 411, 120))
+        self.observaciones.setGeometry(QtCore.QRect(10, 280, 411, 90))
         self.observaciones.setObjectName("observaciones")
-        self.editar_mapa_boton = QtWidgets.QPushButton(self.centralwidget)
-        self.editar_mapa_boton.setGeometry(QtCore.QRect(10, 420, 221, 25))
-        self.editar_mapa_boton.setObjectName("editar_mapa_boton")
+
+        self.cargar_mapa_boton = QtWidgets.QPushButton(self.centralwidget)
+        self.cargar_mapa_boton.setGeometry(QtCore.QRect(10, 390, 221, 25))
+        self.cargar_mapa_boton.setObjectName("cargar_mapa_boton")
+
+        self.nuevo_mapa_boton = QtWidgets.QPushButton(self.centralwidget)
+        self.nuevo_mapa_boton.setGeometry(QtCore.QRect(10, 420, 221, 25))
+        self.nuevo_mapa_boton.setObjectName("nuevo_mapa_boton")
+
         self.cancelar_aceptar_boton = QtWidgets.QDialogButtonBox(self.centralwidget)
         self.cancelar_aceptar_boton.setGeometry(QtCore.QRect(250, 420, 175, 25))
-        self.cancelar_aceptar_boton.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Save)
+        self.cancelar_aceptar_boton.setStandardButtons(
+            QtWidgets.QDialogButtonBox.Cancel | QtWidgets.QDialogButtonBox.Save)
         self.cancelar_aceptar_boton.setObjectName("cancelar_aceptar_boton")
+
         NuevaMuestraWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(NuevaMuestraWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 429, 22))
@@ -85,11 +93,13 @@ class Ui_NuevaMuestraWindow(object):
         self.label_5.setText(_translate("NuevaMuestraWindow", "Operador"))
         self.label_6.setText(_translate("NuevaMuestraWindow", "Cantidad de lecturas"))
         self.label_7.setText(_translate("NuevaMuestraWindow", "Observaciones"))
-        self.editar_mapa_boton.setText(_translate("NuevaMuestraWindow", "Editar mapa de teclas"))
+        self.nuevo_mapa_boton.setText(_translate("NuevaMuestraWindow", "Crear nuevo mapa de teclas"))
+        self.cargar_mapa_boton.setText(_translate("NuevaMuestraWindow", "Cargar mapa de teclas"))
 
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     NuevaMuestraWindow = QtWidgets.QMainWindow()
     ui = Ui_NuevaMuestraWindow()
