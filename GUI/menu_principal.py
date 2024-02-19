@@ -7,7 +7,7 @@ from GUI.graficos.graficos import GraficosWindow
 from GUI.menu_principal_ui import Ui_MainWindow
 from GUI.nueva_muestra.NuevaMuestra import NuevaMuestraWindow
 from GUI.sesion.Sesion import SesionWindow
-from utils import cargar_archivo_muestra
+from utils import cargar_archivo_muestra, error_window
 
 
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
@@ -41,18 +41,24 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         return None
 
     def cargar_muestra(self, checked):
-        fileName = self.openFileNameDialog()
-        if fileName is not None:
-            muestra = cargar_archivo_muestra(fileName)
-            self.sesion_window = SesionWindow(muestra)
-            self.sesion_window.show()
+        try:
+            fileName = self.openFileNameDialog()
+            if fileName is not None:
+                muestra = cargar_archivo_muestra(fileName)
+                self.sesion_window = SesionWindow(muestra)
+                self.sesion_window.show()
+        except Exception as e:
+            error_window(self, e)
 
     def cargar_tabla(self, checked):
-        fileName = self.openFileNameDialog(tipo='csv')
-        if fileName is not None:
-            df = pd.read_csv(fileName)
-            self.graficos_window = GraficosWindow(df)
-            self.graficos_window.show()
+        try:
+            fileName = self.openFileNameDialog(tipo='csv')
+            if fileName is not None:
+                df = pd.read_csv(fileName)
+                self.graficos_window = GraficosWindow(df)
+                self.graficos_window.show()
+        except Exception as e:
+            error_window(self, e)
 
 
 if __name__ == "__main__":
