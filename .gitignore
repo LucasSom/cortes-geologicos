@@ -2,3 +2,6 @@
 /docs/
 .idea/
 muestras
+build
+dist
+*.spec
