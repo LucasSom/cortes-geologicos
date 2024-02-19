@@ -30,6 +30,7 @@ def data_prep(data, top, left, right):
 
 def field_boundaries(scheme):
     classifications, labels = None, None
+    y_axis_scale = 2 / (3 ** 0.5)
     if scheme == 'Pettijohn_1977':
         c1 = ['Quartz arenite', (0.5, 0.9), (0.525, 0.95), (0.5, 1), (0.475, 0.95), (0.5, 0.9)]
         c2 = ['Sublitharenite', (0.5, 0.5), (0.625, 0.75), (0.525, 0.95), (0.5, 0.9), (0.5, 0.5)]
@@ -68,32 +69,27 @@ def field_boundaries(scheme):
         l7 = ["undissected arc", 0.8, 0.05, 0]
         labels = [l1, l2, l3, l4, l5, l6, l7]
     elif scheme == 'Dickinson_1983_QmFLQp':
-        scale = 2 / (3 ** 0.5)
         A = (0, 0)
-        A1 = (0.7925, 0.1143 * scale)
+        A1 = (0.7925, 0.1143 * y_axis_scale)
         B = (1, 0)
-        B1 = (0.7473, 0.1809 * scale)
-        C = (0.5, 0.866025404 * scale)
-        C1 = (0.6976, 0.2541 * scale)
+        B1 = (0.7473, 0.1809 * y_axis_scale)
+        C = (0.5, 0.866025404 * y_axis_scale)
+        C1 = (0.6976, 0.2541 * y_axis_scale)
         D = (0.23, 0)
-        D1 = (0.6945, 0.2536 * scale)
+        D1 = (0.6945, 0.2536 * y_axis_scale)
         E = (0.47, 0)
-        E1 = (0.4078, 0.4216 * scale)
+        E1 = (0.4078, 0.4216 * y_axis_scale)
         F = (0.87, 0)
-        F1 = (0.4753, 0.5818 * scale)
-        G1 = (0.5789, 0.4291 * scale)
-        H = (0.09, 0.1559 * scale)
-        H1 = (0.7003, 0.2502 * scale)
-        I1 = (0.497, 0.6332 * scale)
-        J = (0.285, 0.4936 * scale)
-        L = (0.4, 0.6928 * scale)
-        M = (0.935, 0.1126 * scale)
-        O = (0.91, 0.1559 * scale)
-        Q = (0.855, 0.2511 * scale)
-        S = (0.84, 0.2771 * scale)
-        U = (0.71, 0.5023 * scale)
-        W = (0.555, 0.7708 * scale)
-        Z = (0.3108, 0.1916 * scale)
+        F1 = (0.4753, 0.5818 * y_axis_scale)
+        G1 = (0.5789, 0.4291 * y_axis_scale)
+        H1 = (0.7003, 0.2502 * y_axis_scale)
+        I1 = (0.497, 0.6332 * y_axis_scale)
+        J = (0.285, 0.4936 * y_axis_scale)
+        L = (0.4, 0.6928 * y_axis_scale)
+        Q = (0.855, 0.2511 * y_axis_scale)
+        U = (0.71, 0.5023 * y_axis_scale)
+        W = (0.555, 0.7708 * y_axis_scale)
+        Z = (0.3108, 0.1916 * y_axis_scale)
 
         c1 = ['basement uplift', A, D, E1, J, A]
         c2 = ['transitional continental', E1, I1, L, J, E1]
