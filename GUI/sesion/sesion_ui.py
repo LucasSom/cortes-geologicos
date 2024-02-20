@@ -15,21 +15,21 @@ class Ui_Dialog_Sesion(object):
     def setupUi(self, Dialog):
         self.Dialog = Dialog
         self.Dialog.setObjectName("Dialog")
-        self.Dialog.resize(1078, 797)
+        self.Dialog.resize(1078, 815)
 
         self.aceptar_cancelar = QtWidgets.QDialogButtonBox(self.Dialog)
-        self.aceptar_cancelar.setGeometry(QtCore.QRect(900, 760, 171, 30))
+        self.aceptar_cancelar.setGeometry(QtCore.QRect(900, 760, 171, 50))
         self.aceptar_cancelar.setOrientation(QtCore.Qt.Horizontal)
         self.aceptar_cancelar.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel | QtWidgets.QDialogButtonBox.Save)
         self.aceptar_cancelar.setObjectName("aceptar_cancelar")
 
         self.deshacerButton = QtWidgets.QCommandLinkButton(self.Dialog)
-        self.deshacerButton.setGeometry(QtCore.QRect(10, 760, 530, 30))
+        self.deshacerButton.setGeometry(QtCore.QRect(10, 760, 530, 50))
         self.deshacerButton.setLayoutDirection(QtCore.Qt.RightToLeft)
         self.deshacerButton.setObjectName("deshacerButton")
 
         self.agregarTeclaButton = QtWidgets.QCommandLinkButton(self.Dialog)
-        self.agregarTeclaButton.setGeometry(QtCore.QRect(550, 760, 350, 30))
+        self.agregarTeclaButton.setGeometry(QtCore.QRect(550, 760, 350, 50))
         self.agregarTeclaButton.setLayoutDirection(QtCore.Qt.RightToLeft)
         self.agregarTeclaButton.setObjectName("agregarTeclaButton")
 

@@ -2,6 +2,7 @@ import os
 import pickle
 
 import pandas as pd
+from PyQt5.QtWidgets import QMessageBox
 
 
 def file_extension(p):
@@ -35,3 +36,10 @@ def cargar_archivo_muestra(file_name: str, verbose=False):
 def filtrar_tipo_roca(df: pd.DataFrame, tipo: str) -> pd.DataFrame:
     columnas = [c for c in df.columns if c[1:len(tipo) + 1] == tipo]
     return df[columnas].sum(axis=1)
+
+
+def error_window(parent, e: Exception):
+    exceptionPopUp = QMessageBox(parent)
+    exceptionPopUp.setText(f"Se ha producido el siguiente error:\n{e}")
+    exceptionPopUp.setIcon(QMessageBox.Critical)
+    exceptionPopUp.exec()

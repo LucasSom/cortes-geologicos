@@ -1,13 +1,11 @@
-import os.path
-
-import numpy as np
 import pandas as pd
+import userpaths
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QFileDialog
 
 from GUI.editar_mapa.EditarMapaWindow import EditarMapaWindow
-from GUI.sesion.Sesion import SesionWindow
 from GUI.nueva_muestra.nueva_muestra_ui import Ui_NuevaMuestraWindow
+from GUI.sesion.Sesion import SesionWindow
 from Muestra import Muestra
 from utils import guardar_muestra
 
@@ -30,19 +28,15 @@ class NuevaMuestraWindow(QtWidgets.QMainWindow, Ui_NuevaMuestraWindow):
         self.cargar_mapa_boton.clicked.connect(self.cargar_mapa)
 
     def saveFileDialog(self):
-        options = QFileDialog.Options()
-        options |= QFileDialog.DontUseNativeDialog
-        fileName, _ = QFileDialog.getSaveFileName(self, "Guardar muestra", os.path.curdir,
-                                                  "All Files (*);;Muestras (*.mtra)", options=options)
+        fileName, _ = QFileDialog.getSaveFileName(self, "Guardar muestra", userpaths.get_my_documents(),
+                                                  "Muestras (*.mtra);;All Files (*)")
         if fileName:
             return fileName
         return None
 
     def cargar_mapa(self):
-        options = QFileDialog.Options()
-        options |= QFileDialog.DontUseNativeDialog
-        fileName, _ = QFileDialog.getOpenFileName(self, "Cargar mapa de teclas", os.path.curdir,
-                                                  "CSV (*.csv);;All Files (*)", options=options)
+        fileName, _ = QFileDialog.getOpenFileName(self, "Cargar mapa de teclas", userpaths.get_my_documents(),
+                                                  "CSV (*.csv);;All Files (*)")
         if fileName:
             mapa_df = pd.read_csv(fileName)
             self.mapa = {tecla: roca[0] for tecla, roca in mapa_df.items() if type(roca[0]) is str}

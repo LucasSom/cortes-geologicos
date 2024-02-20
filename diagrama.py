@@ -30,6 +30,7 @@ def data_prep(data, top, left, right):
 
 def field_boundaries(scheme):
     classifications, labels = None, None
+    y_axis_scale = 2 / (3 ** 0.5)
     if scheme == 'Pettijohn_1977':
         c1 = ['Quartz arenite', (0.5, 0.9), (0.525, 0.95), (0.5, 1), (0.475, 0.95), (0.5, 0.9)]
         c2 = ['Sublitharenite', (0.5, 0.5), (0.625, 0.75), (0.525, 0.95), (0.5, 0.9), (0.5, 0.5)]
@@ -46,7 +47,7 @@ def field_boundaries(scheme):
         l4 = ["Subarkose", 0.32, 0.83, 0]
         l5 = ["Arkosic arenite", 0.25, 0.05, 0]
         labels = [l1, l2, l3, l4, l5]
-    elif scheme == 'Dickinson_1983':
+    elif scheme == 'Dickinson_1983_QFL':
         c1 = ['basement uplift', (0, 0), (0.15, 0), (0.341992, 0.4985), (0.266412, 0.532842), (0, 0)]
         c2 = ['transitional continental', (0.341992, 0.4985), (0.266412, 0.532842), (0.403822, 0.807654), (0.45, 0.779),
               (0.341992, 0.4985)]
@@ -67,6 +68,56 @@ def field_boundaries(scheme):
         l6 = ["transitional arc", 0.45, 0.15, 0]
         l7 = ["undissected arc", 0.8, 0.05, 0]
         labels = [l1, l2, l3, l4, l5, l6, l7]
+    elif scheme == 'Dickinson_1983_QmFLQp':
+        A = (0, 0)
+        A1 = (0.7925, 0.1143 * y_axis_scale)
+        B = (1, 0)
+        B1 = (0.7473, 0.1809 * y_axis_scale)
+        C = (0.5, 0.866025404 * y_axis_scale)
+        C1 = (0.6976, 0.2541 * y_axis_scale)
+        D = (0.23, 0)
+        D1 = (0.6945, 0.2536 * y_axis_scale)
+        E = (0.47, 0)
+        E1 = (0.4078, 0.4216 * y_axis_scale)
+        F = (0.87, 0)
+        F1 = (0.4753, 0.5818 * y_axis_scale)
+        G1 = (0.5789, 0.4291 * y_axis_scale)
+        H1 = (0.7003, 0.2502 * y_axis_scale)
+        I1 = (0.497, 0.6332 * y_axis_scale)
+        J = (0.285, 0.4936 * y_axis_scale)
+        L = (0.4, 0.6928 * y_axis_scale)
+        Q = (0.855, 0.2511 * y_axis_scale)
+        U = (0.71, 0.5023 * y_axis_scale)
+        W = (0.555, 0.7708 * y_axis_scale)
+        Z = (0.3108, 0.1916 * y_axis_scale)
+
+        c1 = ['basement uplift', A, D, E1, J, A]
+        c2 = ['transitional continental', E1, I1, L, J, E1]
+        c3 = ['craton interior', I1, W, C, L, I1]
+
+        c4 = ['mixed', H1, F1, E1, H1]
+        c5 = ['dissected arcs', E1, D1, Z, E1]
+        c6 = ['transitional arc', D, E, A1, C1, Z, D]
+        c7 = ['undissected arc', E, F, A1, E]
+
+        c8 = ['quartzose recycled', W, F1, G1, U, W]
+        c9 = ['transitional recycled', B1, Q, U, G1, B1]
+        c10 = ['lithic recycled', F, B, Q, B1, F]
+        classifications = [c1, c2, c3, c4, c5, c6, c7, c8, c9, c10]
+
+        l1 = ["basement uplift", 0.165, 0.2, 58]
+        l2 = ["transitional\n continental", 0.4, 0.65, 60]
+        l3 = ["craton interior", 0.5, 0.93, 0]
+        l4 = ["mixed", 0.5, 0.5, 0]
+        l5 = ["dissected\narc", 0.46, 0.31, 0]
+        l6 = ["transitional\narc", 0.45, 0.15, 0]
+        l7 = ["undissected arc", 0.72, 0.025, 0]
+        l8 = ["quartzose\nrecycled", 0.6, 0.7, 300]
+        l9 = ["transitional\nrecycled", 0.7, 0.4, 300]
+        l10 = ["lithic recycled", 0.92, 0.15, 0]
+
+        labels = [l1, l2, l3, l4, l5, l6, l7, l8, l9, l10]
+
     elif scheme == 'blank':
         c1 = ['triangle', (0, 0), (0.5, 1), (1, 0), (0, 0)]
         classifications = [c1]
@@ -97,7 +148,7 @@ def plot_diagrama(data, top, left, right, matrix=None, plot_type='blank', top_la
     :return: tupla con el Dataframe de entrada al que se le agrega una columna con el valor de la clasificación según
      el plot_type elegido
     """
-    list_valid_types = ['Pettijohn_1977', 'Dickinson_1983', 'blank']
+    list_valid_types = ['Pettijohn_1977', 'Dickinson_1983_QFL', 'Dickinson_1983_QmFLQp', 'blank']
     if plot_type not in list_valid_types:
         raise ValueError("Plot type not recognised, valid types are blank, Pettijohn_1977 and Dickinson_1983")
 
@@ -152,8 +203,8 @@ def plot_diagrama(data, top, left, right, matrix=None, plot_type='blank', top_la
             ax.add_line(l2)
 
     # add the fields for each petrograpic classification
-    for i in range(len(classifications)):
-        polygon = classifications[i][1:]
+    for classification in classifications:
+        polygon = classification[1:]
         path = Path(polygon)
         # check if every polygon in the loop contains points and color green if true
         index = path.contains_points(np.column_stack((x, y)))
@@ -165,8 +216,8 @@ def plot_diagrama(data, top, left, right, matrix=None, plot_type='blank', top_la
 
     if plot_type != 'blank':
         final_data = data.copy()
-        for i in range(len(classifications)):
-            polygon = classifications[i][1:]
+        for classification in classifications:
+            polygon = classification[1:]
             path = Path(polygon)
             # check if points are within each polygon
             # the radius argument allows samples plotting on boundary to be classified
@@ -174,18 +225,18 @@ def plot_diagrama(data, top, left, right, matrix=None, plot_type='blank', top_la
             index1 = path.contains_points(np.column_stack((x, y)), radius=0.01)
             for j in range(len(index)):
                 if index[j] or index1[j]:
-                    final_data.loc[j, "Pettijohn"] = classifications[i][
+                    final_data.loc[j, "Clasificación"] = classification[
                         0]  # add the classification to the column Pettijohn in the datatable
                     if matrix is not None:
-                        if matrix[j] > 15 and matrix[j] < 75:  # change the classification if maxtix > 15% and less <75%
-                            if classifications[i][0] == 'Sublith Arenite' or classifications[i][0] == 'Lith Arenite':
-                                final_data.loc[j, "Pettijohn"] = 'Lithic Wacke'
-                            elif classifications[i][0] == 'Sub Arkose' or classifications[i][0] == 'Arkosic Arenite':
-                                final_data.loc[j, "Pettijohn"] = 'Arkosic Wacke'
-                            elif classifications[i][0] == 'Quartz Arenite':
-                                final_data.loc[j, "Pettijohn"] = 'Quartz Wacke'
+                        if 15 < matrix[j] < 75:  # change the classification if maxtix > 15% and less <75%
+                            if classification[0] == 'Sublith Arenite' or classification[0] == 'Lith Arenite':
+                                final_data.loc[j, "Clasificación"] = 'Lithic Wacke'
+                            elif classification[0] == 'Sub Arkose' or classification[0] == 'Arkosic Arenite':
+                                final_data.loc[j, "Clasificación"] = 'Arkosic Wacke'
+                            elif classification[0] == 'Quartz Arenite':
+                                final_data.loc[j, "Clasificación"] = 'Quartz Wacke'
                         elif matrix[j] > 75:
-                            final_data.loc[j, "Pettijohn"] = 'Mudrock'
+                            final_data.loc[j, "Clasificación"] = 'Mudrock'
 
         final_data = final_data.set_index('Muestra')
         return final_data, fig

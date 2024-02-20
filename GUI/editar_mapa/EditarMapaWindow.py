@@ -1,6 +1,5 @@
-import os
-
 import pandas as pd
+import userpaths
 from PyQt5.QtWidgets import QFileDialog
 
 from GUI.editar_mapa.editar_mapa_ui import Ui_MainWindow
@@ -56,13 +55,10 @@ class EditarMapaWindow(Ui_MainWindow):
         if self.parent is not None:
             self.parent.mapa = self.mapa
 
-            options = QFileDialog.Options()
-            options |= QFileDialog.DontUseNativeDialog
-            fileName, _ = QFileDialog.getSaveFileName(self, "Guardar mapa de teclas", os.path.curdir,
-                                                      "CSV (*.csv);;All Files (*)", options=options)
+            fileName, _ = QFileDialog.getSaveFileName(self, "Guardar mapa de teclas", userpaths.get_my_documents(),
+                                                      "CSV (*.csv);;All Files (*)")
             df = pd.DataFrame({tecla: [roca] for tecla, roca in self.mapa.items()})
             df.to_csv(fileName if file_extension(fileName) == '.csv' else fileName + '.csv', index=False)
 
-            # self.parent.setupUi(self.parent)
         self.close()
 
