@@ -7,7 +7,7 @@ from GUI.editar_mapa.EditarMapaWindow import EditarMapaWindow
 from GUI.nueva_muestra.nueva_muestra_ui import Ui_NuevaMuestraWindow
 from GUI.sesion.Sesion import SesionWindow
 from Muestra import Muestra
-from utils import guardar_muestra
+from utils import guardar_muestra, error_window
 
 
 class NuevaMuestraWindow(QtWidgets.QMainWindow, Ui_NuevaMuestraWindow):
@@ -55,8 +55,11 @@ class NuevaMuestraWindow(QtWidgets.QMainWindow, Ui_NuevaMuestraWindow):
         if fileName is not None:
             guardar_muestra(nueva_muestra, fileName, verbose=True)
 
-        self.sesion_window = SesionWindow(nueva_muestra)
-        self.sesion_window.show()
+        try:
+            self.sesion_window = SesionWindow(nueva_muestra)
+            self.sesion_window.show()
+        except Exception as e:
+            error_window(self, e)
         self.close()
 
     def cancelar(self):
