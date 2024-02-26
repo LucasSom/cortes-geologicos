@@ -43,3 +43,18 @@ def error_window(parent, e: Exception):
     exceptionPopUp.setText(f"Se ha producido el siguiente error:\n{e}")
     exceptionPopUp.setIcon(QMessageBox.Critical)
     exceptionPopUp.exec()
+
+
+def warning_window(parent, texto):
+    exceptionPopUp = QMessageBox(parent)
+    exceptionPopUp.setText(texto)
+    exceptionPopUp.setIcon(QMessageBox.Warning)
+    exceptionPopUp.exec()
+
+
+def values_unicity_check(parent, mapa):
+    rocas = [r for r in mapa.values() if r != '']
+    if len(rocas) != len(set(rocas)):
+        warning_window(parent, "Hay valores duplicados.")
+        return False
+    return True

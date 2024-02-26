@@ -3,7 +3,7 @@ import userpaths
 from PyQt5.QtWidgets import QFileDialog
 
 from GUI.editar_mapa.editar_mapa_ui import Ui_MainWindow
-from utils import file_extension
+from utils import file_extension, values_unicity_check
 
 
 class EditarMapaWindow(Ui_MainWindow):
@@ -52,13 +52,15 @@ class EditarMapaWindow(Ui_MainWindow):
             "8": self.text_8.text(),
             "9": self.text_9.text(),
         }
-        if self.parent is not None:
-            self.parent.mapa = self.mapa
 
-            fileName, _ = QFileDialog.getSaveFileName(self, "Guardar mapa de teclas", userpaths.get_my_documents(),
-                                                      "CSV (*.csv);;All Files (*)")
-            df = pd.DataFrame({tecla: [roca] for tecla, roca in self.mapa.items()})
-            df.to_csv(fileName if file_extension(fileName) == '.csv' else fileName + '.csv', index=False)
+        # Chequeo de unicidad de valores
+        if values_unicity_check(self.parent, self.mapa):
+            if self.parent is not None:
+                self.parent.mapa = self.mapa
 
-        self.close()
+                fileName, _ = QFileDialog.getSaveFileName(self, "Guardar mapa de teclas", userpaths.get_my_documents(),
+                                                          "CSV (*.csv);;All Files (*)")
+                df = pd.DataFrame({tecla: [roca] for tecla, roca in self.mapa.items()})
+                df.to_csv(fileName if file_extension(fileName) == '.csv' else fileName + '.csv', index=False)
 
+            self.close()

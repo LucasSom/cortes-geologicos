@@ -1,6 +1,8 @@
 from GUI.nueva_tecla.nueva_tecla_ui import Ui_Dialog_Nueva_Tecla
 from PyQt5 import QtWidgets
 
+from utils import values_unicity_check
+
 
 class NuevaTeclaWindow(QtWidgets.QDialog, Ui_Dialog_Nueva_Tecla):
     def __init__(self, parent=None):
@@ -14,6 +16,6 @@ class NuevaTeclaWindow(QtWidgets.QDialog, Ui_Dialog_Nueva_Tecla):
         roca = self.roca_input.text()
         self.parent.muestra.mapa[tecla] = roca
 
-        self.parent.imprimir_lista_teclas()
-
-        self.close()
+        if values_unicity_check(self.parent, self.parent.muestra.mapa):
+            self.parent.imprimir_lista_teclas()
+            self.close()
