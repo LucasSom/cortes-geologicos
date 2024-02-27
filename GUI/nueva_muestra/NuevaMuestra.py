@@ -7,7 +7,7 @@ from GUI.editar_mapa.EditarMapaWindow import EditarMapaWindow
 from GUI.nueva_muestra.nueva_muestra_ui import Ui_NuevaMuestraWindow
 from GUI.sesion.Sesion import SesionWindow
 from Muestra import Muestra
-from utils import guardar_muestra, error_window
+from utils import guardar_muestra, error_window, warning_window
 
 
 class NuevaMuestraWindow(QtWidgets.QMainWindow, Ui_NuevaMuestraWindow):
@@ -43,24 +43,31 @@ class NuevaMuestraWindow(QtWidgets.QMainWindow, Ui_NuevaMuestraWindow):
             self.editar_mapa()
 
     def aceptar(self):
-        fileName = self.saveFileDialog()
-        nueva_muestra = Muestra(self.nombre.text(),
-                                self.fecha.date().toPyDate(),
-                                self.localidad.text(),
-                                self.operador.text(),
-                                self.cantidad_lecturas.value(),
-                                self.observaciones.toPlainText(),
-                                self.mapa,
-                                fileName)
-        if fileName is not None:
-            guardar_muestra(nueva_muestra, fileName, verbose=True)
+        if self.nombre.text() == '':
+            warning_window(self, "El campo 'Nombre' no puede estar vacío.")
+        elif self.localidad.text() == '':
+            warning_window(self, "El campo 'Localidad' no puede estar vacío.")
+        elif self.cantidad_lecturas.value() == 0:
+            warning_window(self, "El campo 'Cantidad de lecturas' tiene que ser mayor que 0.")
+        else:
+            fileName = self.saveFileDialog()
+            nueva_muestra = Muestra(self.nombre.text(),
+                                    self.fecha.date().toPyDate(),
+                                    self.localidad.text(),
+                                    self.operador.text(),
+                                    self.cantidad_lecturas.value(),
+                                    self.observaciones.toPlainText(),
+                                    self.mapa,
+                                    fileName)
+            if fileName is not None:
+                guardar_muestra(nueva_muestra, fileName, verbose=True)
 
-        try:
-            self.sesion_window = SesionWindow(nueva_muestra)
-            self.sesion_window.show()
-        except Exception as e:
-            error_window(self, e)
-        self.close()
+                try:
+                    self.sesion_window = SesionWindow(nueva_muestra)
+                    self.sesion_window.show()
+                except Exception as e:
+                    error_window(self, e)
+                self.close()
 
     def cancelar(self):
         self.close()
