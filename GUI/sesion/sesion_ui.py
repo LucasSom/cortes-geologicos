@@ -40,7 +40,7 @@ class Ui_Dialog_Sesion(object):
         self.scrollRocas.setObjectName("scrollRocas")
 
         self.scrollRocasWidgetContents = QtWidgets.QWidget()
-        self.scrollRocasWidgetContents.setGeometry(QtCore.QRect(0, 0, 549, 749))
+        self.scrollRocasWidgetContents.setGeometry(QtCore.QRect(0, 0, 530, 749))
         self.scrollRocasWidgetContents.setObjectName("scrollRocasWidgetContents")
         self.scrollRocas.setWidget(self.scrollRocasWidgetContents)
 
@@ -59,7 +59,7 @@ class Ui_Dialog_Sesion(object):
         # self.editarMapaBoton.setObjectName("editarMapaBoton")
 
         self.scrollMapa = QtWidgets.QScrollArea(self.Dialog)
-        self.scrollMapa.setGeometry(QtCore.QRect(560, 0, 511, 751))
+        self.scrollMapa.setGeometry(QtCore.QRect(580, 0, 491, 751))
         self.scrollMapa.setWidgetResizable(True)
         self.scrollMapa.setObjectName("scrollMapa")
 

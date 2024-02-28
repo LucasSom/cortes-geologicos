@@ -26,6 +26,8 @@ class SesionWindow(QtWidgets.QDialog, Ui_Dialog_Sesion, QtWidgets.QWidget):
             tecla = event.text()
             if event.key() == Qt.Key_Escape:
                 self.cancelar()
+            elif event.key() in [Qt.Key_Backspace, Qt.Key_Delete]:
+                self.borrar_roca()
             elif tecla.isalnum():
                 roca = self.muestra.mapa[tecla.upper()]
                 if roca != "":
@@ -41,7 +43,7 @@ class SesionWindow(QtWidgets.QDialog, Ui_Dialog_Sesion, QtWidgets.QWidget):
 
                 finalizarPopUp = QMessageBox(self)
                 finalizarPopUp.setText(f"Sesión finalizada.\n"
-                                       f"Se llegó a las {self.muestra.cantidad_lecturas} muestras.\n"
+                                       f"Se llegó a los {self.muestra.cantidad_lecturas} conteos.\n"
                                        f"Se procederá a calcular los resultados correspondientes.")
                 finalizarPopUp.setIcon(QMessageBox.Information)
                 finalizarPopUp.exec()
@@ -55,6 +57,8 @@ class SesionWindow(QtWidgets.QDialog, Ui_Dialog_Sesion, QtWidgets.QWidget):
                 guardadoPopUp.exec()
 
                 self.close()
+            else:
+                self.guardar()
         except Exception as e:
             error_window(self, e)
 

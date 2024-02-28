@@ -11,9 +11,10 @@ class EditarMapaWindow(Ui_MainWindow):
         self.mapa = parent.mapa
         super(EditarMapaWindow, self).__init__(parent.mapa)
         self.parent = parent
-        self.botonGuardar.clicked.connect(self.guardar)
+        self.botonAceptar.clicked.connect(self.guardar)
 
     def guardar(self):
+        mapa_viejo = self.mapa
         self.mapa = {
             "A": self.text_A.text(),
             "S": self.text_S.text(),
@@ -55,7 +56,7 @@ class EditarMapaWindow(Ui_MainWindow):
 
         # Chequeo de unicidad de valores
         if values_unicity_check(self.parent, self.mapa):
-            if self.parent is not None:
+            if self.parent is not None and mapas_distintos(self.mapa, mapa_viejo):
                 self.parent.mapa = self.mapa
 
                 fileName, _ = QFileDialog.getSaveFileName(self, "Guardar mapa de teclas", userpaths.get_my_documents(),
@@ -64,3 +65,10 @@ class EditarMapaWindow(Ui_MainWindow):
                 df.to_csv(fileName if file_extension(fileName) == '.csv' else fileName + '.csv', index=False)
 
             self.close()
+
+
+def mapas_distintos(m1, m2):
+    for roca in m1.values():
+        if roca != '' and roca not in m2.values():
+            return True
+    return False
