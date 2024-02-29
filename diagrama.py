@@ -48,25 +48,46 @@ def field_boundaries(scheme):
         l5 = ["Arkosic arenite", 0.25, 0.05, 0]
         labels = [l1, l2, l3, l4, l5]
     elif scheme == 'Dickinson_1983_QFL':
-        c1 = ['basement uplift', (0, 0), (0.15, 0), (0.341992, 0.4985), (0.266412, 0.532842), (0, 0)]
-        c2 = ['transitional continental', (0.341992, 0.4985), (0.266412, 0.532842), (0.403822, 0.807654), (0.45, 0.779),
+        # c1 = ['basement uplift', (0, 0), (0.15, 0), (0.341992, 0.4985), (0.266412, 0.532842), (0, 0)]
+        # c2 = ['transitional continental', (0.341992, 0.4985), (0.266412, 0.532842), (0.403822, 0.807654), (0.45, 0.779),
+        #       (0.341992, 0.4985)]
+        # c3 = ['craton interior', (0.45, 0.779), (0.403822, 0.807654), (0.5, 1), (0.52, 0.96), (0.45, 0.779)]
+        # c4 = ['recycled orogen', (0.886, 0.228), (0.341992, 0.4985), (0.52, 0.96), (0.886, 0.228)]
+        # c5 = ['dissected arcs', (0.341992, 0.4985), (0.701343, 0.319926), (0.215664, 0.170566),
+        #       (0.341992, 0.4985)]
+        # c6 = ['transitional arc', (0.701343, 0.319926), (0.863323, 0.239235), (0.5, 0), (0.15, 0),
+        #       (0.215664, 0.170566),
+        #       (0.701343, 0.319926)]
+        # c7 = ['undissected arc', (0.863323, 0.239235), (0.886, 0.228), (1, 0), (0.5, 0), (0.863323, 0.2392359)]
+        # classifications = [c1, c2, c3, c4, c5, c6, c7]
+        # l1 = ["basement uplift", 0.165, 0.2, 58]
+        # l2 = ["transitional\n continental", 0.365, 0.65, 60]
+        # l3 = ["craton interior", 0.38, 0.92, 0]
+        # l4 = ["recycled orogen", 0.54, 0.62, 0]
+        # l5 = ["dissected arcs", 0.41, 0.35, 0]
+        # l6 = ["transitional arc", 0.45, 0.15, 0]
+        # l7 = ["undissected arc", 0.8, 0.05, 0]
+
+        c1 = ['basamento elevado', (0, 0), (0.15, 0), (0.341992, 0.4985), (0.266412, 0.532842), (0, 0)]
+        c2 = ['continental\ntransicional', (0.341992, 0.4985), (0.266412, 0.532842), (0.403822, 0.807654), (0.45, 0.779),
               (0.341992, 0.4985)]
-        c3 = ['craton interior', (0.45, 0.779), (0.403822, 0.807654), (0.5, 1), (0.52, 0.96), (0.45, 0.779)]
-        c4 = ['recycled orogen', (0.886, 0.228), (0.341992, 0.4985), (0.52, 0.96), (0.886, 0.228)]
-        c5 = ['dissected arcs', (0.341992, 0.4985), (0.701343, 0.319926), (0.215664, 0.170566),
+        c3 = ['interior cratónico', (0.45, 0.779), (0.403822, 0.807654), (0.5, 1), (0.52, 0.96), (0.45, 0.779)]
+        c4 = ['orógeno reciclado', (0.886, 0.228), (0.341992, 0.4985), (0.52, 0.96), (0.886, 0.228)]
+        c5 = ['arco disectado', (0.341992, 0.4985), (0.701343, 0.319926), (0.215664, 0.170566),
               (0.341992, 0.4985)]
-        c6 = ['transitional arc', (0.701343, 0.319926), (0.863323, 0.239235), (0.5, 0), (0.15, 0),
+        c6 = ['arco transicional', (0.701343, 0.319926), (0.863323, 0.239235), (0.5, 0), (0.15, 0),
               (0.215664, 0.170566),
               (0.701343, 0.319926)]
-        c7 = ['undissected arc', (0.863323, 0.239235), (0.886, 0.228), (1, 0), (0.5, 0), (0.863323, 0.2392359)]
+        c7 = ['arco no disectado', (0.863323, 0.239235), (0.886, 0.228), (1, 0), (0.5, 0), (0.863323, 0.2392359)]
         classifications = [c1, c2, c3, c4, c5, c6, c7]
-        l1 = ["basement uplift", 0.165, 0.2, 58]
-        l2 = ["transitional\n continental", 0.365, 0.65, 60]
-        l3 = ["craton interior", 0.38, 0.92, 0]
-        l4 = ["recycled orogen", 0.54, 0.62, 0]
-        l5 = ["dissected arcs", 0.41, 0.35, 0]
-        l6 = ["transitional arc", 0.45, 0.15, 0]
-        l7 = ["undissected arc", 0.8, 0.05, 0]
+
+        l1 = ["basamento elevado", 0.165, 0.2, 58]
+        l2 = ["continental\ntransicional", 0.365, 0.65, 60]
+        l3 = ["interior cratónico", 0.38, 0.92, 0]
+        l4 = ["orógeno reciclado", 0.54, 0.62, 0]
+        l5 = ["arco disectado", 0.41, 0.35, 0]
+        l6 = ["arco transicional", 0.45, 0.15, 0]
+        l7 = ["arco no disectado", 0.8, 0.05, 0]
         labels = [l1, l2, l3, l4, l5, l6, l7]
     elif scheme == 'Dickinson_1983_QmFLQp':
         A = (0, 0)
@@ -91,30 +112,55 @@ def field_boundaries(scheme):
         W = (0.555, 0.7708 * y_axis_scale)
         Z = (0.3108, 0.1916 * y_axis_scale)
 
-        c1 = ['basement uplift', A, D, E1, J, A]
-        c2 = ['transitional continental', E1, I1, L, J, E1]
-        c3 = ['craton interior', I1, W, C, L, I1]
+        # c1 = ['basement uplift', A, D, E1, J, A]
+        # c2 = ['transitional continental', E1, I1, L, J, E1]
+        # c3 = ['craton interior', I1, W, C, L, I1]
+        #
+        # c4 = ['mixed', H1, F1, E1, H1]
+        # c5 = ['dissected arcs', E1, D1, Z, E1]
+        # c6 = ['transitional arc', D, E, A1, C1, Z, D]
+        # c7 = ['undissected arc', E, F, A1, E]
+        #
+        # c8 = ['quartzose recycled', W, F1, G1, U, W]
+        # c9 = ['transitional recycled', B1, Q, U, G1, B1]
+        # c10 = ['lithic recycled', F, B, Q, B1, F]
+        # classifications = [c1, c2, c3, c4, c5, c6, c7, c8, c9, c10]
+        #
+        # l1 = ["basement uplift", 0.165, 0.2, 58]
+        # l2 = ["transitional\n continental", 0.4, 0.65, 60]
+        # l3 = ["craton interior", 0.5, 0.93, 0]
+        # l4 = ["mixed", 0.5, 0.5, 0]
+        # l5 = ["dissected\narc", 0.46, 0.31, 0]
+        # l6 = ["transitional\narc", 0.45, 0.15, 0]
+        # l7 = ["undissected arc", 0.72, 0.025, 0]
+        # l8 = ["quartzose\nrecycled", 0.6, 0.7, 300]
+        # l9 = ["transitional\nrecycled", 0.7, 0.4, 300]
+        # l10 = ["lithic recycled", 0.92, 0.15, 0]
 
-        c4 = ['mixed', H1, F1, E1, H1]
-        c5 = ['dissected arcs', E1, D1, Z, E1]
-        c6 = ['transitional arc', D, E, A1, C1, Z, D]
-        c7 = ['undissected arc', E, F, A1, E]
+        c1 = ['basamento elevado', A, D, E1, J, A]
+        c2 = ['continental\ntransicional', E1, I1, L, J, E1]
+        c3 = ['interior cratónico', I1, W, C, L, I1]
 
-        c8 = ['quartzose recycled', W, F1, G1, U, W]
-        c9 = ['transitional recycled', B1, Q, U, G1, B1]
-        c10 = ['lithic recycled', F, B, Q, B1, F]
+        c4 = ['mezcla', H1, F1, E1, H1]
+        c5 = ['arco\ndisectado', E1, D1, Z, E1]
+        c6 = ['arco\ntransicional', D, E, A1, C1, Z, D]
+        c7 = ['arco no\ndisectado', E, F, A1, E]
+
+        c8 = ['orógeno\nreciclado\ncuarzoso', W, F1, G1, U, W]
+        c9 = ['orógeno\nreciclado\ntransicional', B1, Q, U, G1, B1]
+        c10 = ['orógeno\nreciclado\nlítico', F, B, Q, B1, F]
         classifications = [c1, c2, c3, c4, c5, c6, c7, c8, c9, c10]
 
-        l1 = ["basement uplift", 0.165, 0.2, 58]
-        l2 = ["transitional\n continental", 0.4, 0.65, 60]
-        l3 = ["craton interior", 0.5, 0.93, 0]
-        l4 = ["mixed", 0.5, 0.5, 0]
-        l5 = ["dissected\narc", 0.46, 0.31, 0]
-        l6 = ["transitional\narc", 0.45, 0.15, 0]
-        l7 = ["undissected arc", 0.72, 0.025, 0]
-        l8 = ["quartzose\nrecycled", 0.6, 0.7, 300]
-        l9 = ["transitional\nrecycled", 0.7, 0.4, 300]
-        l10 = ["lithic recycled", 0.92, 0.15, 0]
+        l1 = ["basamento elevado", 0.165, 0.2, 58]
+        l2 = ["continental\ntransicional", 0.4, 0.65, 60]
+        l3 = ["interior cratónico", 0.5, 0.93, 0]
+        l4 = ["mezcla", 0.5, 0.5, 0]
+        l5 = ["arco\ndisectado", 0.46, 0.31, 0]
+        l6 = ["arco\ntransicional", 0.45, 0.15, 0]
+        l7 = ["arco no\ndisectado", 0.72, 0.05, 0]
+        l8 = ["orógeno\nreciclado\ncuarzoso", 0.58, 0.65, 300]
+        l9 = ["orógeno\nreciclado\ntransicional", 0.72, 0.4, 300]
+        l10 = ["orógeno\nreciclado\nlítico", 0.87, 0.15, 0]
 
         labels = [l1, l2, l3, l4, l5, l6, l7, l8, l9, l10]
 

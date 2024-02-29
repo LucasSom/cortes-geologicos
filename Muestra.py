@@ -16,7 +16,7 @@ class Muestra:
         self.componentes = []
 
     def exportar_datos(self):
-        path_dir = os.path.join(os.path.dirname(self.fileName), "tablas")
+        path_dir = os.path.dirname(self.fileName)
         if not os.path.exists(path_dir):
             os.makedirs(path_dir)
 
