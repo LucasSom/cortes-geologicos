@@ -1,3 +1,5 @@
+import os.path
+
 import pandas as pd
 import userpaths
 from PyQt5 import QtWidgets
@@ -55,7 +57,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             fileName = self.openFileNameDialog(tipo='csv')
             if fileName is not None:
                 df = pd.read_csv(fileName)
-                self.graficos_window = GraficosWindow(df)
+                self.graficos_window = GraficosWindow(df, os.path.splitext(fileName)[0])
                 self.graficos_window.show()
         except Exception as e:
             error_window(self, e)

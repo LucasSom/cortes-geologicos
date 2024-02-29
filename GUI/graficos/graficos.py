@@ -1,16 +1,18 @@
+import pandas as pd
 from PyQt5.QtWidgets import QMainWindow
 from matplotlib import pyplot as plt
 
 from GUI.graficos.generar_graficos_ui import Ui_GraficosWindow
 from GUI.graficos.relacion.RelacionWindow import RelacionWindow
 from diagrama import plot_diagrama
-from utils import filtrar_tipo_roca, error_window
+from utils import filtrar_tipo_roca, error_window, info_window
 
 
 class GraficosWindow(QMainWindow, Ui_GraficosWindow):
-    def __init__(self, df):
+    def __init__(self, df, fileName):
         QMainWindow.__init__(self)
         self.relacion_window = None
+        self.fileName = fileName
         self.df = df
         self.setupUi(self)
 
@@ -32,6 +34,15 @@ class GraficosWindow(QMainWindow, Ui_GraficosWindow):
                                                   top_label='Q', left_label='F', right_label='L')
             plt.show()
             print(classified_data)
+
+            df = pd.concat([cuarzos, feldespatos, liticos], axis=1)
+            df.columns = ["Q", "F", "L"]
+            df.index = self.df["Muestra"]
+            df["Total"] = df.sum(axis=1)
+            export_path = f"{self.fileName}-QFL.csv"
+            df.to_csv(export_path)
+
+            info_window(self, f"Tabla guardada en {export_path}")
         except Exception as e:
             error_window(self, e)
 
@@ -50,6 +61,15 @@ class GraficosWindow(QMainWindow, Ui_GraficosWindow):
                                                   plot_type='Dickinson_1983_QmFLQp',
                                                   top_label='Qm', left_label='F', right_label='L+Qp')
             plt.show()
+
+            df = pd.concat([cuarzos_monocristalinos, feldespatos, liticos + cuarzos_policristalinos], axis=1)
+            df.columns = ["Qm", "F", "L+Qp"]
+            df.index = self.df["Muestra"]
+            df["Total"] = df.sum(axis=1)
+            export_path = f"{self.fileName}-QmFLQp.csv"
+            df.to_csv(export_path)
+
+            info_window(self, f"Tabla guardada en {export_path}")
         except Exception as e:
             error_window(self, e)
 
@@ -83,5 +103,15 @@ class GraficosWindow(QMainWindow, Ui_GraficosWindow):
                                                   plot_type='blank',
                                                   top_label='Lv', left_label='Ls', right_label='Lm')
             plt.show()
+
+            df = pd.concat([liticos_volcanicos, liticos_sedimentarios, liticos_metamorficos], axis=1)
+            df.columns = ["Lv", "Ls", "Lm"]
+            df.index = self.df["Muestra"]
+            df["Total"] = df.sum(axis=1)
+            export_path = f"{self.fileName}-LvLsLm.csv"
+            df.to_csv(export_path)
+
+            info_window(self, f"Tabla guardada en {export_path}")
+
         except Exception as e:
             error_window(self, e)

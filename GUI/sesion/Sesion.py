@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import QMessageBox
 
 from GUI.nueva_tecla.NuevaTeclaWindow import NuevaTeclaWindow
 from GUI.sesion.sesion_ui import Ui_Dialog_Sesion
-from utils import guardar_muestra, error_window
+from utils import guardar_muestra, error_window, info_window
 
 
 class SesionWindow(QtWidgets.QDialog, Ui_Dialog_Sesion, QtWidgets.QWidget):
@@ -50,11 +50,7 @@ class SesionWindow(QtWidgets.QDialog, Ui_Dialog_Sesion, QtWidgets.QWidget):
 
                 mapa_fileName = self.muestra.exportar_datos()
 
-                guardadoPopUp = QMessageBox(self)
-                guardadoPopUp.setText(f"Se guardó la tabla de resultados en:\n"
-                                      f"{mapa_fileName}\n")
-                guardadoPopUp.setIcon(QMessageBox.Information)
-                guardadoPopUp.exec()
+                info_window(self, f"Se guardó la tabla de resultados en:\n{mapa_fileName}")
 
                 self.close()
             else:
