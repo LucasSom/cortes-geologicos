@@ -6,6 +6,7 @@ from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QFileDialog
 
 from GUI.graficos.graficos import GraficosWindow
+from GUI.instrucciones.instrucciones import InstruccionesWindow
 from GUI.menu_principal_ui import Ui_MainWindow
 from GUI.nueva_muestra.NuevaMuestra import NuevaMuestraWindow
 from GUI.sesion.Sesion import SesionWindow
@@ -18,11 +19,14 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.cargar_muestra_w = None
         self.sesion_window = None
         self.graficos_window = None
+        self.instrucciones_w = None
+
         QtWidgets.QMainWindow.__init__(self, *args, **kwargs)
         self.setupUi(self)
         self.pushButton.clicked.connect(self.show_nueva_muestra)
         self.pushButton_2.clicked.connect(self.cargar_muestra)
-        self.cargarTablaBoton.clicked.connect(self.cargar_tabla)
+        self.generarGraficosBoton.clicked.connect(self.cargar_tabla)
+        self.instruccionesBoton.clicked.connect(self.instrucciones)
 
     def show_nueva_muestra(self):
         self.nueva_muestra_w = NuevaMuestraWindow()
@@ -61,6 +65,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 self.graficos_window.show()
         except Exception as e:
             error_window(self, e)
+
+    def instrucciones(self):
+        self.instrucciones_w = InstruccionesWindow()
+        self.instrucciones_w.show()
 
 
 if __name__ == "__main__":

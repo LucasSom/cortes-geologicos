@@ -14,23 +14,34 @@ from PyQt5 import QtCore, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(322, 401)
+        MainWindow.resize(322, 471)
+
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
+
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QtCore.QRect(20, 20, 281, 91))
         self.pushButton.setObjectName("pushButton")
+
         self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_2.setGeometry(QtCore.QRect(20, 130, 281, 91))
         self.pushButton_2.setObjectName("pushButton_2")
-        self.cargarTablaBoton = QtWidgets.QPushButton(self.centralwidget)
-        self.cargarTablaBoton.setGeometry(QtCore.QRect(20, 240, 281, 91))
-        self.cargarTablaBoton.setObjectName("cargarTablaBoton")
+
+        self.generarGraficosBoton = QtWidgets.QPushButton(self.centralwidget)
+        self.generarGraficosBoton.setGeometry(QtCore.QRect(20, 240, 281, 91))
+        self.generarGraficosBoton.setObjectName("graficosBoton")
+
+        self.instruccionesBoton = QtWidgets.QPushButton(self.centralwidget)
+        self.instruccionesBoton.setGeometry(QtCore.QRect(20, 350, 281, 91))
+        self.instruccionesBoton.setObjectName("instruccionesBoton")
+
         MainWindow.setCentralWidget(self.centralwidget)
+
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 322, 22))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
+
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
@@ -43,7 +54,8 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "Menú principal"))
         self.pushButton.setText(_translate("MainWindow", "Nueva muestra"))
         self.pushButton_2.setText(_translate("MainWindow", "Cargar muestra"))
-        self.cargarTablaBoton.setText(_translate("MainWindow", "Cargar tabla"))
+        self.generarGraficosBoton.setText(_translate("MainWindow", "Generar gráficos"))
+        self.instruccionesBoton.setText(_translate("MainWindow", "Instrucciones"))
 
 
 if __name__ == "__main__":
