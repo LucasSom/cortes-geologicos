@@ -10,11 +10,12 @@
 
 from PyQt5 import QtCore
 from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QPushButton, QStatusBar, QMenuBar
+from PyQt5.uic.properties import QtWidgets
 
-from pyqt5_auto_translate import \
-    TranslatedQLabel as QLabel, \
-    TranslatedQPushButton as QPushButton, translater, \
-    ExampleTranslateMenuBar, load_ui_with_translation
+# from pyqt5_auto_translate import \
+#     TranslatedQLabel as QLabel, \
+#     TranslatedQPushButton as QPushButton, translater, \
+#     ExampleTranslateMenuBar, load_ui_with_translation
 
 
 class Ui_MainWindow(object):
@@ -57,20 +58,16 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "Menú principal"))
-        # self.pushButton.setText(_translate("MainWindow", "Nueva muestra"))
-        # self.pushButton_2.setText(_translate("MainWindow", "Cargar muestra"))
-        # self.generarGraficosBoton.setText(_translate("MainWindow", "Generar gráficos"))
-        # self.instruccionesBoton.setText(_translate("MainWindow", "Instrucciones"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Conteo modal"))
+        self.pushButton.setText(_translate("MainWindow", "Nueva muestra"))
+        self.pushButton_2.setText(_translate("MainWindow", "Cargar muestra"))
+        self.generarGraficosBoton.setText(_translate("MainWindow", "Cargar tabla"))
 
 
 if __name__ == "__main__":
     import sys
-    app = QApplication(sys.argv)
-    MainWindow = QMainWindow()
-
-    MainWindow.setMenuBar(ExampleTranslateMenuBar())
-
+    app = QtWidgets.QApplication(sys.argv)
+    MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
     MainWindow.show()
