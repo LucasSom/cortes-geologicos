@@ -5,6 +5,9 @@ import pandas as pd
 from PyQt5.QtWidgets import QMessageBox
 
 
+project_path = os.path.dirname(os.path.abspath(__file__))
+
+
 def file_extension(p):
     return os.path.splitext(p)[1]
 

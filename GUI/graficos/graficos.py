@@ -16,12 +16,23 @@ class GraficosWindow(QMainWindow, Ui_GraficosWindow):
         self.df = df
         self.setupUi(self)
 
-        self.QFL_boton.clicked.connect(self.generar_qfl)
+        self.QFL_boton_dickinson.clicked.connect(self.generar_qfl_dickinson)
+        self.QFL_boton_folk.clicked.connect(self.generar_qfl_folk)
+        self.QFL_boton_garzanti.clicked.connect(self.generar_qfl_garzanti)
         self.QmFLQp_boton.clicked.connect(self.generar_QmFLQp)
         self.relacion_Fp_F_Boton.clicked.connect(self.relacion_Fp_F)
         self.LVLSLm_boton.clicked.connect(self.generar_LvLsLm)
 
-    def generar_qfl(self):
+    def generar_qfl_dickinson(self):
+        self.generar_qfl(clasificacion='Dickinson_1983_QFL')
+
+    def generar_qfl_folk(self):
+        self.generar_qfl(clasificacion='Folk')
+
+    def generar_qfl_garzanti(self):
+        self.generar_qfl(clasificacion='Garzanti_2019')
+
+    def generar_qfl(self, clasificacion):
         try:
             cuarzos = filtrar_tipo_roca(self.df, tipo='Q')
             feldespatos = filtrar_tipo_roca(self.df, tipo='F')
@@ -30,7 +41,7 @@ class GraficosWindow(QMainWindow, Ui_GraficosWindow):
             matrix = filtrar_tipo_roca(self.df, tipo='O')
 
             classified_data, plot = plot_diagrama(self.df, top=cuarzos, left=feldespatos, right=liticos, matrix=matrix,
-                                                  plot_type='Dickinson_1983_QFL',
+                                                  plot_type=clasificacion,
                                                   top_label='Q', left_label='F', right_label='L')
             plt.show()
             print(classified_data)

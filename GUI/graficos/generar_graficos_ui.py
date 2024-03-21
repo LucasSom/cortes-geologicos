@@ -14,30 +14,37 @@ from PyQt5 import QtCore, QtWidgets
 class Ui_GraficosWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(322, 491)
-
+        MainWindow.resize(942, 266)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
 
-        self.QFL_boton = QtWidgets.QPushButton(self.centralwidget)
-        self.QFL_boton.setGeometry(QtCore.QRect(20, 20, 281, 91))
-        self.QFL_boton.setObjectName("QFL_boton")
+        self.QFL_boton_dickinson = QtWidgets.QPushButton(self.centralwidget)
+        self.QFL_boton_dickinson.setGeometry(QtCore.QRect(20, 20, 281, 91))
+        self.QFL_boton_dickinson.setObjectName("QFL_boton_dickinson")
 
         self.QmFLQp_boton = QtWidgets.QPushButton(self.centralwidget)
         self.QmFLQp_boton.setGeometry(QtCore.QRect(20, 130, 281, 91))
         self.QmFLQp_boton.setObjectName("QmFLQp_boton")
 
         self.relacion_Fp_F_Boton = QtWidgets.QPushButton(self.centralwidget)
-        self.relacion_Fp_F_Boton.setGeometry(QtCore.QRect(20, 350, 281, 91))
+        self.relacion_Fp_F_Boton.setGeometry(QtCore.QRect(640, 130, 281, 91))
         self.relacion_Fp_F_Boton.setObjectName("relacion_Fp_F_Boton")
 
         self.LVLSLm_boton = QtWidgets.QPushButton(self.centralwidget)
-        self.LVLSLm_boton.setGeometry(QtCore.QRect(20, 240, 281, 91))
+        self.LVLSLm_boton.setGeometry(QtCore.QRect(330, 130, 281, 91))
         self.LVLSLm_boton.setObjectName("LVLSLm_boton")
+
+        self.QFL_boton_folk = QtWidgets.QPushButton(self.centralwidget)
+        self.QFL_boton_folk.setGeometry(QtCore.QRect(330, 20, 281, 91))
+        self.QFL_boton_folk.setObjectName("QFL_boton_folk")
+
+        self.QFL_boton_garzanti = QtWidgets.QPushButton(self.centralwidget)
+        self.QFL_boton_garzanti.setGeometry(QtCore.QRect(640, 20, 281, 91))
+        self.QFL_boton_garzanti.setObjectName("QFL_boton_garzanti")
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 322, 22))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 942, 22))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
 
@@ -51,10 +58,12 @@ class Ui_GraficosWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Generar gráficos"))
-        self.QFL_boton.setText(_translate("MainWindow", "Generar QFL"))
+        self.QFL_boton_dickinson.setText(_translate("MainWindow", "Generar QFL (Dickinson)"))
         self.QmFLQp_boton.setText(_translate("MainWindow", "Generar Qm-F-(L+Qp)"))
         self.relacion_Fp_F_Boton.setText(_translate("MainWindow", "Calcular relación Fp/(Fp+Fk+Fm)"))
         self.LVLSLm_boton.setText(_translate("MainWindow", "Generar LV-LS-Lm"))
+        self.QFL_boton_folk.setText(_translate("MainWindow", "Generar QFL (Folk)"))
+        self.QFL_boton_garzanti.setText(_translate("MainWindow", "Generar QFL (Garzanti)"))
 
 
 if __name__ == "__main__":

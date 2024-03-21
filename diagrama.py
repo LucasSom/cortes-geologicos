@@ -164,6 +164,104 @@ def field_boundaries(scheme):
 
         labels = [l1, l2, l3, l4, l5, l6, l7, l8, l9, l10]
 
+    elif scheme == 'Garzanti_2019':
+        A = (0, 0)
+        B = (1, 0)
+        C = (0.5, 0.866025404 * y_axis_scale)
+        D = (0.1, 0)
+        E = (0.05, 0.09 * y_axis_scale)
+        F = (0.9, 0)
+        G = (0.95, 0.09 * y_axis_scale)
+        H = (0.5, 0)
+        I = (0.45, 0.78 * y_axis_scale)
+        J = (0.55, 0.78 * y_axis_scale)
+        K = (0.25, 0.43 * y_axis_scale)
+        L = (0.75, 0.43 * y_axis_scale)
+        M = (0.5, 0.29 * y_axis_scale)
+        N = (0.15, 0.09 * y_axis_scale)
+        O = (0.85, 0.09 * y_axis_scale)
+        P = (0.5, 0.69 * y_axis_scale)
+        Q = (0.33, 0.39 * y_axis_scale)
+        R = (0.68, 0.39 * y_axis_scale)
+        S = (0.5, 0.09 * y_axis_scale)
+
+        c1 = ['feldespato', A, D, N, E, A]
+        c2 = ['cuarzo', C, I, P, J, C]
+        c3 = ['lítico', B, G, O, F, B]
+
+        c4 = ['cuarzo-feldespático', E, N, Q, K, E]
+        c5 = ['feldespato-cuarzoso', K, Q, P, I, K]
+        c6 = ['lito-cuarzoso', P, J, L, R, P]
+        c7 = ['cuarzo-lítico', R, L, G, O, R]
+        c8 = ['lito-feldespático', D, N, S, H, D]
+        c9 = ['feldespato-lítico', O, F, H, S, O]
+
+        c10 = ['IQF', M, N, Q, M]
+        c11 = ['IFQ', M, P, Q, M]
+        c12 = ['fLQ', M, R, P, M]
+        c13 = ['fQL', M, R, O, M]
+        c14 = ['qFL', M, O, S, M]
+        c15 = ['qLF', M, S, N, M]
+        classifications = [c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15]
+
+        l1 = ["feldespato", 0.05, 0.05, 0]
+        l2 = ["cuarzo", 0.5, 0.92, 0]
+        l3 = ["lítico", 0.92, 0.05, 0]
+        l4 = ["cuarzo-feldespático", 0.2, 0.3, 55]
+        l5 = ["feldespato-cuarzoso", 0.38, 0.65, 55]
+        l6 = ["lito-cuarzoso", 0.6, 0.7, 305]
+        l7 = ["cuarzo-lítico", 0.8, 0.3, 305]
+        l8 = ["lito-feldespático", 0.3, 0.05, 0]
+        l9 = ["feldespato-lítico", 0.7, 0.05, 0]
+        l10 = ["IQF", 0.32, 0.35, 0]
+        l11 = ["IFQ", 0.43, 0.5, 0]
+        l12 = ["fLQ", 0.57, 0.5, 0]
+        l13 = ["fQL", 0.67, 0.35, 0]
+        l14 = ["qFL", 0.6, 0.15, 0]
+        l15 = ["qLF", 0.4, 0.15, 0]
+
+        labels = [l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11, l12, l13, l14, l15]
+
+    elif scheme == 'Folk':
+        A = (0, 0)
+        B = (1, 0)
+        C = (0.5, 0.866025404 * y_axis_scale)
+        E = (0.53, 0.82 * y_axis_scale)
+        G = (0.475, 0.82 * y_axis_scale)
+        H = (0.75, 0)
+        I = (0.375, 0.65 * y_axis_scale)
+        J = (0.25, 0)
+        K = (0.63, 0.65 * y_axis_scale)
+        L = (0.5, 0.65 * y_axis_scale)
+        M = (0.5, 0)
+        N = (0.5, 0.82 * y_axis_scale)
+        O = (0.44, 0.65 * y_axis_scale)
+        P = (0.56, 0.65 * y_axis_scale)
+
+        c1 = ['cuarzoarenita', C, G, E, C]
+
+        c2 = ['subfeldarenita', G, N, L, I, G]
+        c3 = ['sublitoarenita', N, E, K, L, N]
+
+        c4 = ['feldarenita', A, J, O, I, A]
+        c5 = ['feldarenita lítica', J, O, L, M, J]
+        c6 = ['litoarenita feldespática', M, L, P, H, M]
+        c7 = ['litoarenita', H, P, K, B, H]
+
+        classifications = [c1, c2, c3, c4, c5, c6, c7]
+
+        l1 = ["cuarzoarenita", 0.5, 1, 0]
+
+        l2 = ["subfeldarenita", 0.3, 0.85, 0]
+        l3 = ["sublitoarenita", 0.7, 0.85, 0]
+
+        l4 = ["feldarenita", 0.2, 0.3, 60]
+        l5 = ["feldarenita lítica", 0.4, 0.3, 80]
+        l6 = ["litoarenita feldespática", 0.6, 0.3, 280]
+        l7 = ["litoarenita", 0.8, 0.3, 300]
+
+        labels = [l1, l2, l3, l4, l5, l6, l7]
+
     elif scheme == 'blank':
         c1 = ['triangle', (0, 0), (0.5, 1), (1, 0), (0, 0)]
         classifications = [c1]
@@ -184,7 +282,8 @@ def plot_diagrama(data, top, left, right, matrix=None, plot_type='blank', top_la
     :param right: str o array. Ídem 'top'. Para QFL right=lítico.
     :param matrix: str or array-like, optional, default=None. Si se grafican datos petrográficos pueden incluirse en
      este parámetro los clay matrix. Estructura análoga a los anteriores.
-    :param plot_type: Tipo de gráfico. Son 3 opciones: 'Dickinson_1983', 'Pettijohn_1977' o 'blank'. Default: 'blank'
+    :param plot_type: Tipo de gráfico. Son 3 opciones: 'Pettijohn_1977', 'Dickinson_1983_QFL', 'Dickinson_1983_QmFLQp',
+     'Garzanti_2019', 'Folk' o 'blank'. Default: 'blank'
     :param top_label: Label del vértice superior del triángulo (para QFL, 'Q').
     :param left_label: Label del vértice izquierdo del triángulo (para QFL, 'F').
     :param right_label: Label del vértice derecho del triángulo (para QFL, 'L').
@@ -194,9 +293,10 @@ def plot_diagrama(data, top, left, right, matrix=None, plot_type='blank', top_la
     :return: tupla con el Dataframe de entrada al que se le agrega una columna con el valor de la clasificación según
      el plot_type elegido
     """
-    list_valid_types = ['Pettijohn_1977', 'Dickinson_1983_QFL', 'Dickinson_1983_QmFLQp', 'blank']
+    list_valid_types = ['Pettijohn_1977', 'Dickinson_1983_QFL', 'Dickinson_1983_QmFLQp', 'Garzanti_2019', 'Folk', 'blank']
     if plot_type not in list_valid_types:
-        raise ValueError("Plot type not recognised, valid types are blank, Pettijohn_1977 and Dickinson_1983")
+        raise ValueError("Plot type not recognised, valid types are 'blank', 'Pettijohn_1977', 'Dickinson_1983_QFL', "
+                         "'Dickinson_1983_QmFLQp', 'Garzanti_2019' and 'Folk'")
 
     x, y = data_prep(data, top, left, right)
     fig, ax = plt.subplots()
