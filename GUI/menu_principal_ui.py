@@ -61,7 +61,7 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "Conteo modal"))
         self.pushButton.setText(_translate("MainWindow", "Nueva muestra"))
         self.pushButton_2.setText(_translate("MainWindow", "Cargar muestra"))
-        self.generarGraficosBoton.setText(_translate("MainWindow", "Cargar tabla"))
+        self.generarGraficosBoton.setText(_translate("MainWindow", "Generar gráficos"))
 
 
 if __name__ == "__main__":

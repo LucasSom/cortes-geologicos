@@ -6,7 +6,7 @@ from PyQt5 import QtCore, QtWidgets, QtWebEngineWidgets
 class Ui_Instrucciones(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(400, 300)
+        Dialog.resize(800, 600)
 
         self.verticalLayout = QtWidgets.QVBoxLayout(Dialog)
         self.verticalLayout.setObjectName("verticalLayout")

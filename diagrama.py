@@ -371,8 +371,20 @@ def plot_diagrama(data, top, left, right, matrix=None, plot_type='blank', top_la
             index1 = path.contains_points(np.column_stack((x, y)), radius=0.01)
             for j in range(len(index)):
                 if index[j] or index1[j]:
-                    final_data.loc[j, "Clasificación"] = classification[
-                        0]  # add the classification to the column Pettijohn in the datatable
+                    if plot_type == 'Pettijohn_1977':
+                        nombre_clasificacion = "Pettijohn"
+                    elif plot_type == 'Dickinson_1983_QFL':
+                        nombre_clasificacion = "Dickinson_QFL"
+                    elif plot_type == 'Dickinson_1983_QmFLQp':
+                        nombre_clasificacion = "Dickinson_QmFLQp"
+                    elif plot_type == 'Garzanti_2019':
+                        nombre_clasificacion = 'Garzanti'
+                    else:
+                        nombre_clasificacion = 'Folk'
+
+                    final_data.loc[j, nombre_clasificacion] = classification[0]
+                    # add the classification to the column Pettijohn in the datatable
+
                     if matrix is not None:
                         if 15 < matrix[j] < 75:  # change the classification if maxtix > 15% and less <75%
                             if classification[0] == 'Sublith Arenite' or classification[0] == 'Lith Arenite':
