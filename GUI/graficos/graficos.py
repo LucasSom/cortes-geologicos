@@ -3,7 +3,6 @@ from PyQt5.QtWidgets import QMainWindow
 from matplotlib import pyplot as plt
 
 from GUI.graficos.generar_graficos_ui import Ui_GraficosWindow
-from GUI.graficos.relacion.RelacionWindow import RelacionWindow
 from diagrama import plot_diagrama
 from utils import filtrar_tipo_roca, error_window, info_window
 
@@ -49,9 +48,9 @@ class GraficosWindow(QMainWindow, Ui_GraficosWindow):
             df = pd.concat([cuarzos, feldespatos, liticos], axis=1)
             df.columns = ["Q", "F", "L"]
             df.index = self.df["Muestra"]
-            df["Total"] = df.sum(axis=1)
-            export_path = f"{self.fileName}-QFL.csv"
-            df.to_csv(export_path)
+            df[f"Total-{clasificacion}"] = df.sum(axis=1)
+            export_path = f"{self.fileName}-QFL.xlsx"
+            df.to_excel(export_path)
 
             info_window(self, f"Tabla guardada en {export_path}")
         except Exception as e:
@@ -77,8 +76,8 @@ class GraficosWindow(QMainWindow, Ui_GraficosWindow):
             df.columns = ["Qm", "F", "L+Qp"]
             df.index = self.df["Muestra"]
             df["Total"] = df.sum(axis=1)
-            export_path = f"{self.fileName}-QmFLQp.csv"
-            df.to_csv(export_path)
+            export_path = f"{self.fileName}-QmFLQp.xlsx"
+            df.to_excel(export_path)
 
             info_window(self, f"Tabla guardada en {export_path}")
         except Exception as e:
@@ -94,10 +93,10 @@ class GraficosWindow(QMainWindow, Ui_GraficosWindow):
             df_relacion['relacion_Fp_F'] = (Fp/(Fp+Fk+Fm)).fillna(0)
             df_relacion = df_relacion.set_index('Muestra')
 
-            promedio_relacion = df_relacion.loc['Promedio', 'relacion_Fp_F']
+            export_path = f"{self.fileName}-Fp_F.xlsx"
+            df_relacion.to_excel(export_path)
 
-            self.relacion_window = RelacionWindow(promedio_relacion)
-            self.relacion_window.show()
+            info_window(self, f"Tabla guardada en {export_path}")
         except Exception as e:
             error_window(self, e)
 
@@ -119,8 +118,8 @@ class GraficosWindow(QMainWindow, Ui_GraficosWindow):
             df.columns = ["Lv", "Ls", "Lm"]
             df.index = self.df["Muestra"]
             df["Total"] = df.sum(axis=1)
-            export_path = f"{self.fileName}-LvLsLm.csv"
-            df.to_csv(export_path)
+            export_path = f"{self.fileName}-LvLsLm.xlsx"
+            df.to_excel(export_path)
 
             info_window(self, f"Tabla guardada en {export_path}")
 

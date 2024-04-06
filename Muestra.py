@@ -37,6 +37,6 @@ class Muestra:
         df_promedio = pd.DataFrame(promedio).T.set_index("Muestra")
         df_new = pd.concat([df_new, df_promedio])
 
-        mapa_fileName = os.path.join(path_dir, f"{self.localidad}.csv")
-        df_new.to_csv(mapa_fileName, index_label='Muestra')
+        mapa_fileName = os.path.join(path_dir, f"{self.localidad}.xlsx")
+        df_new.to_excel(mapa_fileName, index_label='Muestra')
         return mapa_fileName
