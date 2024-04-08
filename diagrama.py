@@ -280,7 +280,7 @@ def field_boundaries(scheme):
 
 
 def plot_diagrama(data, top, left, right, matrix=None, plot_type='blank', top_label='', left_label='', right_label='',
-                  grid=True, color='g', size=15) -> Tuple[pd.DataFrame, plt.Figure]:
+                  grid=True, color='g', size=15, include_last_row=True) -> Tuple[pd.DataFrame, plt.Figure]:
     """
     Grafica un diagrama triangular. Para QFL top=cuarzo, left=feldespato, right=lítico.
 
@@ -299,6 +299,7 @@ def plot_diagrama(data, top, left, right, matrix=None, plot_type='blank', top_la
     :param grid: Bool que indica si se dibuja la grilla en el triángulo o no. Default: 'True'
     :param color: Color de los puntos a marcar. Default: 'r'
     :param size: Tamaño de la marca. Default: '15'
+    :param include_last_row: Si se incluye la última fila del data frame (típicamente el promedio)
     :return: tupla con el Dataframe de entrada al que se le agrega una columna con el valor de la clasificación según
      el plot_type elegido
     """
@@ -315,9 +316,11 @@ def plot_diagrama(data, top, left, right, matrix=None, plot_type='blank', top_la
         ax.text(lab[1], lab[2], lab[0], ha="center", va="center", rotation=lab[3], size=8)
 
     ax.scatter(x[:-1], y[:-1], color=color, s=size, edgecolor='k', zorder=10)
-    ax.scatter(x[-1], y[-1], color='r', s=size+1, edgecolor='k', zorder=10)
+    if include_last_row:
+        ax.scatter(x[-1], y[-1], color='r', s=size+1, edgecolor='k', zorder=10)
     for i, muestra in enumerate(data.index):
-        plt.text(x[i] * (1 + 0.01), y[i] * (1 + 0.01), muestra, fontsize=8)
+        if i < len(data.index) - 1 or include_last_row:
+            plt.text(x[i] * (1 + 0.01), y[i] * (1 + 0.01), muestra, fontsize=8)
     ax.set_frame_on(False)
     ax.axes.get_xaxis().set_visible(False)
     ax.axes.get_yaxis().set_visible(False)

@@ -13,6 +13,7 @@ class GraficosWindow(QMainWindow, Ui_GraficosWindow):
         self.relacion_window = None
         self.fileName = fileName
         self.df = df
+        self.incluir_promedio = False
         self.setupUi(self)
 
         self.QFL_boton_dickinson.clicked.connect(self.generar_qfl_dickinson)
@@ -21,6 +22,10 @@ class GraficosWindow(QMainWindow, Ui_GraficosWindow):
         self.QmFLQp_boton.clicked.connect(self.generar_QmFLQp)
         self.relacion_Fp_F_Boton.clicked.connect(self.relacion_Fp_F)
         self.LVLSLm_boton.clicked.connect(self.generar_LvLsLm)
+        self.checkBox_promedio.toggled.connect(self.invertir_promedio)
+
+    def invertir_promedio(self):
+        self.incluir_promedio = not self.incluir_promedio
 
     def generar_qfl_dickinson(self):
         self.generar_qfl(clasificacion='Dickinson_1983_QFL')
@@ -41,7 +46,8 @@ class GraficosWindow(QMainWindow, Ui_GraficosWindow):
 
             classified_data, plot = plot_diagrama(self.df, top=cuarzos, left=feldespatos, right=liticos, matrix=matrix,
                                                   plot_type=clasificacion,
-                                                  top_label='Q', left_label='F', right_label='L')
+                                                  top_label='Q', left_label='F', right_label='L',
+                                                  include_last_row=self.incluir_promedio)
             print(classified_data)
             plt.show()
             self.df[nombre_clasificacion[clasificacion]] = classified_data[nombre_clasificacion[clasificacion]]
@@ -71,7 +77,8 @@ class GraficosWindow(QMainWindow, Ui_GraficosWindow):
                                                   right=liticos + cuarzos_policristalinos,
                                                   matrix=None,
                                                   plot_type='Dickinson_1983_QmFLQp',
-                                                  top_label='Qm', left_label='F', right_label='L+Qp')
+                                                  top_label='Qm', left_label='F', right_label='L+Qp',
+                                                  include_last_row=self.incluir_promedio)
             plt.show()
             self.df["Dickinson_QmFLQp"] = classified_data["Dickinson_QmFLQp"]
             self.df.to_excel(f"{self.fileName}.xlsx")
@@ -94,7 +101,7 @@ class GraficosWindow(QMainWindow, Ui_GraficosWindow):
             Fm = filtrar_tipo_roca(self.df, tipo='Fm')
 
             df_relacion = self.df.copy()
-            df_relacion['relacion_Fp_F'] = (Fp/(Fp+Fk+Fm)).fillna(0)
+            df_relacion['relacion_Fp_F'] = (Fp / (Fp + Fk + Fm)).fillna(0)
             df_relacion = df_relacion.set_index('Muestra')
 
             export_path = f"{self.fileName}-Fp_F.xlsx"
@@ -115,7 +122,8 @@ class GraficosWindow(QMainWindow, Ui_GraficosWindow):
                                                   left=liticos_sedimentarios,
                                                   right=liticos_metamorficos,
                                                   plot_type='blank',
-                                                  top_label='Lv', left_label='Ls', right_label='Lm')
+                                                  top_label='Lv', left_label='Ls', right_label='Lm',
+                                                  include_last_row=self.incluir_promedio)
             plt.show()
 
             df = pd.concat([liticos_volcanicos, liticos_sedimentarios, liticos_metamorficos], axis=1)

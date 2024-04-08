@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>942</width>
-    <height>266</height>
+    <height>309</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -90,6 +90,19 @@
     </property>
     <property name="text">
      <string>Generar QFL (Garzanti)</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkBox_promedio">
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>240</y>
+      <width>161</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Incluir promedio</string>
     </property>
    </widget>
   </widget>

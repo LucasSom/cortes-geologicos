@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtWidgets
 class Ui_GraficosWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(942, 266)
+        MainWindow.resize(942, 309)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
 
@@ -42,6 +42,10 @@ class Ui_GraficosWindow(object):
         self.QFL_boton_garzanti.setGeometry(QtCore.QRect(640, 20, 281, 91))
         self.QFL_boton_garzanti.setObjectName("QFL_boton_garzanti")
 
+        self.checkBox_promedio = QtWidgets.QCheckBox(self.centralwidget)
+        self.checkBox_promedio.setGeometry(QtCore.QRect(400, 240, 161, 23))
+        self.checkBox_promedio.setObjectName("checkBox_promedio")
+
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 942, 22))
@@ -64,6 +68,7 @@ class Ui_GraficosWindow(object):
         self.LVLSLm_boton.setText(_translate("MainWindow", "Generar LV-LS-Lm"))
         self.QFL_boton_folk.setText(_translate("MainWindow", "Generar QFL (Folk)"))
         self.QFL_boton_garzanti.setText(_translate("MainWindow", "Generar QFL (Garzanti)"))
+        self.checkBox_promedio.setText(_translate("MainWindow", "Incluir promedio"))
 
 
 if __name__ == "__main__":
