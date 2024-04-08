@@ -48,7 +48,6 @@ class GraficosWindow(QMainWindow, Ui_GraficosWindow):
                                                   plot_type=clasificacion,
                                                   top_label='Q', left_label='F', right_label='L',
                                                   include_last_row=self.incluir_promedio)
-            print(classified_data)
             plt.show()
             self.df[nombre_clasificacion[clasificacion]] = classified_data[nombre_clasificacion[clasificacion]]
             self.df.to_excel(f"{self.fileName}.xlsx")
@@ -102,7 +101,8 @@ class GraficosWindow(QMainWindow, Ui_GraficosWindow):
 
             df_relacion = self.df.copy()
             df_relacion['relacion_Fp_F'] = (Fp / (Fp + Fk + Fm)).fillna(0)
-            df_relacion = df_relacion.set_index('Muestra')
+            if df_relacion.index.name != 'Muestra':
+                df_relacion.set_index('Muestra', inplace=True)
 
             export_path = f"{self.fileName}-Fp_F.xlsx"
             df_relacion.to_excel(export_path)
@@ -128,7 +128,8 @@ class GraficosWindow(QMainWindow, Ui_GraficosWindow):
 
             df = pd.concat([liticos_volcanicos, liticos_sedimentarios, liticos_metamorficos], axis=1)
             df.columns = ["Lv", "Ls", "Lm"]
-            df.index = self.df["Muestra"]
+            if df.index.name != 'Muestra':
+                df.set_index('Muestra', inplace=True)
             df["Total"] = df.sum(axis=1)
             export_path = f"{self.fileName}-LvLsLm.xlsx"
             df.to_excel(export_path)

@@ -399,7 +399,7 @@ def plot_diagrama(data, top, left, right, matrix=None, plot_type='blank', top_la
 
         return final_data, fig
 
-    return data.set_index('Muestra'), fig
+    return data.set_index('Muestra') if data.index.name != 'Muestra' else data, fig
 
 
 if __name__ == "__main__":
