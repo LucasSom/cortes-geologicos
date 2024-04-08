@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import QMainWindow
 from matplotlib import pyplot as plt
 
 from GUI.graficos.generar_graficos_ui import Ui_GraficosWindow
-from diagrama import plot_diagrama
+from diagrama import plot_diagrama, nombre_clasificacion
 from utils import filtrar_tipo_roca, error_window, info_window
 
 
@@ -42,12 +42,14 @@ class GraficosWindow(QMainWindow, Ui_GraficosWindow):
             classified_data, plot = plot_diagrama(self.df, top=cuarzos, left=feldespatos, right=liticos, matrix=matrix,
                                                   plot_type=clasificacion,
                                                   top_label='Q', left_label='F', right_label='L')
-            plt.show()
             print(classified_data)
+            plt.show()
+            self.df[nombre_clasificacion[clasificacion]] = classified_data[nombre_clasificacion[clasificacion]]
+            self.df.to_excel(f"{self.fileName}.xlsx")
 
             df = pd.concat([cuarzos, feldespatos, liticos], axis=1)
             df.columns = ["Q", "F", "L"]
-            df.index = self.df["Muestra"]
+            df.index = self.df.index
             df[f"Total-{clasificacion}"] = df.sum(axis=1)
             export_path = f"{self.fileName}-QFL.xlsx"
             df.to_excel(export_path)
@@ -71,10 +73,12 @@ class GraficosWindow(QMainWindow, Ui_GraficosWindow):
                                                   plot_type='Dickinson_1983_QmFLQp',
                                                   top_label='Qm', left_label='F', right_label='L+Qp')
             plt.show()
+            self.df["Dickinson_QmFLQp"] = classified_data["Dickinson_QmFLQp"]
+            self.df.to_excel(f"{self.fileName}.xlsx")
 
             df = pd.concat([cuarzos_monocristalinos, feldespatos, liticos + cuarzos_policristalinos], axis=1)
             df.columns = ["Qm", "F", "L+Qp"]
-            df.index = self.df["Muestra"]
+            df.index = self.df.index
             df["Total"] = df.sum(axis=1)
             export_path = f"{self.fileName}-QmFLQp.xlsx"
             df.to_excel(export_path)

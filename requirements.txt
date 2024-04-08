@@ -1,5 +1,7 @@
 pyqt5
 pandas
+openpyxl
 matplotlib
 userpaths
 PyQtWebEngine
+# pyqt5-auto-translate

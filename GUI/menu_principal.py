@@ -61,6 +61,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             fileName = self.openFileNameDialog(tipo='csv')
             if fileName is not None:
                 df = pd.read_csv(fileName) if os.path.splitext(fileName)[1] == '.csv' else pd.read_excel(fileName)
+                df.set_index("Muestra", inplace=True)
                 self.graficos_window = GraficosWindow(df, os.path.splitext(fileName)[0])
                 self.graficos_window.show()
         except Exception as e:

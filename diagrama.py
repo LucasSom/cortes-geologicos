@@ -8,6 +8,15 @@ import matplotlib.patches as patches
 import matplotlib.lines as mlines
 
 
+nombre_clasificacion = {
+    'Pettijohn_1977': "Pettijohn",
+    'Dickinson_1983_QFL': "Dickinson_QFL",
+    'Dickinson_1983_QmFLQp': "Dickinson_QmFLQp",
+    'Garzanti_2019': 'Garzanti',
+    'Folk': 'Folk'
+}
+
+
 def data_prep(data, top, left, right):
     if type(top) == str:
         top = data[top]
@@ -307,7 +316,7 @@ def plot_diagrama(data, top, left, right, matrix=None, plot_type='blank', top_la
 
     ax.scatter(x[:-1], y[:-1], color=color, s=size, edgecolor='k', zorder=10)
     ax.scatter(x[-1], y[-1], color='r', s=size+1, edgecolor='k', zorder=10)
-    for i, muestra in enumerate(data['Muestra']):
+    for i, muestra in enumerate(data.index):
         plt.text(x[i] * (1 + 0.01), y[i] * (1 + 0.01), muestra, fontsize=8)
     ax.set_frame_on(False)
     ax.axes.get_xaxis().set_visible(False)
@@ -348,7 +357,7 @@ def plot_diagrama(data, top, left, right, matrix=None, plot_type='blank', top_la
             ax.add_line(l1)
             ax.add_line(l2)
 
-    # add the fields for each petrograpic classification
+    # add the fields for each petrographic classification
     for classification in classifications:
         polygon = classification[1:]
         path = Path(polygon)
@@ -371,22 +380,11 @@ def plot_diagrama(data, top, left, right, matrix=None, plot_type='blank', top_la
             index1 = path.contains_points(np.column_stack((x, y)), radius=0.01)
             for j in range(len(index)):
                 if index[j] or index1[j]:
-                    if plot_type == 'Pettijohn_1977':
-                        nombre_clasificacion = "Pettijohn"
-                    elif plot_type == 'Dickinson_1983_QFL':
-                        nombre_clasificacion = "Dickinson_QFL"
-                    elif plot_type == 'Dickinson_1983_QmFLQp':
-                        nombre_clasificacion = "Dickinson_QmFLQp"
-                    elif plot_type == 'Garzanti_2019':
-                        nombre_clasificacion = 'Garzanti'
-                    else:
-                        nombre_clasificacion = 'Folk'
-
-                    final_data.loc[j, nombre_clasificacion] = classification[0]
-                    # add the classification to the column Pettijohn in the datatable
+                    final_data.loc[final_data.index[j], nombre_clasificacion[plot_type]] = classification[0]
+                    # add the classification to the column nombre_clasificacion in the datatable
 
                     if matrix is not None:
-                        if 15 < matrix[j] < 75:  # change the classification if maxtix > 15% and less <75%
+                        if 15 < matrix[j] < 75:  # change the classification if matrix > 15% and less <75%
                             if classification[0] == 'Sublith Arenite' or classification[0] == 'Lith Arenite':
                                 final_data.loc[j, "Clasificación"] = 'Lithic Wacke'
                             elif classification[0] == 'Sub Arkose' or classification[0] == 'Arkosic Arenite':
@@ -396,7 +394,6 @@ def plot_diagrama(data, top, left, right, matrix=None, plot_type='blank', top_la
                         elif matrix[j] > 75:
                             final_data.loc[j, "Clasificación"] = 'Mudrock'
 
-        final_data = final_data.set_index('Muestra')
         return final_data, fig
 
     return data.set_index('Muestra'), fig

@@ -58,7 +58,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "Conteo modal"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "@Cont.Ar"))
         self.pushButton.setText(_translate("MainWindow", "Nueva muestra"))
         self.pushButton_2.setText(_translate("MainWindow", "Cargar muestra"))
         self.generarGraficosBoton.setText(_translate("MainWindow", "Generar gráficos"))
