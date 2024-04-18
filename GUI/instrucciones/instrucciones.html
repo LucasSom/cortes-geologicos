@@ -56,23 +56,29 @@
         cantidad de lecturas determinan cuándo se finalizará automáticamente el conteo.
     </p>
     <p>Para facilitar el conteo se emplea un mapa de teclas, es decir, una asignación de una letra o número del teclado
-        a un tipo de roca. <strong>El nombre de la roca debe comenzar con la abreviatura entre paréntesis</strong>. Por
-        ejemplo, "(Qmo) Cuarzo monocristalino onduloso". Para crear un nuevo mapa, hacer click en el botón "Crear nuevo
-        mapa de teclas". Al finalizar la edición del mapa se lo guarda en un archivo CSV para luego poder reutilizarlo.
-        Para ello, al crear una nueva muestra, hacer click en "Cargar mapa de teclas" donde se puede editar el mapa o
-        dejarlo tal cual está.
+        a un tipo de componente. <strong>El nombre del componente debe comenzar con la abreviatura entre
+        paréntesis</strong>. Por ejemplo, "(Qmo) Cuarzo monocristalino onduloso". Para crear un nuevo mapa, hacer click
+        en el botón "Crear nuevo mapa de teclas". El programa asociará todo lo que comienza con Q, y lo
+        agrupará en el vértice del Cuarzo, todo lo que comience con F y lo agrupará en el
+        vértice del feldespato y todo lo que comience con L lo agrupará en el vértice de líticos.
+        Se debe tener especial cuidado con los tipos de cuarzos que se quieran definir y con
+        los tipos de líticos que se quieran definir. Al finalizar la edición del mapa se lo guarda
+        en un archivo CSV para luego poder reutilizarlo. Para ello, al crear una nueva muestra,
+        hacer click en "Cargar mapa de teclas" donde se puede editar el mapa o dejarlo tal cual está.
     </p>
     <p>Al finalizar la parametrización de la muestra, cliquear en "Save" o "Guardar". Se abrirá una ventana de diálogo
         para guardar la muestra en un archivo de tipo <em>.mtra</em>. Luego de guardar se abrirá la ventana de "Sesión".
     </p>
 
     <h2 id="Sesion">Sesión (Cargar muestra)</h2>
-    <p>La sesión de conteo se efectúa en una ventana donde a la derecha se encuentra el mapa de teclas y a la izquierda
-        se listan las rocas contadas. Para ingresarlas, simplemente se debe tocar la tecla correspondiente al tipo de
-        roca a contar. Una vez que se llega al número de rocas determinado en los parámetros de la muestra finaliza la
-        sesión y se guarda el conteo en un archivo con el nombre de la localidad. Si ya existía un archivo con ese
-        nombre, se agrega una fila a la tabla con los datos de la nueva muestra. La tabla, además, consta de una última
-        fila con el promedio de todos los valores.
+    <p>La sesión de conteo se efectúa en una ventana donde a la derecha se encuentra el
+        mapa de teclas y a la izquierda se listan los componentes contados. Para ingresarlos,
+        simplemente se debe tocar la tecla correspondiente al tipo de componente a contar.
+        Una vez que se llega al número de componentes determinado en los parámetros de la
+        muestra finaliza la sesión y se guarda el conteo en un archivo con el nombre de la
+        localidad. Si ya existía un archivo con ese nombre, se agrega una fila a la tabla con los
+        datos de la nueva muestra. La tabla, además, consta de una última fila con el
+        promedio de todos los valores.
     </p>
     <p>Si durante el conteo se desea deshacer una roca ingresada se puede hacer click en el botón "Deshacer", o bien,
         apretar la tecla "Borrar" o la tecla "Suprimir".
@@ -80,10 +86,10 @@
 
     <h2 id="Graficos">Generar gráficos</h2>
     <p> Para la generación de gráficos se carga primero la tabla de la localidad deseada. Luego, simplemente se debe
-        hacer click en el gráfico deseado. Se abrirá una nueva ventana con la imagen que puede ser guardada en
-        diferentes formatos. Además, se agrega una columna a la tabla con la clasificación correspondiente al tipo de
-        gráfico elegido. El resultado del cálculo de la relación <i>Fp/(Fp+Fk+Fm)</i> se expresa en una nueva columna en
-        la misma tabla.
+        hacer click en el gráfico deseado seteando o no la opción de incluir un punto con el promedio. Se abrirá una
+        nueva ventana con la imagen que puede ser guardada en diferentes formatos. Además, se agrega una columna a la
+        tabla con la clasificación correspondiente al tipo de gráfico elegido. El resultado del cálculo de la relación
+        <i>Fp/(Fp+Fk+Fm)</i> se expresa en una nueva columna en la misma tabla.
     </p>
 
     <h1 id="acerca_de">Acerca de</h1>
