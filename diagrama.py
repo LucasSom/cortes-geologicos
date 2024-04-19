@@ -15,6 +15,7 @@ nombre_clasificacion = {
     'Garzanti_2019': 'Garzanti',
     'Folk': 'Folk'
 }
+y_axis_scale = 2 / (3 ** 0.5)
 
 
 def data_prep(data, top, left, right):
@@ -39,7 +40,6 @@ def data_prep(data, top, left, right):
 
 def field_boundaries(scheme):
     classifications, labels = None, None
-    y_axis_scale = 2 / (3 ** 0.5)
     if scheme == 'Pettijohn_1977':
         c1 = ['Quartz arenite', (0.5, 0.9), (0.525, 0.95), (0.5, 1), (0.475, 0.95), (0.5, 0.9)]
         c2 = ['Sublitharenite', (0.5, 0.5), (0.625, 0.75), (0.525, 0.95), (0.5, 0.9), (0.5, 0.5)]

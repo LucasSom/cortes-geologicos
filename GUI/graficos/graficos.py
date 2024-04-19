@@ -42,9 +42,11 @@ class GraficosWindow(QMainWindow, Ui_GraficosWindow):
             feldespatos = filtrar_tipo_roca(self.df, tipo='F')
             liticos = filtrar_tipo_roca(self.df, tipo='L')
             # the clay matrix can be None if not present
-            matrix = filtrar_tipo_roca(self.df, tipo='O')
+            otros = filtrar_tipo_roca(self.df, tipo='O')
 
-            classified_data, plot = plot_diagrama(self.df, top=cuarzos, left=feldespatos, right=liticos, matrix=matrix,
+            classified_data, plot = plot_diagrama(self.df,
+                                                  top=cuarzos, left=feldespatos,
+                                                  right=liticos, matrix=otros,
                                                   plot_type=clasificacion,
                                                   top_label='Q', left_label='F', right_label='L',
                                                   include_last_row=self.incluir_promedio)
@@ -52,12 +54,20 @@ class GraficosWindow(QMainWindow, Ui_GraficosWindow):
             self.df[nombre_clasificacion[clasificacion]] = classified_data[nombre_clasificacion[clasificacion]]
             self.df.to_excel(f"{self.fileName}.xlsx")
 
-            df = pd.concat([cuarzos, feldespatos, liticos], axis=1)
-            df.columns = ["Q", "F", "L"]
-            df.index = self.df.index
-            df[f"Total-{clasificacion}"] = df.sum(axis=1)
+            df_reescalado = pd.DataFrame({
+                'Q': cuarzos,
+                'F': feldespatos,
+                'L': liticos,
+            }, index=self.df.index)
+
+            sumatoria = df_reescalado.sum(axis=1)
+            df_reescalado['Q'] = df_reescalado['Q'] / sumatoria
+            df_reescalado['F'] = df_reescalado['F'] / sumatoria
+            df_reescalado['L'] = df_reescalado['L'] / sumatoria
+
+            df_reescalado[f"Total-{clasificacion}"] = df_reescalado.sum(axis=1)
             export_path = f"{self.fileName}-QFL.xlsx"
-            df.to_excel(export_path)
+            df_reescalado.to_excel(export_path)
 
             info_window(self, f"Tabla guardada en {export_path}")
         except Exception as e:
