@@ -4,7 +4,6 @@ import pickle
 import pandas as pd
 from PyQt5.QtWidgets import QMessageBox
 
-
 project_path = os.path.dirname(os.path.abspath(__file__))
 
 
@@ -62,6 +61,7 @@ def info_window(parent, texto):
     information_pop_up.setText(texto)
     information_pop_up.setIcon(QMessageBox.Information)
     information_pop_up.exec()
+
 
 def values_unicity_check(parent, mapa):
     rocas = [r for r in mapa.values() if r != '']

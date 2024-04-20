@@ -1,4 +1,6 @@
 import os
+from collections import Counter
+from typing import Dict
 
 import pandas as pd
 
@@ -40,3 +42,11 @@ class Muestra:
         mapa_fileName = os.path.join(path_dir, f"{self.localidad}.xlsx")
         df_new.to_excel(mapa_fileName, index_label='Muestra')
         return mapa_fileName
+
+    def getComponentesCount(self) -> Dict[str, int]:
+        d = dict(Counter(self.componentes))
+        for nombres_rocas in self.mapa.values():
+            if nombres_rocas not in d and nombres_rocas != '':
+                d[nombres_rocas] = 0
+
+        return d

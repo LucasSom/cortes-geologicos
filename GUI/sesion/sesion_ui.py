@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'GUI/sesion.ui'
+# Form implementation generated from reading ui file 'GUI/sesion/sesion.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.10
 #
@@ -35,12 +35,12 @@ class Ui_Dialog_Sesion(object):
 
         # Scroll area de las rocas
         self.scrollRocas = QtWidgets.QScrollArea(self.Dialog)
-        self.scrollRocas.setGeometry(QtCore.QRect(0, 0, 551, 751))
+        self.scrollRocas.setGeometry(QtCore.QRect(0, 530, 551, 221))
         self.scrollRocas.setWidgetResizable(True)
         self.scrollRocas.setObjectName("scrollRocas")
 
         self.scrollRocasWidgetContents = QtWidgets.QWidget()
-        self.scrollRocasWidgetContents.setGeometry(QtCore.QRect(0, 0, 530, 749))
+        self.scrollRocasWidgetContents.setGeometry(QtCore.QRect(0, 0, 549, 219))
         self.scrollRocasWidgetContents.setObjectName("scrollRocasWidgetContents")
         self.scrollRocas.setWidget(self.scrollRocasWidgetContents)
 
@@ -59,12 +59,12 @@ class Ui_Dialog_Sesion(object):
         # self.editarMapaBoton.setObjectName("editarMapaBoton")
 
         self.scrollMapa = QtWidgets.QScrollArea(self.Dialog)
-        self.scrollMapa.setGeometry(QtCore.QRect(580, 0, 491, 751))
+        self.scrollMapa.setGeometry(QtCore.QRect(0, 0, 551, 521))
         self.scrollMapa.setWidgetResizable(True)
         self.scrollMapa.setObjectName("scrollMapa")
 
         self.scrollMapaWidgetContents = QtWidgets.QWidget()
-        self.scrollMapaWidgetContents.setGeometry(QtCore.QRect(0, 0, 509, 749))
+        self.scrollMapaWidgetContents.setGeometry(QtCore.QRect(0, 0, 549, 519))
         self.scrollMapaWidgetContents.setObjectName("scrollMapaWidgetContents")
 
         # Scroll area del mapa de teclas
@@ -82,6 +82,14 @@ class Ui_Dialog_Sesion(object):
         self.aceptar_cancelar.rejected.connect(self.Dialog.reject)  # type: ignore
         QtCore.QMetaObject.connectSlotsByName(self.Dialog)
 
+        self.tableView = QtWidgets.QTableWidget(self.Dialog)
+        self.tableView.setColumnCount(2)
+        self.tableView.setRowCount(len([componente for componente in self.Dialog.muestra.mapa.values()
+                                        if componente != '']))
+        self.tableView.setGeometry(QtCore.QRect(560, 0, 511, 751))
+        self.tableView.setObjectName("tablaConteo")
+        self.imprimir_conteo_inicial()
+
     def imprimir_lista_teclas(self):
         i = 0
         self.listwidgetMapa.clear()
@@ -90,6 +98,15 @@ class Ui_Dialog_Sesion(object):
                 self.listwidgetMapa.addItem(f"{tecla}: {roca}")
                 item = self.listwidgetMapa.item(i)
                 i += 1
+
+    def imprimir_conteo_inicial(self):
+        componentes = self.Dialog.muestra.getComponentesCount()
+        for i, (componente, cantidad) in enumerate(componentes.items()):
+            self.tableView.setItem(i, 0, QtWidgets.QTableWidgetItem(componente))
+            self.tableView.setItem(i, 1, QtWidgets.QTableWidgetItem(str(cantidad)))
+        self.tableView.resizeColumnsToContents()
+        self.tableView.resizeRowsToContents()
+        self.tableView.show()
 
     def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate
