@@ -82,13 +82,31 @@ class Ui_Dialog_Sesion(object):
         self.aceptar_cancelar.rejected.connect(self.Dialog.reject)  # type: ignore
         QtCore.QMetaObject.connectSlotsByName(self.Dialog)
 
-        self.tableView = QtWidgets.QTableWidget(self.Dialog)
+        # scroll area de la tabla de conteo de rocas
+        self.scrollTableArea = QtWidgets.QScrollArea(self.Dialog)
+        self.scrollTableArea.setGeometry(QtCore.QRect(560, 0, 511, 751))
+        self.scrollTableArea.setWidgetResizable(True)
+        self.scrollTableArea.setObjectName("scrollTableArea")
+
+        self.scrollAreaWidgetContents = QtWidgets.QWidget()
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 509, 749))
+        self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
+        self.scrollTableArea.setWidget(self.scrollAreaWidgetContents)
+
+        self.vbox_tabla = QtWidgets.QVBoxLayout()  # The Vertical Box that contains the Horizontal Boxes of labels and buttons
+        self.widget_tabla = QtWidgets.QWidget()  # Widget that contains the collection of Vertical Box
+
+        self.tableView = QtWidgets.QTableWidget()
         self.tableView.setColumnCount(2)
         self.tableView.setRowCount(len([componente for componente in self.Dialog.muestra.mapa.values()
                                         if componente != '']))
-        self.tableView.setGeometry(QtCore.QRect(560, 0, 511, 751))
+        self.tableView.setGeometry(QtCore.QRect(560, 0, 517, 747))
         self.tableView.setObjectName("tablaConteo")
+        self.tableView.verticalHeader().setVisible(False)
         self.imprimir_conteo_inicial()
+        self.vbox_tabla.addWidget(self.tableView)
+        self.widget_tabla.setLayout(self.vbox_tabla)
+        self.scrollTableArea.setWidget(self.widget_tabla)
 
     def imprimir_lista_teclas(self):
         i = 0

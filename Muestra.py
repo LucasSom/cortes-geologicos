@@ -4,6 +4,8 @@ from typing import Dict
 
 import pandas as pd
 
+from diagrama import nombre_clasificacion
+
 
 class Muestra:
     def __init__(self, nombre, fecha, localidad, operador, cantidad_lecturas, observaciones, mapa, fileName):
@@ -31,6 +33,11 @@ class Muestra:
         if os.path.isfile(file_path):
             df_old = pd.read_excel(file_path, index_col=0)
             df_old.drop(["Promedio"], inplace=True)
+
+            for clasificacion in nombre_clasificacion.values():
+                if clasificacion in df_old.columns:
+                    df_old.drop(columns=[clasificacion], inplace=True)
+
             df_new = pd.concat([df_old, df_new]).fillna(0)
 
         # Calculo el promedio de cada columna

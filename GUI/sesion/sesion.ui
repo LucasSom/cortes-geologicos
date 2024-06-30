@@ -130,7 +130,7 @@
     </widget>
    </widget>
   </widget>
-  <widget class="QTableView" name="tableView">
+  <widget class="QScrollArea" name="scrollTableArea">
    <property name="geometry">
     <rect>
      <x>560</x>
@@ -139,6 +139,29 @@
      <height>751</height>
     </rect>
    </property>
+   <property name="widgetResizable">
+    <bool>true</bool>
+   </property>
+   <widget class="QWidget" name="scrollAreaWidgetContents">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>509</width>
+      <height>749</height>
+     </rect>
+    </property>
+    <widget class="QTableWidget" name="tableWidget">
+     <property name="geometry">
+      <rect>
+       <x>5</x>
+       <y>1</y>
+       <width>501</width>
+       <height>741</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
   </widget>
  </widget>
  <resources/>
