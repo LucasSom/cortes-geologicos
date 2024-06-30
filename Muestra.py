@@ -26,10 +26,10 @@ class Muestra:
         counts_df = pd.DataFrame(df_new["Muestra"].value_counts(normalize=True))
         df_new = counts_df.rename(columns={"proportion": self.nombre}).T
 
-        # Cargar viejo CSV y concatenarlo
-        file_path = os.path.join(path_dir, f"{self.localidad}.csv")
+        # Cargar viejo Excel y concatenarlo
+        file_path = os.path.join(path_dir, f"{self.localidad}.xlsx")
         if os.path.isfile(file_path):
-            df_old = pd.read_csv(file_path, index_col=0)
+            df_old = pd.read_excel(file_path, index_col=0)
             df_old.drop(["Promedio"], inplace=True)
             df_new = pd.concat([df_old, df_new]).fillna(0)
 
