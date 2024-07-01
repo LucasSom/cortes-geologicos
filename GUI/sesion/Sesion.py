@@ -1,6 +1,6 @@
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QMessageBox
+from PyQt5.QtWidgets import QMessageBox, QTableWidget, QListWidget
 
 from GUI.nueva_tecla.EditarTeclaWindow import EditarTeclaWindow
 from GUI.sesion.sesion_ui import Ui_Dialog_Sesion
@@ -18,6 +18,11 @@ class SesionWindow(QtWidgets.QDialog, Ui_Dialog_Sesion, QtWidgets.QWidget):
             self.deshacerButton.clicked.connect(self.borrar_roca)
             self.agregarTeclaButton.clicked.connect(self.agregar_tecla)
             self.aceptar_cancelar.accepted.connect(self.guardar)
+
+            self.widget_tabla.focusOutEvent = self.on_table_widget_focus_out
+            self.widget_mapa.focusOutEvent = self.on_list_widget_focus_out
+            self.widget_rocas.focusOutEvent = self.on_list_widget_focus_out
+
         except Exception as e:
             error_window(self, e)
 
@@ -34,6 +39,18 @@ class SesionWindow(QtWidgets.QDialog, Ui_Dialog_Sesion, QtWidgets.QWidget):
                     self.agregar_roca(roca)
         except Exception as e:
             error_window(self, e)
+
+    def focusInEvent(self, event):
+        self.setFocus(Qt.ActiveWindowFocusReason)
+        super().focusInEvent(event)
+
+    def on_table_widget_focus_out(self, event):
+        self.setFocus(Qt.ActiveWindowFocusReason)
+        super(QTableWidget, self.widget_tabla).focusOutEvent(event)
+
+    def on_list_widget_focus_out(self, event):
+        self.setFocus(Qt.ActiveWindowFocusReason)
+        super(QListWidget, self.widget_tabla).focusOutEvent(event)
 
     def agregar_roca(self, roca):
         try:
