@@ -11,7 +11,7 @@
 from PyQt5 import QtCore, QtWidgets
 
 
-class Ui_Dialog_Nueva_Tecla(object):
+class Ui_Dialog_Editar_Tecla(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(628, 77)
@@ -45,6 +45,6 @@ class Ui_Dialog_Nueva_Tecla(object):
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Nueva tecla"))
-        self.label.setText(_translate("Dialog", "Nueva tecla:"))
+        Dialog.setWindowTitle(_translate("Dialog", "Editar tecla"))
+        self.label.setText(_translate("Dialog", "Tecla:"))
         self.label_2.setText(_translate("Dialog", "Roca:"))

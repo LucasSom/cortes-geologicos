@@ -32,9 +32,9 @@
   <widget class="QCommandLinkButton" name="deshacerButton">
    <property name="geometry">
     <rect>
-     <x>180</x>
+     <x>0</x>
      <y>760</y>
-     <width>191</width>
+     <width>371</width>
      <height>31</height>
     </rect>
    </property>
@@ -49,9 +49,9 @@
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>0</y>
+     <y>530</y>
      <width>551</width>
-     <height>751</height>
+     <height>221</height>
     </rect>
    </property>
    <property name="widgetResizable">
@@ -63,33 +63,10 @@
       <x>0</x>
       <y>0</y>
       <width>549</width>
-      <height>749</height>
+      <height>219</height>
      </rect>
     </property>
    </widget>
-  </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>760</y>
-     <width>41</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Input</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="input">
-   <property name="geometry">
-    <rect>
-     <x>60</x>
-     <y>760</y>
-     <width>121</width>
-     <height>25</height>
-    </rect>
-   </property>
   </widget>
   <widget class="QPushButton" name="editarMapaBoton">
    <property name="geometry">
@@ -107,10 +84,10 @@
   <widget class="QScrollArea" name="scrollMapa">
    <property name="geometry">
     <rect>
-     <x>560</x>
+     <x>0</x>
      <y>0</y>
-     <width>511</width>
-     <height>751</height>
+     <width>551</width>
+     <height>521</height>
     </rect>
    </property>
    <property name="widgetResizable">
@@ -121,8 +98,8 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>509</width>
-      <height>749</height>
+      <width>549</width>
+      <height>519</height>
      </rect>
     </property>
     <widget class="QLabel" name="label_tecla_1">
@@ -149,6 +126,39 @@
      </property>
      <property name="text">
       <string>TextLabel</string>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QScrollArea" name="scrollTableArea">
+   <property name="geometry">
+    <rect>
+     <x>560</x>
+     <y>0</y>
+     <width>511</width>
+     <height>751</height>
+    </rect>
+   </property>
+   <property name="widgetResizable">
+    <bool>true</bool>
+   </property>
+   <widget class="QWidget" name="scrollAreaWidgetContents">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>509</width>
+      <height>749</height>
+     </rect>
+    </property>
+    <widget class="QTableWidget" name="tableWidget">
+     <property name="geometry">
+      <rect>
+       <x>5</x>
+       <y>1</y>
+       <width>501</width>
+       <height>741</height>
+      </rect>
      </property>
     </widget>
    </widget>

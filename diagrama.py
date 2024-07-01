@@ -8,6 +8,16 @@ import matplotlib.patches as patches
 import matplotlib.lines as mlines
 
 
+nombre_clasificacion = {
+    'Pettijohn_1977': "Pettijohn",
+    'Dickinson_1983_QFL': "Dickinson_QFL",
+    'Dickinson_1983_QmFLQp': "Dickinson_QmFLQp",
+    'Garzanti_2019': 'Garzanti',
+    'Folk': 'Folk'
+}
+y_axis_scale = 2 / (3 ** 0.5)
+
+
 def data_prep(data, top, left, right):
     if type(top) == str:
         top = data[top]
@@ -30,7 +40,6 @@ def data_prep(data, top, left, right):
 
 def field_boundaries(scheme):
     classifications, labels = None, None
-    y_axis_scale = 2 / (3 ** 0.5)
     if scheme == 'Pettijohn_1977':
         c1 = ['Quartz arenite', (0.5, 0.9), (0.525, 0.95), (0.5, 1), (0.475, 0.95), (0.5, 0.9)]
         c2 = ['Sublitharenite', (0.5, 0.5), (0.625, 0.75), (0.525, 0.95), (0.5, 0.9), (0.5, 0.5)]
@@ -48,25 +57,46 @@ def field_boundaries(scheme):
         l5 = ["Arkosic arenite", 0.25, 0.05, 0]
         labels = [l1, l2, l3, l4, l5]
     elif scheme == 'Dickinson_1983_QFL':
-        c1 = ['basement uplift', (0, 0), (0.15, 0), (0.341992, 0.4985), (0.266412, 0.532842), (0, 0)]
-        c2 = ['transitional continental', (0.341992, 0.4985), (0.266412, 0.532842), (0.403822, 0.807654), (0.45, 0.779),
+        # c1 = ['basement uplift', (0, 0), (0.15, 0), (0.341992, 0.4985), (0.266412, 0.532842), (0, 0)]
+        # c2 = ['transitional continental', (0.341992, 0.4985), (0.266412, 0.532842), (0.403822, 0.807654), (0.45, 0.779),
+        #       (0.341992, 0.4985)]
+        # c3 = ['craton interior', (0.45, 0.779), (0.403822, 0.807654), (0.5, 1), (0.52, 0.96), (0.45, 0.779)]
+        # c4 = ['recycled orogen', (0.886, 0.228), (0.341992, 0.4985), (0.52, 0.96), (0.886, 0.228)]
+        # c5 = ['dissected arcs', (0.341992, 0.4985), (0.701343, 0.319926), (0.215664, 0.170566),
+        #       (0.341992, 0.4985)]
+        # c6 = ['transitional arc', (0.701343, 0.319926), (0.863323, 0.239235), (0.5, 0), (0.15, 0),
+        #       (0.215664, 0.170566),
+        #       (0.701343, 0.319926)]
+        # c7 = ['undissected arc', (0.863323, 0.239235), (0.886, 0.228), (1, 0), (0.5, 0), (0.863323, 0.2392359)]
+        # classifications = [c1, c2, c3, c4, c5, c6, c7]
+        # l1 = ["basement uplift", 0.165, 0.2, 58]
+        # l2 = ["transitional\n continental", 0.365, 0.65, 60]
+        # l3 = ["craton interior", 0.38, 0.92, 0]
+        # l4 = ["recycled orogen", 0.54, 0.62, 0]
+        # l5 = ["dissected arcs", 0.41, 0.35, 0]
+        # l6 = ["transitional arc", 0.45, 0.15, 0]
+        # l7 = ["undissected arc", 0.8, 0.05, 0]
+
+        c1 = ['basamento elevado', (0, 0), (0.15, 0), (0.341992, 0.4985), (0.266412, 0.532842), (0, 0)]
+        c2 = ['continental\ntransicional', (0.341992, 0.4985), (0.266412, 0.532842), (0.403822, 0.807654), (0.45, 0.779),
               (0.341992, 0.4985)]
-        c3 = ['craton interior', (0.45, 0.779), (0.403822, 0.807654), (0.5, 1), (0.52, 0.96), (0.45, 0.779)]
-        c4 = ['recycled orogen', (0.886, 0.228), (0.341992, 0.4985), (0.52, 0.96), (0.886, 0.228)]
-        c5 = ['dissected arcs', (0.341992, 0.4985), (0.701343, 0.319926), (0.215664, 0.170566),
+        c3 = ['interior cratónico', (0.45, 0.779), (0.403822, 0.807654), (0.5, 1), (0.52, 0.96), (0.45, 0.779)]
+        c4 = ['orógeno reciclado', (0.886, 0.228), (0.341992, 0.4985), (0.52, 0.96), (0.886, 0.228)]
+        c5 = ['arco disectado', (0.341992, 0.4985), (0.701343, 0.319926), (0.215664, 0.170566),
               (0.341992, 0.4985)]
-        c6 = ['transitional arc', (0.701343, 0.319926), (0.863323, 0.239235), (0.5, 0), (0.15, 0),
+        c6 = ['arco transicional', (0.701343, 0.319926), (0.863323, 0.239235), (0.5, 0), (0.15, 0),
               (0.215664, 0.170566),
               (0.701343, 0.319926)]
-        c7 = ['undissected arc', (0.863323, 0.239235), (0.886, 0.228), (1, 0), (0.5, 0), (0.863323, 0.2392359)]
+        c7 = ['arco no disectado', (0.863323, 0.239235), (0.886, 0.228), (1, 0), (0.5, 0), (0.863323, 0.2392359)]
         classifications = [c1, c2, c3, c4, c5, c6, c7]
-        l1 = ["basement uplift", 0.165, 0.2, 58]
-        l2 = ["transitional\n continental", 0.365, 0.65, 60]
-        l3 = ["craton interior", 0.38, 0.92, 0]
-        l4 = ["recycled orogen", 0.54, 0.62, 0]
-        l5 = ["dissected arcs", 0.41, 0.35, 0]
-        l6 = ["transitional arc", 0.45, 0.15, 0]
-        l7 = ["undissected arc", 0.8, 0.05, 0]
+
+        l1 = ["basamento elevado", 0.165, 0.2, 58]
+        l2 = ["continental\ntransicional", 0.365, 0.65, 60]
+        l3 = ["interior cratónico", 0.38, 0.92, 0]
+        l4 = ["orógeno reciclado", 0.54, 0.62, 0]
+        l5 = ["arco disectado", 0.41, 0.35, 0]
+        l6 = ["arco transicional", 0.45, 0.15, 0]
+        l7 = ["arco no disectado", 0.8, 0.05, 0]
         labels = [l1, l2, l3, l4, l5, l6, l7]
     elif scheme == 'Dickinson_1983_QmFLQp':
         A = (0, 0)
@@ -91,32 +121,155 @@ def field_boundaries(scheme):
         W = (0.555, 0.7708 * y_axis_scale)
         Z = (0.3108, 0.1916 * y_axis_scale)
 
-        c1 = ['basement uplift', A, D, E1, J, A]
-        c2 = ['transitional continental', E1, I1, L, J, E1]
-        c3 = ['craton interior', I1, W, C, L, I1]
+        # c1 = ['basement uplift', A, D, E1, J, A]
+        # c2 = ['transitional continental', E1, I1, L, J, E1]
+        # c3 = ['craton interior', I1, W, C, L, I1]
+        #
+        # c4 = ['mixed', H1, F1, E1, H1]
+        # c5 = ['dissected arcs', E1, D1, Z, E1]
+        # c6 = ['transitional arc', D, E, A1, C1, Z, D]
+        # c7 = ['undissected arc', E, F, A1, E]
+        #
+        # c8 = ['quartzose recycled', W, F1, G1, U, W]
+        # c9 = ['transitional recycled', B1, Q, U, G1, B1]
+        # c10 = ['lithic recycled', F, B, Q, B1, F]
+        # classifications = [c1, c2, c3, c4, c5, c6, c7, c8, c9, c10]
+        #
+        # l1 = ["basement uplift", 0.165, 0.2, 58]
+        # l2 = ["transitional\n continental", 0.4, 0.65, 60]
+        # l3 = ["craton interior", 0.5, 0.93, 0]
+        # l4 = ["mixed", 0.5, 0.5, 0]
+        # l5 = ["dissected\narc", 0.46, 0.31, 0]
+        # l6 = ["transitional\narc", 0.45, 0.15, 0]
+        # l7 = ["undissected arc", 0.72, 0.025, 0]
+        # l8 = ["quartzose\nrecycled", 0.6, 0.7, 300]
+        # l9 = ["transitional\nrecycled", 0.7, 0.4, 300]
+        # l10 = ["lithic recycled", 0.92, 0.15, 0]
 
-        c4 = ['mixed', H1, F1, E1, H1]
-        c5 = ['dissected arcs', E1, D1, Z, E1]
-        c6 = ['transitional arc', D, E, A1, C1, Z, D]
-        c7 = ['undissected arc', E, F, A1, E]
+        c1 = ['basamento elevado', A, D, E1, J, A]
+        c2 = ['continental\ntransicional', E1, I1, L, J, E1]
+        c3 = ['interior cratónico', I1, W, C, L, I1]
 
-        c8 = ['quartzose recycled', W, F1, G1, U, W]
-        c9 = ['transitional recycled', B1, Q, U, G1, B1]
-        c10 = ['lithic recycled', F, B, Q, B1, F]
+        c4 = ['mezcla', H1, F1, E1, H1]
+        c5 = ['arco\ndisectado', E1, D1, Z, E1]
+        c6 = ['arco\ntransicional', D, E, A1, C1, Z, D]
+        c7 = ['arco no\ndisectado', E, F, A1, E]
+
+        c8 = ['orógeno\nreciclado\ncuarzoso', W, F1, G1, U, W]
+        c9 = ['orógeno\nreciclado\ntransicional', B1, Q, U, G1, B1]
+        c10 = ['orógeno\nreciclado\nlítico', F, B, Q, B1, F]
         classifications = [c1, c2, c3, c4, c5, c6, c7, c8, c9, c10]
 
-        l1 = ["basement uplift", 0.165, 0.2, 58]
-        l2 = ["transitional\n continental", 0.4, 0.65, 60]
-        l3 = ["craton interior", 0.5, 0.93, 0]
-        l4 = ["mixed", 0.5, 0.5, 0]
-        l5 = ["dissected\narc", 0.46, 0.31, 0]
-        l6 = ["transitional\narc", 0.45, 0.15, 0]
-        l7 = ["undissected arc", 0.72, 0.025, 0]
-        l8 = ["quartzose\nrecycled", 0.6, 0.7, 300]
-        l9 = ["transitional\nrecycled", 0.7, 0.4, 300]
-        l10 = ["lithic recycled", 0.92, 0.15, 0]
+        l1 = ["basamento elevado", 0.165, 0.2, 58]
+        l2 = ["continental\ntransicional", 0.4, 0.65, 60]
+        l3 = ["interior cratónico", 0.5, 0.93, 0]
+        l4 = ["mezcla", 0.5, 0.5, 0]
+        l5 = ["arco\ndisectado", 0.46, 0.31, 0]
+        l6 = ["arco\ntransicional", 0.45, 0.15, 0]
+        l7 = ["arco no\ndisectado", 0.72, 0.05, 0]
+        l8 = ["orógeno\nreciclado\ncuarzoso", 0.58, 0.65, 300]
+        l9 = ["orógeno\nreciclado\ntransicional", 0.72, 0.4, 300]
+        l10 = ["orógeno\nreciclado\nlítico", 0.87, 0.15, 0]
 
         labels = [l1, l2, l3, l4, l5, l6, l7, l8, l9, l10]
+
+    elif scheme == 'Garzanti_2019':
+        A = (0, 0)
+        B = (1, 0)
+        C = (0.5, 0.866025404 * y_axis_scale)
+        D = (0.1, 0)
+        E = (0.05, 0.09 * y_axis_scale)
+        F = (0.9, 0)
+        G = (0.95, 0.09 * y_axis_scale)
+        H = (0.5, 0)
+        I = (0.45, 0.78 * y_axis_scale)
+        J = (0.55, 0.78 * y_axis_scale)
+        K = (0.25, 0.43 * y_axis_scale)
+        L = (0.75, 0.43 * y_axis_scale)
+        M = (0.5, 0.29 * y_axis_scale)
+        N = (0.15, 0.09 * y_axis_scale)
+        O = (0.85, 0.09 * y_axis_scale)
+        P = (0.5, 0.69 * y_axis_scale)
+        Q = (0.33, 0.39 * y_axis_scale)
+        R = (0.68, 0.39 * y_axis_scale)
+        S = (0.5, 0.09 * y_axis_scale)
+
+        c1 = ['feldespato', A, D, N, E, A]
+        c2 = ['cuarzo', C, I, P, J, C]
+        c3 = ['lítico', B, G, O, F, B]
+
+        c4 = ['cuarzo-feldespático', E, N, Q, K, E]
+        c5 = ['feldespato-cuarzoso', K, Q, P, I, K]
+        c6 = ['lito-cuarzoso', P, J, L, R, P]
+        c7 = ['cuarzo-lítico', R, L, G, O, R]
+        c8 = ['lito-feldespático', D, N, S, H, D]
+        c9 = ['feldespato-lítico', O, F, H, S, O]
+
+        c10 = ['IQF', M, N, Q, M]
+        c11 = ['IFQ', M, P, Q, M]
+        c12 = ['fLQ', M, R, P, M]
+        c13 = ['fQL', M, R, O, M]
+        c14 = ['qFL', M, O, S, M]
+        c15 = ['qLF', M, S, N, M]
+        classifications = [c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15]
+
+        l1 = ["feldespato", 0.05, 0.05, 0]
+        l2 = ["cuarzo", 0.5, 0.92, 0]
+        l3 = ["lítico", 0.92, 0.05, 0]
+        l4 = ["cuarzo-feldespático", 0.2, 0.3, 55]
+        l5 = ["feldespato-cuarzoso", 0.38, 0.65, 55]
+        l6 = ["lito-cuarzoso", 0.6, 0.7, 305]
+        l7 = ["cuarzo-lítico", 0.8, 0.3, 305]
+        l8 = ["lito-feldespático", 0.3, 0.05, 0]
+        l9 = ["feldespato-lítico", 0.7, 0.05, 0]
+        l10 = ["IQF", 0.32, 0.35, 0]
+        l11 = ["IFQ", 0.43, 0.5, 0]
+        l12 = ["fLQ", 0.57, 0.5, 0]
+        l13 = ["fQL", 0.67, 0.35, 0]
+        l14 = ["qFL", 0.6, 0.15, 0]
+        l15 = ["qLF", 0.4, 0.15, 0]
+
+        labels = [l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11, l12, l13, l14, l15]
+
+    elif scheme == 'Folk':
+        A = (0, 0)
+        B = (1, 0)
+        C = (0.5, 0.866025404 * y_axis_scale)
+        E = (0.53, 0.82 * y_axis_scale)
+        G = (0.475, 0.82 * y_axis_scale)
+        H = (0.75, 0)
+        I = (0.375, 0.65 * y_axis_scale)
+        J = (0.25, 0)
+        K = (0.63, 0.65 * y_axis_scale)
+        L = (0.5, 0.65 * y_axis_scale)
+        M = (0.5, 0)
+        N = (0.5, 0.82 * y_axis_scale)
+        O = (0.44, 0.65 * y_axis_scale)
+        P = (0.56, 0.65 * y_axis_scale)
+
+        c1 = ['cuarzoarenita', C, G, E, C]
+
+        c2 = ['subfeldarenita', G, N, L, I, G]
+        c3 = ['sublitoarenita', N, E, K, L, N]
+
+        c4 = ['feldarenita', A, J, O, I, A]
+        c5 = ['feldarenita lítica', J, O, L, M, J]
+        c6 = ['litoarenita feldespática', M, L, P, H, M]
+        c7 = ['litoarenita', H, P, K, B, H]
+
+        classifications = [c1, c2, c3, c4, c5, c6, c7]
+
+        l1 = ["cuarzoarenita", 0.5, 1, 0]
+
+        l2 = ["subfeldarenita", 0.3, 0.85, 0]
+        l3 = ["sublitoarenita", 0.7, 0.85, 0]
+
+        l4 = ["feldarenita", 0.2, 0.3, 60]
+        l5 = ["feldarenita lítica", 0.4, 0.3, 80]
+        l6 = ["litoarenita feldespática", 0.6, 0.3, 280]
+        l7 = ["litoarenita", 0.8, 0.3, 300]
+
+        labels = [l1, l2, l3, l4, l5, l6, l7]
 
     elif scheme == 'blank':
         c1 = ['triangle', (0, 0), (0.5, 1), (1, 0), (0, 0)]
@@ -127,7 +280,7 @@ def field_boundaries(scheme):
 
 
 def plot_diagrama(data, top, left, right, matrix=None, plot_type='blank', top_label='', left_label='', right_label='',
-                  grid=True, color='g', size=15) -> Tuple[pd.DataFrame, plt.Figure]:
+                  grid=True, color='g', size=15, include_last_row=True) -> Tuple[pd.DataFrame, plt.Figure]:
     """
     Grafica un diagrama triangular. Para QFL top=cuarzo, left=feldespato, right=lítico.
 
@@ -138,19 +291,22 @@ def plot_diagrama(data, top, left, right, matrix=None, plot_type='blank', top_la
     :param right: str o array. Ídem 'top'. Para QFL right=lítico.
     :param matrix: str or array-like, optional, default=None. Si se grafican datos petrográficos pueden incluirse en
      este parámetro los clay matrix. Estructura análoga a los anteriores.
-    :param plot_type: Tipo de gráfico. Son 3 opciones: 'Dickinson_1983', 'Pettijohn_1977' o 'blank'. Default: 'blank'
+    :param plot_type: Tipo de gráfico. Son 3 opciones: 'Pettijohn_1977', 'Dickinson_1983_QFL', 'Dickinson_1983_QmFLQp',
+     'Garzanti_2019', 'Folk' o 'blank'. Default: 'blank'
     :param top_label: Label del vértice superior del triángulo (para QFL, 'Q').
     :param left_label: Label del vértice izquierdo del triángulo (para QFL, 'F').
     :param right_label: Label del vértice derecho del triángulo (para QFL, 'L').
     :param grid: Bool que indica si se dibuja la grilla en el triángulo o no. Default: 'True'
     :param color: Color de los puntos a marcar. Default: 'r'
     :param size: Tamaño de la marca. Default: '15'
+    :param include_last_row: Si se incluye la última fila del data frame (típicamente el promedio)
     :return: tupla con el Dataframe de entrada al que se le agrega una columna con el valor de la clasificación según
      el plot_type elegido
     """
-    list_valid_types = ['Pettijohn_1977', 'Dickinson_1983_QFL', 'Dickinson_1983_QmFLQp', 'blank']
+    list_valid_types = ['Pettijohn_1977', 'Dickinson_1983_QFL', 'Dickinson_1983_QmFLQp', 'Garzanti_2019', 'Folk', 'blank']
     if plot_type not in list_valid_types:
-        raise ValueError("Plot type not recognised, valid types are blank, Pettijohn_1977 and Dickinson_1983")
+        raise ValueError("Plot type not recognised, valid types are 'blank', 'Pettijohn_1977', 'Dickinson_1983_QFL', "
+                         "'Dickinson_1983_QmFLQp', 'Garzanti_2019' and 'Folk'")
 
     x, y = data_prep(data, top, left, right)
     fig, ax = plt.subplots()
@@ -160,9 +316,11 @@ def plot_diagrama(data, top, left, right, matrix=None, plot_type='blank', top_la
         ax.text(lab[1], lab[2], lab[0], ha="center", va="center", rotation=lab[3], size=8)
 
     ax.scatter(x[:-1], y[:-1], color=color, s=size, edgecolor='k', zorder=10)
-    ax.scatter(x[-1], y[-1], color='r', s=size+1, edgecolor='k', zorder=10)
-    for i, muestra in enumerate(data['Muestra']):
-        plt.text(x[i] * (1 + 0.01), y[i] * (1 + 0.01), muestra, fontsize=8)
+    if include_last_row:
+        ax.scatter(x[-1], y[-1], color='r', s=size+1, edgecolor='k', zorder=10)
+    for i, muestra in enumerate(data.index):
+        if i < len(data.index) - 1 or include_last_row:
+            plt.text(x[i] * (1 + 0.01), y[i] * (1 + 0.01), muestra, fontsize=8)
     ax.set_frame_on(False)
     ax.axes.get_xaxis().set_visible(False)
     ax.axes.get_yaxis().set_visible(False)
@@ -202,7 +360,7 @@ def plot_diagrama(data, top, left, right, matrix=None, plot_type='blank', top_la
             ax.add_line(l1)
             ax.add_line(l2)
 
-    # add the fields for each petrograpic classification
+    # add the fields for each petrographic classification
     for classification in classifications:
         polygon = classification[1:]
         path = Path(polygon)
@@ -225,10 +383,11 @@ def plot_diagrama(data, top, left, right, matrix=None, plot_type='blank', top_la
             index1 = path.contains_points(np.column_stack((x, y)), radius=0.01)
             for j in range(len(index)):
                 if index[j] or index1[j]:
-                    final_data.loc[j, "Clasificación"] = classification[
-                        0]  # add the classification to the column Pettijohn in the datatable
+                    final_data.loc[final_data.index[j], nombre_clasificacion[plot_type]] = classification[0]
+                    # add the classification to the column nombre_clasificacion in the datatable
+
                     if matrix is not None:
-                        if 15 < matrix[j] < 75:  # change the classification if maxtix > 15% and less <75%
+                        if 15 < matrix[j] < 75:  # change the classification if matrix > 15% and less <75%
                             if classification[0] == 'Sublith Arenite' or classification[0] == 'Lith Arenite':
                                 final_data.loc[j, "Clasificación"] = 'Lithic Wacke'
                             elif classification[0] == 'Sub Arkose' or classification[0] == 'Arkosic Arenite':
@@ -238,10 +397,9 @@ def plot_diagrama(data, top, left, right, matrix=None, plot_type='blank', top_la
                         elif matrix[j] > 75:
                             final_data.loc[j, "Clasificación"] = 'Mudrock'
 
-        final_data = final_data.set_index('Muestra')
         return final_data, fig
 
-    return data.set_index('Muestra'), fig
+    return data.set_index('Muestra') if data.index.name != 'Muestra' else data, fig
 
 
 if __name__ == "__main__":

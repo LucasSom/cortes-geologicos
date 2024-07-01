@@ -6,15 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>322</width>
-    <height>491</height>
+    <width>942</width>
+    <height>309</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Generar gráficos</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="QFL_boton">
+   <widget class="QPushButton" name="QFL_boton_dickinson">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Generar QFL</string>
+     <string>Generar QFL (Dickinson)</string>
     </property>
    </widget>
    <widget class="QPushButton" name="QmFLQp_boton">
@@ -43,8 +43,8 @@
    <widget class="QPushButton" name="relacion_Fp_F_Boton">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>350</y>
+      <x>640</x>
+      <y>130</y>
       <width>281</width>
       <height>91</height>
      </rect>
@@ -56,8 +56,8 @@
    <widget class="QPushButton" name="LVLSLm_boton">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>240</y>
+      <x>330</x>
+      <y>130</y>
       <width>281</width>
       <height>91</height>
      </rect>
@@ -66,13 +66,52 @@
      <string>Generar LV-LS-Lm</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="QFL_boton_folk">
+    <property name="geometry">
+     <rect>
+      <x>330</x>
+      <y>20</y>
+      <width>281</width>
+      <height>91</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Generar QFL (Folk)</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="QFL_boton_garzanti">
+    <property name="geometry">
+     <rect>
+      <x>640</x>
+      <y>20</y>
+      <width>281</width>
+      <height>91</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Generar QFL (Garzanti)</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkBox_promedio">
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>240</y>
+      <width>161</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Incluir promedio</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>322</width>
+     <width>942</width>
      <height>22</height>
     </rect>
    </property>

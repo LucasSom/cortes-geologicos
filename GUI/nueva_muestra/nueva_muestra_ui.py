@@ -36,6 +36,7 @@ class Ui_NuevaMuestraWindow(object):
         self.label_7 = QtWidgets.QLabel(self.centralwidget)
         self.label_7.setGeometry(QtCore.QRect(10, 260, 161, 17))
         self.label_7.setObjectName("label_7")
+
         self.nombre = QtWidgets.QLineEdit(self.centralwidget)
         self.nombre.setGeometry(QtCore.QRect(10, 30, 411, 25))
         self.nombre.setObjectName("nombre")
@@ -51,7 +52,7 @@ class Ui_NuevaMuestraWindow(object):
         self.operador.setObjectName("operador")
         self.cantidad_lecturas = QtWidgets.QSpinBox(self.centralwidget)
         self.cantidad_lecturas.setGeometry(QtCore.QRect(10, 230, 71, 26))
-        self.cantidad_lecturas.setMinimum(1)
+        self.cantidad_lecturas.setMinimum(0)
         self.cantidad_lecturas.setMaximum(1000)
         self.cantidad_lecturas.setObjectName("cantidad_lecturas")
         self.observaciones = QtWidgets.QPlainTextEdit(self.centralwidget)

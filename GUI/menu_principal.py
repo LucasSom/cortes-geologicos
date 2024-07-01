@@ -1,9 +1,12 @@
+import os.path
+
 import pandas as pd
 import userpaths
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QFileDialog
 
 from GUI.graficos.graficos import GraficosWindow
+from GUI.instrucciones.instrucciones import InstruccionesWindow
 from GUI.menu_principal_ui import Ui_MainWindow
 from GUI.nueva_muestra.NuevaMuestra import NuevaMuestraWindow
 from GUI.sesion.Sesion import SesionWindow
@@ -16,11 +19,14 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.cargar_muestra_w = None
         self.sesion_window = None
         self.graficos_window = None
+        self.instrucciones_w = None
+
         QtWidgets.QMainWindow.__init__(self, *args, **kwargs)
         self.setupUi(self)
         self.pushButton.clicked.connect(self.show_nueva_muestra)
         self.pushButton_2.clicked.connect(self.cargar_muestra)
-        self.cargarTablaBoton.clicked.connect(self.cargar_tabla)
+        self.generarGraficosBoton.clicked.connect(self.cargar_tabla)
+        self.instruccionesBoton.clicked.connect(self.instrucciones)
 
     def show_nueva_muestra(self):
         self.nueva_muestra_w = NuevaMuestraWindow()
@@ -33,8 +39,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             fileName, _ = QFileDialog.getOpenFileName(self, "Cargar muestra", userpaths.get_my_documents(),
                                                       "Muestras (*.mtra);;All Files (*)")
         elif tipo == 'csv':
-            fileName, _ = QFileDialog.getOpenFileName(self, "Cargar tabla CSV", userpaths.get_my_documents(),
-                                                      "CSV (*.csv);;All Files (*)")
+            fileName, _ = QFileDialog.getOpenFileName(self, "Cargar tabla", userpaths.get_my_documents(),
+                                                      "Excel (*.xlsx);;CSV (*.csv);;All Files (*)")
 
         if fileName:
             return fileName
@@ -54,11 +60,16 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         try:
             fileName = self.openFileNameDialog(tipo='csv')
             if fileName is not None:
-                df = pd.read_csv(fileName)
-                self.graficos_window = GraficosWindow(df)
+                df = pd.read_csv(fileName) if os.path.splitext(fileName)[1] == '.csv' else pd.read_excel(fileName)
+                df.set_index("Muestra", inplace=True)
+                self.graficos_window = GraficosWindow(df, os.path.splitext(fileName)[0])
                 self.graficos_window.show()
         except Exception as e:
             error_window(self, e)
+
+    def instrucciones(self):
+        self.instrucciones_w = InstruccionesWindow()
+        self.instrucciones_w.show()
 
 
 if __name__ == "__main__":
