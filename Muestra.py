@@ -27,6 +27,7 @@ class Muestra:
         df_new = pd.DataFrame(self.componentes, columns=["Muestra"])
         counts_df = pd.DataFrame(df_new["Muestra"].value_counts(normalize=True))
         df_new = counts_df.rename(columns={"proportion": self.nombre}).T
+        df_new.rename(index={'Muestra': self.nombre}, inplace=True)
 
         # Cargar viejo Excel y concatenarlo
         file_path = os.path.join(path_dir, f"{self.localidad}.xlsx")
