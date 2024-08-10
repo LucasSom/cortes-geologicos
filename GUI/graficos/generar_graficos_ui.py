@@ -19,7 +19,7 @@ class Ui_GraficosWindow(object):
         self.centralwidget.setObjectName("centralwidget")
 
         self.QFL_boton_dickinson = QtWidgets.QPushButton(self.centralwidget)
-        self.QFL_boton_dickinson.setGeometry(QtCore.QRect(20, 20, 281, 91))
+        self.QFL_boton_dickinson.setGeometry(QtCore.QRect(640, 20, 281, 91))
         self.QFL_boton_dickinson.setObjectName("QFL_boton_dickinson")
 
         self.QmFLQp_boton = QtWidgets.QPushButton(self.centralwidget)
@@ -35,11 +35,11 @@ class Ui_GraficosWindow(object):
         self.LVLSLm_boton.setObjectName("LVLSLm_boton")
 
         self.QFL_boton_folk = QtWidgets.QPushButton(self.centralwidget)
-        self.QFL_boton_folk.setGeometry(QtCore.QRect(330, 20, 281, 91))
+        self.QFL_boton_folk.setGeometry(QtCore.QRect(20, 20, 281, 91))
         self.QFL_boton_folk.setObjectName("QFL_boton_folk")
 
         self.QFL_boton_garzanti = QtWidgets.QPushButton(self.centralwidget)
-        self.QFL_boton_garzanti.setGeometry(QtCore.QRect(640, 20, 281, 91))
+        self.QFL_boton_garzanti.setGeometry(QtCore.QRect(330, 20, 281, 91))
         self.QFL_boton_garzanti.setObjectName("QFL_boton_garzanti")
 
         self.checkBox_promedio = QtWidgets.QCheckBox(self.centralwidget)
