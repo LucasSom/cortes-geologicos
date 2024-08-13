@@ -47,7 +47,20 @@ class Muestra:
         df_promedio = pd.DataFrame(promedio).T.set_index("Muestra")
         df_new = pd.concat([df_new, df_promedio])
 
-        df_new = df_new[sorted(df_new.columns)]
+        def ordenar_columnas(columnas):
+            Qs, Fs, Ls, Os = [], [], [], []
+            for columna in sorted(columnas):
+                if columna[1] == 'Q':
+                    Qs.append(columna)
+                elif columna[1] == 'F':
+                    Fs.append(columna)
+                elif columna[1] == 'L':
+                    Ls.append(columna)
+                elif columna[1] == 'O':
+                    Os.append(columna)
+            return Qs + Fs + Ls + Os
+
+        df_new = df_new[ordenar_columnas(df_new.columns)]
 
         mapa_fileName = os.path.join(path_dir, f"{self.localidad}.xlsx")
         df_new.to_excel(mapa_fileName, index_label='Muestra')
