@@ -25,7 +25,7 @@ class Muestra:
             os.makedirs(path_dir)
 
         df_new = pd.DataFrame(self.componentes, columns=["Muestra"])
-        counts_df = pd.DataFrame(df_new["Muestra"].value_counts(normalize=True))
+        counts_df = pd.DataFrame(df_new["Muestra"].value_counts(normalize=True) * 100)
         df_new = counts_df.rename(columns={"proportion": self.nombre}).T
         df_new.rename(index={'Muestra': self.nombre}, inplace=True)
 
