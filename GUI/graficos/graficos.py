@@ -61,9 +61,9 @@ class GraficosWindow(QMainWindow, Ui_GraficosWindow):
             }, index=self.df.index)
 
             sumatoria = df_reescalado.sum(axis=1)
-            df_reescalado['Q'] = df_reescalado['Q'] / sumatoria
-            df_reescalado['F'] = df_reescalado['F'] / sumatoria
-            df_reescalado['L'] = df_reescalado['L'] / sumatoria
+            df_reescalado['Q'] = df_reescalado['Q'] / sumatoria * 100
+            df_reescalado['F'] = df_reescalado['F'] / sumatoria * 100
+            df_reescalado['L'] = df_reescalado['L'] / sumatoria * 100
 
             df_reescalado[f"Total-{clasificacion}"] = df_reescalado.sum(axis=1)
             export_path = f"{self.fileName}-QFL.xlsx"
@@ -92,12 +92,22 @@ class GraficosWindow(QMainWindow, Ui_GraficosWindow):
             self.df["Dickinson_QmFLQp"] = classified_data["Dickinson_QmFLQp"]
             self.df.to_excel(f"{self.fileName}.xlsx")
 
-            df = pd.concat([cuarzos_monocristalinos, feldespatos, liticos + cuarzos_policristalinos], axis=1)
-            df.columns = ["Qm", "F", "L+Qp"]
-            df.index = self.df.index
-            df["Total"] = df.sum(axis=1)
+            df_reescalado = pd.DataFrame({
+                'Qm': cuarzos_monocristalinos,
+                'F': feldespatos,
+                'L+Qp': liticos + cuarzos_policristalinos,
+            }, index=self.df.index)
+
+            sumatoria = df_reescalado.sum(axis=1)
+            df_reescalado['Qm'] = df_reescalado['Qm'] / sumatoria * 100
+            df_reescalado['F'] = df_reescalado['F'] / sumatoria * 100
+            df_reescalado['L+Qp'] = df_reescalado['L+Qp'] / sumatoria * 100
+
+            df_reescalado[f"Total-QmFLQp"] = df_reescalado.sum(axis=1)
+
+            df_reescalado.index = self.df.index
             export_path = f"{self.fileName}-QmFLQp.xlsx"
-            df.to_excel(export_path)
+            df_reescalado.to_excel(export_path)
 
             info_window(self, f"Tabla guardada en {export_path}")
         except Exception as e:
@@ -136,13 +146,23 @@ class GraficosWindow(QMainWindow, Ui_GraficosWindow):
                                                   include_last_row=self.incluir_promedio)
             plt.show()
 
-            df = pd.concat([liticos_volcanicos, liticos_sedimentarios, liticos_metamorficos], axis=1)
-            df.columns = ["Lv", "Ls", "Lm"]
-            if df.index.name != 'Muestra':
-                df.set_index('Muestra', inplace=True)
-            df["Total"] = df.sum(axis=1)
+            df_reescalado = pd.DataFrame({
+                'Lv': liticos_volcanicos,
+                'Ls': liticos_sedimentarios,
+                'Lm': liticos_metamorficos,
+            }, index=self.df.index)
+
+            sumatoria = df_reescalado.sum(axis=1)
+            df_reescalado['Lv'] = df_reescalado['Lv'] / sumatoria * 100
+            df_reescalado['Ls'] = df_reescalado['Ls'] / sumatoria * 100
+            df_reescalado['Lm'] = df_reescalado['Lm'] / sumatoria * 100
+
+            df_reescalado[f"Total-LvLsLm"] = df_reescalado.sum(axis=1)
+
+            if df_reescalado.index.name != 'Muestra':
+                df_reescalado.set_index('Muestra', inplace=True)
             export_path = f"{self.fileName}-LvLsLm.xlsx"
-            df.to_excel(export_path)
+            df_reescalado.to_excel(export_path)
 
             info_window(self, f"Tabla guardada en {export_path}")
 

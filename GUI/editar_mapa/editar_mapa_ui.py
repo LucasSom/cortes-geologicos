@@ -470,7 +470,7 @@ class Ui_MainWindow(QMainWindow):
 
         self.setCentralWidget(self.scrollArea)
 
-        self.setGeometry(600, 100, 1000, 900)
+        self.setGeometry(500, 100, 600, 700)
         self.setWindowTitle('Editar mapa de teclas')
         self.show()
 
