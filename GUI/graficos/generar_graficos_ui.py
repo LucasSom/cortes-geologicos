@@ -62,12 +62,12 @@ class Ui_GraficosWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Generar gráficos"))
-        self.QFL_boton_dickinson.setText(_translate("MainWindow", "Generar QFL (Dickinson)"))
-        self.QmFLQp_boton.setText(_translate("MainWindow", "Generar Qm-F-(L+Qp)"))
+        self.QFL_boton_dickinson.setText(_translate("MainWindow", "Generar QFL\nDickinson et al. (1983)"))
+        self.QmFLQp_boton.setText(_translate("MainWindow", "Generar Qm-F-(L+Qp)\nDickinson et al. (1983)"))
         self.relacion_Fp_F_Boton.setText(_translate("MainWindow", "Calcular relación Fp/(Fp+Fk+Fm)"))
         self.LVLSLm_boton.setText(_translate("MainWindow", "Generar LV-LS-Lm"))
-        self.QFL_boton_folk.setText(_translate("MainWindow", "Generar QFL (Folk)"))
-        self.QFL_boton_garzanti.setText(_translate("MainWindow", "Generar QFL (Garzanti)"))
+        self.QFL_boton_folk.setText(_translate("MainWindow", "Generar QFL\nFolk et al. (1970)"))
+        self.QFL_boton_garzanti.setText(_translate("MainWindow", "Generar QFL\nGarzanti (2019)"))
         self.checkBox_promedio.setText(_translate("MainWindow", "Incluir promedio"))
 
 
