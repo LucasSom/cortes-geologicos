@@ -99,7 +99,7 @@ class Ui_Dialog_Sesion(object):
         self.tableView = QtWidgets.QTableWidget()
         self.tableView.setColumnCount(2)
         self.tableView.setRowCount(len([componente for componente in self.Dialog.muestra.mapa.values()
-                                        if componente != '']))
+                                        if componente != '']) + 1)
         self.tableView.setGeometry(QtCore.QRect(560, 0, 517, 747))
         self.tableView.setObjectName("tablaConteo")
         self.tableView.verticalHeader().setVisible(False)
@@ -119,9 +119,14 @@ class Ui_Dialog_Sesion(object):
 
     def imprimir_conteo_inicial(self):
         componentes = self.Dialog.muestra.getComponentesCount()
+        total = 0
         for i, (componente, cantidad) in enumerate(componentes.items()):
             self.tableView.setItem(i, 0, QtWidgets.QTableWidgetItem(componente))
             self.tableView.setItem(i, 1, QtWidgets.QTableWidgetItem(str(cantidad)))
+            total += cantidad
+        i = len(componentes)
+        self.tableView.setItem(i, 0, QtWidgets.QTableWidgetItem("Total"))
+        self.tableView.setItem(i, 1, QtWidgets.QTableWidgetItem(str(total)))
         self.tableView.resizeColumnsToContents()
         self.tableView.resizeRowsToContents()
         self.tableView.show()

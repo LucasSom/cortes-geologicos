@@ -78,11 +78,13 @@ class SesionWindow(QtWidgets.QDialog, Ui_Dialog_Sesion, QtWidgets.QWidget):
             error_window(self, e)
 
     def incrementar_contador(self, componente):
-        for i in range(self.tableView.rowCount()):
+        n_filas = self.tableView.rowCount()
+        for i in range(n_filas):
             if componente == self.tableView.item(i, 0).text():
                 cantidad = int(self.tableView.item(i, 1).text()) + 1
                 self.tableView.setItem(i, 1, QtWidgets.QTableWidgetItem(str(cantidad)))
                 break
+        self.tableView.item(n_filas - 1, 1).setText(str(int(self.tableView.item(n_filas - 1, 1).text()) + 1))
 
     def agregar_tecla(self):
         self.nueva_tecla_window = EditarTeclaWindow(self)
@@ -97,12 +99,14 @@ class SesionWindow(QtWidgets.QDialog, Ui_Dialog_Sesion, QtWidgets.QWidget):
         self.tableView.resizeRowsToContents()
 
     def borrar_roca(self):
+        n_filas = self.tableView.rowCount()
         item = self.listwidgetRocas.takeItem(0)
-        for i in range(self.tableView.rowCount()):
+        for i in range(n_filas):
             if item.text() == self.tableView.item(i, 0).text():
                 cantidad = int(self.tableView.item(i, 1).text()) - 1
                 self.tableView.setItem(i, 1, QtWidgets.QTableWidgetItem(str(cantidad)))
                 break
+        self.tableView.item(n_filas - 1, 1).setText(str(int(self.tableView.item(n_filas - 1, 1).text()) - 1))
 
     def guardar(self):
         self.muestra.componentes = [self.listwidgetRocas.item(i).text() for i in range(self.listwidgetRocas.count())]
