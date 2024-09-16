@@ -6,11 +6,18 @@ from utils import info_window
 
 
 def check_for_update(current_version, w):
-    response = requests.get("https://api.github.com/repos/LucasSom/cortes-geologicos/releases/latest")
-    latest_version = response.json()["tag_name"]
+    try:
+        response = requests.get("https://api.github.com/repos/LucasSom/cortes-geologicos/releases/latest")
+        latest_version = response.json()["tag_name"]
 
-    if current_version < latest_version:
-        notify_user(latest_version, w)
+        if current_version < latest_version:
+            notify_user(latest_version, w)
+    except Exception as e:
+        if type(e) == requests.exceptions.ConnectionError:
+            info_window(w, "No se pudieron comprobar actualizaciones por problemas de conexión.")
+        else:
+            print(e)
+            info_window(w, "No se pudieron comprobar actualizaciones por un problema desconocido.")
 
 
 def notify_user(latest_version, w):
