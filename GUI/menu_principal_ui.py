@@ -9,7 +9,8 @@
 
 
 from PyQt5 import QtCore
-from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QPushButton, QStatusBar, QMenuBar
+from PyQt5.QtGui import QPixmap
+from PyQt5.QtWidgets import QWidget, QPushButton, QStatusBar, QMenuBar, QLabel, QVBoxLayout
 from PyQt5.uic.properties import QtWidgets
 
 # from pyqt5_auto_translate import \
@@ -21,7 +22,7 @@ from PyQt5.uic.properties import QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(322, 471)
+        MainWindow.resize(322, 601)
 
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
@@ -42,10 +43,23 @@ class Ui_MainWindow(object):
         self.instruccionesBoton.setGeometry(QtCore.QRect(20, 350, 281, 91))
         self.instruccionesBoton.setObjectName("instruccionesBoton")
 
+        self.label = QLabel(self.centralwidget)
+        self.label.setGeometry(QtCore.QRect(20, 430, 281, 91))
+        self.label.setObjectName("label")
+
+        # creating label
+        self.imagen = QLabel(self.centralwidget)
+        # loading image
+        self.pixmap = QPixmap('logo_conicet.png')
+        # adding image to label
+        self.imagen.setPixmap(self.pixmap)
+        # Optional, resize label to image size
+        self.imagen.resize(self.pixmap.width(), self.pixmap.height())
+
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.menubar = QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 322, 22))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 452, 222))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
 
@@ -62,6 +76,7 @@ class Ui_MainWindow(object):
         self.pushButton.setText(_translate("MainWindow", "Nueva muestra"))
         self.pushButton_2.setText(_translate("MainWindow", "Cargar muestra"))
         self.generarGraficosBoton.setText(_translate("MainWindow", "Generar gráficos"))
+        self.label.setText(_translate("Dialog", "Idea: Dra. Maisa Tunik\nProgramación: Lic. Lucas Somacal"))
 
 
 if __name__ == "__main__":
