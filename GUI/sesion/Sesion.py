@@ -92,9 +92,9 @@ class SesionWindow(QtWidgets.QDialog, Ui_Dialog_Sesion, QtWidgets.QWidget):
 
     def nueva_fila_contador(self, nombre_roca):
         ultima_fila = self.tableView.rowCount()
-        self.tableView.insertRow(ultima_fila)
-        self.tableView.setItem(ultima_fila, 0, QtWidgets.QTableWidgetItem(nombre_roca))
-        self.tableView.setItem(ultima_fila, 1, QtWidgets.QTableWidgetItem('0'))
+        self.tableView.insertRow(ultima_fila - 1)
+        self.tableView.setItem(ultima_fila - 1, 0, QtWidgets.QTableWidgetItem(nombre_roca))
+        self.tableView.setItem(ultima_fila - 1, 1, QtWidgets.QTableWidgetItem('0'))
         self.tableView.resizeColumnsToContents()
         self.tableView.resizeRowsToContents()
 
